@@ -62,7 +62,13 @@ UserSchema.methods.generateAuthToken = async function () {
   await user.save();
   return token;
 };
-
+UserSchema.methods.toJSON = function () {
+  const user = this;
+  const userObject = user.toObject();
+  delete userObject.password;
+  delete userObject.tokens;
+  return userObject;
+};
 UserSchema.statics.findByCredentials = async function ({
   password,
   email,
@@ -94,9 +100,11 @@ UserSchema.statics.getProperty = async function () {
 UserSchema.pre("save", async function (next) {
   const user = this;
 
-  // if the password is changed?
-  if (user.isModified("password"))
+  // users changed new password
+  if (user.isModified("password")) {
     user.password = await bcrypt.hash(user.password, 12);
+    console.log(`New password saved!`);
+  }
 
   next();
 });
