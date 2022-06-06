@@ -1,7 +1,10 @@
 const express = require("express");
 const apiRouter = express.Router();
 
-const usersRouter = require("./routes/users-routes");
-apiRouter.use("/users", usersRouter);
+const userRouter = require("./routes/users-routes");
+apiRouter.use("/users", userRouter);
+
+const movieRouter = require("./routes/movies-routes");
+apiRouter.use("/movies", movieRouter);
 
 module.exports = apiRouter;

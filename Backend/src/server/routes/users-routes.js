@@ -1,12 +1,11 @@
-const usersRouter = require("express").Router();
+const userRouter = require("express").Router();
 const { check } = require("express-validator");
 
 const auth = require("../../middleware/auth");
-const User = require("../../db/model/User");
 const usersController = require("../../controllers/users-controller");
 
 // SIGNUP
-usersRouter.post(
+userRouter.post(
   "/auth/signup",
   [
     check("username").isLength({ min: 6 }),
@@ -17,18 +16,18 @@ usersRouter.post(
 );
 
 // LOGIN
-usersRouter.post("/auth/login", usersController.login);
+userRouter.post("/auth/login", usersController.login);
 
 // GET USER PROFILE
-usersRouter.get("/me", auth, usersController.getUserById);
+userRouter.get("/me", auth, usersController.getUserById);
 
 // GET ALL USERS
-usersRouter.get("/", auth, usersController.getAllUser);
+userRouter.get("/", auth, usersController.getAllUser);
 
 // GET USER STATS
-usersRouter.get("/stats", auth, usersController.getUserStats);
+userRouter.get("/stats", auth, usersController.getUserStats);
 // UPDATE
-usersRouter.patch(
+userRouter.patch(
   "/:id",
   auth,
   [
@@ -40,5 +39,5 @@ usersRouter.patch(
 );
 
 // DELETE
-usersRouter.delete("/:id", auth, usersController.deleteProfile);
-module.exports = usersRouter;
+userRouter.delete("/:id", auth, usersController.deleteProfile);
+module.exports = userRouter;

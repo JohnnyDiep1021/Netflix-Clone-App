@@ -5,8 +5,9 @@ const lodash = require("lodash");
 
 const findDatabaseByName = function (name) {
   switch (name) {
-    case "envelopes":
-      return Envelope;
+    case "Movie":
+      return Movie;
+
     case "User":
       return User;
     default:

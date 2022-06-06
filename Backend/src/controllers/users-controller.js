@@ -25,7 +25,7 @@ const signup = async (req, res, next) => {
     const user = new User({ ...req.body });
     await user.save();
     const token = await user.generateAuthToken();
-    console.log(`Signing up successfully`, user);
+    console.log(`Signing up successfully,`, user);
     res.status(201).json({
       user: user.toObject({ getters: true }),
       token: token,
@@ -108,7 +108,6 @@ const updateUser = async (req, res, next) => {
         `Invalid inputs passed! Please, check your data and try again.`,
         422
       );
-    console.log(req.user._id.toString());
     if (req.user._id.toString() === req.params.id || req.user.isAdmin) {
       const updates = await updateValidation("User", req.body);
       if (updates.error) throw new HttpError(updates.error, 400);

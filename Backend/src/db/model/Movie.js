@@ -4,14 +4,16 @@ const MovieSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: true,
       unique: true,
+      required: true,
     },
     desc: {
       type: String,
+      required: true,
     },
-    img: {
+    image: {
       type: String,
+      required: true,
     },
     imgTitle: {
       type: String,
@@ -33,6 +35,7 @@ const MovieSchema = new mongoose.Schema(
     },
     genre: {
       type: String,
+      required: true,
     },
     isSeries: {
       type: Boolean,
@@ -43,6 +46,8 @@ const MovieSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
+MovieSchema.statics.getProperty = async function () {
+  return Object.keys(this.schema.obj);
+};
 const Movie = mongoose.model("Movie", MovieSchema);
 module.exports = Movie;
