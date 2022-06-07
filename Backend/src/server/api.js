@@ -7,4 +7,7 @@ apiRouter.use("/users", userRouter);
 const movieRouter = require("./routes/movies-routes");
 apiRouter.use("/movies", movieRouter);
 
+const listRouter = require("./routes/lists-routes");
+apiRouter.use("/lists", listRouter);
+
 module.exports = apiRouter;
