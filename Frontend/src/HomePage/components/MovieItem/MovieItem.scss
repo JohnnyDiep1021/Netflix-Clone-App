@@ -1,0 +1,191 @@
+.listItem {
+  list-style: none;
+  width: 18rem;
+  height: 12rem;
+  border-radius: 0.4rem;
+  margin-right: 0.8rem;
+  background-color: var(--bg-black-700);
+  overflow: hidden;
+  color: white;
+  transition: all 0.4s ease;
+  & .listImage {
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+    & img {
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      // object-fit: cover;
+    }
+
+    & video {
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      object-fit: cover;
+
+      &.trailer-video {
+        &.deactive {
+          display: none;
+          visibility: hidden;
+          opacity: 0;
+        }
+      }
+    }
+  }
+  & .itemInfo {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    visibility: hidden;
+    opacity: 0;
+    display: none;
+    & .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      & .left {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      & .btn-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2.4rem;
+        height: 1.8rem;
+        color: rgb(191, 189, 189);
+        background: none;
+        border: 0.1rem solid rgb(191, 189, 189);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.25s ease;
+
+        &:hover {
+          color: #fff;
+          border: 0.15rem solid #fff;
+          &.play-active {
+            background: #fff !important;
+            color: #000 !important;
+          }
+        }
+      }
+    }
+    & .itemInfoTop {
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+      font-weight: 600;
+      color: rgb(215, 213, 213);
+      margin-bottom: 0.6rem;
+
+      & .limit {
+        border: 0.1rem solid gray;
+        padding: 0 0.3rem;
+        margin: 0 0.5rem;
+      }
+    }
+    & .genre {
+      font-size: 1rem;
+    }
+  }
+  &:hover {
+    -webkit-box-shadow: 0 0 1.5rem 0 rgba(255, 255, 255, 0.07);
+    box-shadow: 0 0 1.5rem 0 rgba(255, 255, 255, 0.07);
+    transform: scaleX(1.4) scaleY(2);
+    z-index: 2;
+    & .listImage {
+      height: 55%;
+      // display: none;
+    }
+    & .itemInfo {
+      visibility: visible;
+      opacity: 1;
+      display: block;
+    }
+  }
+}
+
+// .listItem {
+//   width: 225px;
+//   height: 120px;
+//   background-color: var(--main-color);
+//   margin-right: 5px;
+//   overflow: hidden;
+//   cursor: pointer;
+//   color: white;
+//   img {
+//     width: 100%;
+//     height: 100%;
+//     object-fit: cover;
+//   }
+
+//   video {
+//     width: 100%;
+//     height: 140px;
+//     object-fit: cover;
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//   }
+
+//   &:hover {
+//     width: 325px;
+//     height: 300px;
+//     position: absolute;
+//     top: -150px;
+//     -webkit-box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 0.07);
+//     box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 0.07);
+//     border-radius: 5px;
+
+//     img {
+//       height: 140px;
+//     }
+
+//     .itemInfo {
+//       display: flex;
+//       flex-direction: column;
+//       padding: 5px;
+
+//       .icons {
+//         display: flex;
+//         margin-bottom: 10px;
+
+//         .icon {
+//           border: 2px solid white;
+//           padding: 5px;
+//           border-radius: 50%;
+//           margin-right: 10px;
+//           font-size: 16px;
+//         }
+//       }
+//       .itemInfoTop {
+//         display: flex;
+//         align-items: center;
+//         margin-bottom: 10px;
+//         font-size: 14px;
+//         font-weight: 600;
+//         color: gray;
+
+//         .limit {
+//           border: 1px solid gray;
+//           padding: 1px 3px;
+//           margin: 0 10px;
+//         }
+//       }
+
+//       .desc {
+//         font-size: 13px;
+//         margin-bottom: 10px;
+//       }
+
+//       .genre {
+//         font-size: 14px;
+//         color: lightgray;
+//       }
+//     }
+//   }
+// }
