@@ -1,7 +1,7 @@
 .listItem {
   list-style: none;
-  width: 18rem;
-  height: 12rem;
+  width: 21rem;
+  height: 14rem;
   border-radius: 0.4rem;
   margin-right: 0.8rem;
   background-color: var(--bg-black-700);
@@ -37,7 +37,7 @@
   & .itemInfo {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
+    padding: 0.6rem 1rem;
     visibility: hidden;
     opacity: 0;
     display: none;
@@ -45,7 +45,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
       & .left {
         display: flex;
         align-items: center;
@@ -55,8 +55,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 2.4rem;
-        height: 1.8rem;
+        width: 2.6rem;
+        height: 2rem;
         color: rgb(191, 189, 189);
         background: none;
         border: 0.1rem solid rgb(191, 189, 189);
@@ -75,28 +75,29 @@
       }
     }
     & .itemInfoTop {
-      display: flex;
-      align-items: center;
-      font-size: 1rem;
+      font-size: 0.8rem;
       font-weight: 600;
       color: rgb(215, 213, 213);
       margin-bottom: 0.6rem;
-
       & .limit {
         border: 0.1rem solid gray;
         padding: 0 0.3rem;
         margin: 0 0.5rem;
       }
-    }
-    & .genre {
-      font-size: 1rem;
+      & span {
+        display: inline-block;
+        margin-bottom: 0.5rem;
+      }
+      & .genre {
+      }
     }
   }
   &:hover {
     -webkit-box-shadow: 0 0 1.5rem 0 rgba(255, 255, 255, 0.07);
     box-shadow: 0 0 1.5rem 0 rgba(255, 255, 255, 0.07);
-    transform: scaleX(1.4) scaleY(2);
+    transform: scaleX(1.4) scaleY(2.4);
     z-index: 2;
+    // height: 16rem;
     & .listImage {
       height: 55%;
       // display: none;

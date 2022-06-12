@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowDropDown, Notifications, Search } from "@material-ui/icons";
+// import { ArrowDropDown, Notifications, Search } from "@material-ui/icons";
 import "./Navbar.scss";
 
 const Navbar = () => {
@@ -24,15 +24,15 @@ const Navbar = () => {
           <span>My List</span>
         </div>
         <div className="right">
-          <Search className="icon" />
+          {/* <Search className="icon" /> */}
           <span>KID</span>
-          <Notifications className="icon" />
+          {/* <Notifications className="icon" /> */}
           <img
             src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
             alt="profile"
           />
           <div className="profile">
-            <ArrowDropDown className="icon" />
+            {/* <ArrowDropDown className="icon" /> */}
             <div className="options">
               <span>Settings</span>
               <span>Logout</span>

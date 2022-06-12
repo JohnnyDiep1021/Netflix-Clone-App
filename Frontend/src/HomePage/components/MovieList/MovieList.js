@@ -1,16 +1,24 @@
 import React, { useRef, useState } from "react";
 import MovieItem from "../MovieItem/MovieItem";
 import "./MovieList.scss";
-import {
-  ArrowBackIosOutlined,
-  ArrowForwardIosOutlined,
-} from "@material-ui/icons";
+// import {
+//   ArrowBackIosOutlined,
+//   ArrowForwardIosOutlined,
+// } from "@material-ui/icons";
 
+import {
+  ForwardArrow,
+  BackwardArrow,
+} from "../../../shared/components/Icon/MovieIcons";
 const MovieList = () => {
   const [isMoved, setIsMoved] = useState(false);
   const [slideNumber, setSlideNumber] = useState(0);
-
+  const [scrollAmount, setScrollAmount] = useState({
+    scrollPerClick: 0,
+    imgPadding: 8,
+  });
   const listRef = useRef();
+  const sliders = useRef();
   const clickHandler = (direction) => {
     setIsMoved(true);
     let distance = listRef.current.getBoundingClientRect().x - 50;
@@ -26,30 +34,52 @@ const MovieList = () => {
 
     console.log(distance);
   };
+
+  const scrollLeftHandler = (event) => {
+    sliders.current.scrollTo({
+      left: 408,
+      behavior: "smooth",
+    });
+  };
+  const scrollRightHandler = (event) => {
+    sliders.current.scrollTo({
+      left: 408,
+      behavior: "smooth",
+    });
+  };
   return (
     <div className="list">
       <span className="listTitle">Continue to watch</span>
-      <div className="wrapper">
-        <ArrowBackIosOutlined
+      <div className="carousel" ref={sliders}>
+        {/* <ArrowBackIosOutlined
           className="sliderArrow left"
           onClick={() => clickHandler("left")}
           style={{ display: !isMoved && "none" }}
+        /> */}
+        <BackwardArrow
+          className="sliderArrow left"
+          onClick={scrollLeftHandler}
+          style={{ display: !isMoved && "none" }}
         />
-        <ul className="container" ref={listRef}>
-          <MovieItem index={0} id="1" />
-          <MovieItem index={1} id="2" />
-          <MovieItem index={2} id="3" />
+        <ul className="carouselbox" ref={listRef}>
+          <MovieItem index={0} />
+          <MovieItem index={1} />
+          <MovieItem index={2} />
           <MovieItem index={3} />
           <MovieItem index={4} />
-          {/* <MovieItem index={5} />
+          <MovieItem index={5} />
           <MovieItem index={6} />
           <MovieItem index={7} />
           <MovieItem index={8} />
-          <MovieItem index={9} /> */}
+          <MovieItem index={9} />
         </ul>
-        <ArrowForwardIosOutlined
+        {/* <ArrowForwardIosOutlined
           className="sliderArrow right"
           onClick={() => clickHandler("right")}
+        /> */}
+        <ForwardArrow
+          className="sliderArrow right"
+          onClick={scrollRightHandler}
         />
       </div>
     </div>

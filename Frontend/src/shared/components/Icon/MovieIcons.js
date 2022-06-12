@@ -36,12 +36,44 @@ export const Play = (props) => {
     ></ion-icon>
   );
 };
+
+export const Info = (props) => {
+  return (
+    <ion-icon
+      class="icon information"
+      name="information-circle-outline"
+      style={{ width: props.width, height: props.height }}
+    ></ion-icon>
+  );
+};
 export const DropDown = (props) => {
   return (
     <ion-icon
       class="icon dropdown"
       name="chevron-down"
       style={{ width: props.width, height: props.height }}
+    ></ion-icon>
+  );
+};
+
+export const ForwardArrow = (props) => {
+  return (
+    <ion-icon
+      class={`icon forward-arrow ${props.className}`}
+      name="chevron-forward-outline"
+      style={{ width: props.width, height: props.height }}
+      onClick={props.onClick}
+    ></ion-icon>
+  );
+};
+
+export const BackwardArrow = (props) => {
+  return (
+    <ion-icon
+      class={`icon backward-arrow ${props.className}`}
+      name="chevron-back-outline"
+      style={{ width: props.width, height: props.height }}
+      onClick={props.onClick}
     ></ion-icon>
   );
 };

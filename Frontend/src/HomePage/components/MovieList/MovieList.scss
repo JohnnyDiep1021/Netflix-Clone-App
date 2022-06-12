@@ -8,7 +8,7 @@
     margin-left: 5rem;
   }
 
-  & .wrapper {
+  & .carousel {
     position: relative;
     & .sliderArrow {
       width: 5rem;
@@ -29,7 +29,7 @@
         right: 0;
       }
     }
-    & .container {
+    & .carouselbox {
       display: flex;
       margin-left: 5rem;
       width: max-content;

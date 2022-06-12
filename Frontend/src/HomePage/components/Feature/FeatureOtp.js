@@ -1,4 +1,5 @@
-import { InfoOutlined, PlayArrow } from "@material-ui/icons";
+// import { InfoOutlined, PlayArrow } from "@material-ui/icons";
+import { Play, Info } from "../../../shared/components/Icon/MovieIcons";
 import React from "react";
 
 import "./FeatureOtp.scss";
@@ -42,12 +43,12 @@ const FeatureOption = (props) => {
         </span>
         <div className="buttons">
           <button className="play">
-            <PlayArrow />
+            <Play width="25px" height="25px" />
             <span>Play</span>
           </button>
           <button className="more">
-            <InfoOutlined />
-            <span>Info</span>
+            <Info width="30px" height="30px" />
+            <span>More Info</span>
           </button>
         </div>
       </div>
