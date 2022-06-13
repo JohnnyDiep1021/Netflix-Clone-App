@@ -13,10 +13,7 @@ import {
 const MovieList = () => {
   const [isMoved, setIsMoved] = useState(false);
   const [slideNumber, setSlideNumber] = useState(0);
-  const [scrollAmount, setScrollAmount] = useState({
-    scrollPerClick: 0,
-    imgPadding: 8,
-  });
+  const [scrollAmount, setScrollAmount] = useState(0);
   const listRef = useRef();
   const sliders = useRef();
   const clickHandler = (direction) => {
@@ -37,7 +34,7 @@ const MovieList = () => {
 
   const scrollLeftHandler = (event) => {
     sliders.current.scrollTo({
-      left: 408,
+      right: 408,
       behavior: "smooth",
     });
   };
@@ -56,11 +53,7 @@ const MovieList = () => {
           onClick={() => clickHandler("left")}
           style={{ display: !isMoved && "none" }}
         /> */}
-        <BackwardArrow
-          className="sliderArrow left"
-          onClick={scrollLeftHandler}
-          style={{ display: !isMoved && "none" }}
-        />
+
         <ul className="carouselbox" ref={listRef}>
           <MovieItem index={0} />
           <MovieItem index={1} />
@@ -77,11 +70,16 @@ const MovieList = () => {
           className="sliderArrow right"
           onClick={() => clickHandler("right")}
         /> */}
-        <ForwardArrow
-          className="sliderArrow right"
-          onClick={scrollRightHandler}
-        />
       </div>
+      <BackwardArrow
+        className="sliderArrow left"
+        onClick={scrollLeftHandler}
+        style={{ display: !isMoved && "none" }}
+      />
+      <ForwardArrow
+        className="sliderArrow right"
+        onClick={scrollRightHandler}
+      />
     </div>
   );
 };
