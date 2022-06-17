@@ -7,8 +7,8 @@ import "./HomePage.scss";
 const Home = () => {
   return (
     <div className="home">
-      <Navbar />
-      <FeatureOption type="series" />
+      {/* <Navbar />
+      <FeatureOption type="series" /> */}
       <MovieList />
       <MovieList />
       <MovieList />

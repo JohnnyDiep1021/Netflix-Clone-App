@@ -72,7 +72,11 @@ export const BackwardArrow = (props) => {
     <ion-icon
       class={`icon backward-arrow ${props.className}`}
       name="chevron-back-outline"
-      style={{ width: props.width, height: props.height }}
+      style={{
+        width: props.width,
+        height: props.height,
+        display: props.display,
+      }}
       onClick={props.onClick}
     ></ion-icon>
   );
