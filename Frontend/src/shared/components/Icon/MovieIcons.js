@@ -81,3 +81,18 @@ export const BackwardArrow = (props) => {
     ></ion-icon>
   );
 };
+
+export const ReturnArrow = (props) => {
+  return (
+    <ion-icon
+      class={`icon return-arrow ${props.className}`}
+      name="arrow-back"
+      style={{
+        width: props.width,
+        height: props.height,
+        display: props.display,
+      }}
+      onClick={props.onClick}
+    ></ion-icon>
+  );
+};
