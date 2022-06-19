@@ -32,7 +32,9 @@
     & .right {
       display: flex;
       align-items: center;
-      .icon {
+      & .icon {
+        width: 1.6rem;
+        height: 1.6rem;
         margin: 0rem 1.5rem;
         cursor: pointer;
       }

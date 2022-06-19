@@ -9,7 +9,7 @@ const FeatureOption = (props) => {
     <div className="featured">
       {props.type && (
         <div className="category">
-          <span>{props.type === "movie" ? "Movies" : "Series"}</span>
+          <span>{props.type === "movies" ? "Movies" : "Series"}</span>
           <select name="genre" id="genre">
             <option value="adventure">Adventure</option>
             <option value="comedy">Comedy</option>

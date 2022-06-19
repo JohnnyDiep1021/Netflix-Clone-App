@@ -1,14 +1,27 @@
 .movie-view {
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
   & .btn-return {
     display: flex;
     align-items: center;
     position: absolute;
+    border: none;
+    background-color: transparent;
+    font-size: 2rem;
+    color: white;
     top: 1rem;
     left: 1rem;
-    color: white;
     z-index: 2;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: 0.6rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: #fff;
+      color: #000;
+    }
   }
 
   & .video {

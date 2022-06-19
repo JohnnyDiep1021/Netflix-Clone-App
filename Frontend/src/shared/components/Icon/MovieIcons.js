@@ -82,11 +82,56 @@ export const BackwardArrow = (props) => {
   );
 };
 
-export const ReturnArrow = (props) => {
+export const ArrowReturn = (props) => {
   return (
     <ion-icon
-      class={`icon return-arrow ${props.className}`}
+      class={`icon arrow-return ${props.className}`}
       name="arrow-back"
+      style={{
+        width: props.width,
+        height: props.height,
+        display: props.display,
+      }}
+      onClick={props.onClick}
+    ></ion-icon>
+  );
+};
+
+export const Search = (props) => {
+  return (
+    <ion-icon
+      name="search"
+      class={`icon search ${props.className}`}
+      style={{
+        width: props.width,
+        height: props.height,
+        display: props.display,
+      }}
+      onClick={props.onClick}
+    ></ion-icon>
+  );
+};
+
+export const Notification = (props) => {
+  return (
+    <ion-icon
+      name="notifications"
+      class={`icon notification ${props.className}`}
+      style={{
+        width: props.width,
+        height: props.height,
+        display: props.display,
+      }}
+      onClick={props.onClick}
+    ></ion-icon>
+  );
+};
+
+export const ArrowDown = (props) => {
+  return (
+    <ion-icon
+      name="caret-down"
+      class={`icon arrow-down ${props.className}`}
       style={{
         width: props.width,
         height: props.height,

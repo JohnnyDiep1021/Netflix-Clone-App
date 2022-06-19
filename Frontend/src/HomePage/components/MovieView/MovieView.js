@@ -1,18 +1,24 @@
 import React from "react";
-import { ReturnArrow } from "../../../shared/components/Icon/MovieIcons";
+import { ArrowReturn } from "../../../shared/components/Icon/MovieIcons";
 import "./MovieView.scss";
 const MovieView = () => {
   return (
     <div className="movie-view">
       <button className="btn-return">
-        <ReturnArrow />
+        <ArrowReturn width="20px" height="20px" />
         Home
       </button>
-      <video className="video" controls autoPlay>
-        <source
-          src="https://ia800209.us.archive.org/20/items/ElephantsDream/ed_hd.ogv"
-          type="video/ogv"
-        />
+      <video
+        className="video"
+        src="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4"
+        controls
+        autoPlay
+      >
+        {/* <source
+          src="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4"
+          autoPlay
+          type="video/mp4"
+        /> */}
       </video>
     </div>
   );
