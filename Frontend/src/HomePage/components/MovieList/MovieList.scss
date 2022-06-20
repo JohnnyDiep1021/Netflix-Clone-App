@@ -1,6 +1,7 @@
 .list {
   width: 100%;
   margin-top: 1rem;
+  margin-bottom: 4rem;
   // position: relative;
   & .listTitle {
     color: white;
@@ -11,7 +12,7 @@
 
   & .carousel {
     position: relative;
-    // overflow-x: hidden;
+
     & .carouselbox {
       display: flex;
       margin-left: 5rem;

@@ -1,4 +1,4 @@
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./Button.scss";
 
@@ -15,19 +15,19 @@ const Button = (props) => {
       </a>
     );
   }
-  // if (props.to) {
-  //   return (
-  //     <Link
-  //       to={props.to}
-  //       exact={props.exact}
-  //       onClick={props.onClick}
-  //       className={`${props.className}`}
-  //       target={props.target}
-  //     >
-  //       {props.children}
-  //     </Link>
-  //   );
-  // }
+  if (props.to) {
+    return (
+      <Link
+        to={props.to}
+        exact={props.exact}
+        onClick={props.onClick}
+        className={`${props.className}`}
+        target={props.target}
+      >
+        {props.children}
+      </Link>
+    );
+  }
   return (
     <button
       className={props.className}

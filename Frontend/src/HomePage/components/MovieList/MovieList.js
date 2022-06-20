@@ -19,7 +19,7 @@ const MovieList = () => {
   const clickHandler = (direction) => {
     setIsMoved(true);
 
-    const totalCarouselWidth = carouselRef.current.clientWidth - 1248;
+    const totalCarouselWidth = carouselRef.current.clientWidth - 1664;
     // get bounding x (margin-left, ) of carousel
     let distance = carouselRef.current.getBoundingClientRect().x - 50;
     console.log(distance);
@@ -27,6 +27,7 @@ const MovieList = () => {
     // movieItem innerWidth = 200, margin-right = 8 => totalWidth = 208
     // translate +x value will push the carousel forward and create sliding backward effect
     if (direction === "left") {
+      console.log(distance);
       scrollAmount = parseInt(416 + distance);
       // if (scrollAmount >= 0) {
       // setIsMoved(false);
@@ -63,8 +64,8 @@ const MovieList = () => {
   //   // listRef.current.style.transform = `translateX(-${scrollAmount}px)`;
   // };
   // const scrollRightHandler = (event) => {
-  //   const listTotalWidth = listRef.current.clientWidth;
-  //   if (scrollAmount <= listTotalWidth) {
+  //   const carouselTotalWidth = carouselRef.current.clientWidth;
+  //   if (scrollAmount <= carouselTotalWidth) {
   //     scrollAmount += 218;
   //   } else {
   //     scrollAmount = 0;

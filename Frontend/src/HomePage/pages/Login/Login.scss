@@ -45,17 +45,17 @@
         flex-direction: column;
         // justify-content: space-around;
 
-        & input {
-          height: 5rem;
-          border-radius: 0.5rem;
-          background-color: gray;
-          color: #fff;
-          padding-left: 1rem;
-          margin-bottom: 1.6rem;
-          &::placeholder {
-            color: lightgray;
-          }
-        }
+        // & input {
+        //   height: 5rem;
+        //   border-radius: 0.5rem;
+        //   background-color: gray;
+        //   color: #fff;
+        //   padding-left: 1rem;
+        //   margin-bottom: 1.6rem;
+        //   &::placeholder {
+        //     color: lightgray;
+        //   }
+        // }
 
         & button {
           border-radius: 0.4rem;
