@@ -9,33 +9,35 @@
     url("https://cdn.hipwallpaper.com/i/98/21/dUyCkp.jpg");
   background-size: cover;
   position: relative;
-  & .top {
-    & .wrapper {
-      padding: 2rem 5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      & .logo {
-        height: 4rem;
-      }
-      & .btn-login {
-        background-color: red;
-        // border: none;
-        color: white;
-        border-radius: 0.5rem;
-        padding: 0.5rem 1.5rem;
-        font-size: 1.6rem;
-        font-weight: 500;
-        cursor: pointer;
-        text-decoration: none;
-      }
+  // & .top {
+  & .wrapper {
+    padding: 2rem 5rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 99;
+    justify-content: space-between;
+    & .logo {
+      height: 4rem;
+    }
+    & .btn-login {
+      background-color: red;
+      // border: none;
+      color: white;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1.5rem;
+      font-size: 1.6rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
     }
   }
-  .container {
+  // }
+  & .container {
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 0;
+    top: -4rem;
     left: 0;
     display: flex;
     flex-direction: column;
@@ -43,6 +45,9 @@
     justify-content: center;
     color: #fff;
     & h1 {
+      display: block;
+      width: 50%;
+      text-align: center;
       font-size: 5rem;
     }
     & h2 {
@@ -51,24 +56,39 @@
     & p {
       font-size: 2rem;
     }
-    & .input {
-      width: 50%;
-      background-color: #fff;
+    & .input-signup-container {
+      min-width: 70rem;
+      height: 7rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-top: 2rem;
-      height: 5rem;
-      border-radius: 0.5rem;
-      & input {
-        flex: 9;
+
+      & .input-container {
+        flex: 70%;
         height: 100%;
         border: none;
-        padding: 0 1rem;
+        padding: 0;
+        & .input {
+          height: 100%;
+          & .hasText {
+            & + label,
+            &:focus + label {
+              font-size: 1.3rem;
+            }
+          }
+          & input {
+            background-color: #fff;
+            color: #000;
+            border-radius: 0;
+            height: 100%;
+          }
+        }
       }
       & .btn-register {
-        flex: 3;
+        flex: 30%;
         height: 100%;
+        padding: 0.5rem 1.5rem;
         background-color: red;
         border: none;
         color: #fff;

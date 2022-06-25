@@ -128,7 +128,7 @@ const Input = react.forwardRef((props, ref) => {
   }
 
   return (
-    <div className="login-input-container">
+    <div className="input-container">
       <div
         className={`input ${
           !inputState.isValid && inputState.isTouched && "invalid"

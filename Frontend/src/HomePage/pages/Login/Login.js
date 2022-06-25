@@ -70,10 +70,14 @@ const Login = () => {
         </div>
       </div>
       <div className="login-form">
+        {isLoading && <LoadingSpinner asOverlay />}
+
         <div className="login-form-main">
           <h1>Sign In</h1>
           {/* {error && <ErrorModal error={error} />} */}
-          {error && <ErrorModal error={error} content={errorValidate(error)} />}
+          {error && !isLoading && (
+            <ErrorModal error={error} content={errorValidate(error)} />
+          )}
           <form onSubmit={loginSubmithandler}>
             <Input
               id="email"
@@ -94,11 +98,7 @@ const Login = () => {
               onInput={inputHandler}
             />
 
-            <Button
-              type="submit"
-              className="btn-login"
-              disabled={!formState.isValid}
-            >
+            <Button type="submit" className="btn" disabled={!formState.isValid}>
               Sign In
             </Button>
           </form>
