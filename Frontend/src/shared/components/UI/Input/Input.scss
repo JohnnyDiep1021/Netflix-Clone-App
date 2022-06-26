@@ -13,7 +13,7 @@
       }
     }
     & label {
-      color: #8c8c8c;
+      color: var(--dark-text-color);
       position: absolute;
       left: 2rem;
       top: 50%;
@@ -30,7 +30,7 @@
       padding: 1rem;
       border-radius: 0.4rem;
       border: 0;
-      color: #fff;
+      color: var(--light-text-color);
       padding: 1.6rem 2rem 0;
       line-height: 5rem;
       background: #333;

@@ -8,19 +8,13 @@ const signup = async (req, res, next) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty())
-      throw new HttpError(
-        `Invalid username/email or password passed! Please, check your inputs and try again.`,
-        422
-      );
+      throw new HttpError(`Invalid username/email or password passed!`, 422);
 
     const { email, username } = req.body;
     const existingEmail = await User.findOne({ email });
     const existingUsername = await User.findOne({ username });
     if (existingEmail || existingUsername)
-      throw new HttpError(
-        `Username or email has existed. Please choose a new one!`,
-        400
-      );
+      throw new HttpError(`Username/ email has existed!`, 400);
 
     const user = new User({ ...req.body });
     await user.save();

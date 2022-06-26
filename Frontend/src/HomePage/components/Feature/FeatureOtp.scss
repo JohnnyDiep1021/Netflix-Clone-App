@@ -13,7 +13,7 @@
 
     & select {
       cursor: pointer;
-      background-color: var(--main-color);
+      background-color: var(--dark-color-700);
       border: 0.1rem solid white;
       color: white;
       margin-left: 2rem;
@@ -59,7 +59,7 @@
 
         &.play {
           background-color: white;
-          color: var(--main-color);
+          color: var(--dark-color-700);
           font-weight: 600;
         }
 

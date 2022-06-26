@@ -2,7 +2,7 @@
   padding: 1rem 2rem;
   display: table;
   width: 100%;
-  color: #fff;
+  color: var(--light-text-color);
   background: #e87c03;
   border-radius: 0.4rem;
   font-size: 1.4rem;
@@ -12,5 +12,5 @@
 
 a {
   // display: inline-block;
-  color: #fff;
+  color: var(--light-text-color);
 }

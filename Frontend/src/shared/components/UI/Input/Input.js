@@ -125,7 +125,6 @@ const Input = react.forwardRef((props, ref) => {
         </textarea>
       );
   }
-
   return (
     <div className="input-container">
       <div

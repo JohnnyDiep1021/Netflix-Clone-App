@@ -8,7 +8,7 @@ const usersController = require("../../controllers/users-controller");
 userRouter.post(
   "/auth/signup",
   [
-    check("username").isLength({ min: 6 }),
+    check("username").isLength({ min: 6, max: 36 }),
     check("email").isEmail(),
     check("password").isStrongPassword(),
   ],

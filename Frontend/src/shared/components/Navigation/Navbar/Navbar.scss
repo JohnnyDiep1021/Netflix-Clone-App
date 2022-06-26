@@ -8,7 +8,7 @@
   z-index: 999;
   transition: all 0.3s ease;
   &.scrolled {
-    background-color: var(--main-color);
+    background-color: var(--dark-color-700);
   }
 
   & .container {
@@ -42,7 +42,7 @@
       & .profile {
         .options {
           display: none;
-          background-color: var(--main-color);
+          background-color: var(--dark-color-700);
           border-radius: 0.5rem;
         }
         span {

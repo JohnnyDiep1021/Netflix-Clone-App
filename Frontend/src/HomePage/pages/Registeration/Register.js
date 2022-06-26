@@ -1,23 +1,39 @@
 import React, { useState } from "react";
 
+import { authAction } from "../../../shared/store/auth";
+import { useDispatch } from "react-redux";
+
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { useForm } from "../../../shared/hooks/form-hooks";
-import {
-  VALIDATOR_REQUIRE,
-  VALIDATOR_EMAIL,
-} from "../../../shared/util/validators";
 
 import Input from "../../../shared/components/UI/Input/Input";
 import Button from "../../../shared/components/UI/Button/Button";
+import ErrorModal from "../../../shared/components/UI/Modal/ErrorModal";
+import LoadingSpinner from "../../../shared/components/UI/Loading/LoadingSpinner";
 
+import {
+  VALIDATOR_EMAIL,
+  VALIDATOR_MAXLENGTH,
+  VALIDATOR_MINLENGTH,
+} from "../../../shared/util/validators";
+import {
+  EMAIL_MAXLENGTH,
+  EMAIL_MINLENGTH,
+  USERNAME_MINLENGTH,
+  USERNAME_MAXLENGTH,
+} from "../../../shared/util/util";
 import "./Register.scss";
 
 const Register = () => {
+  const dispatch = useDispatch();
   const [signupState, setSignupState] = useState(false);
-
   const [formState, inputHandler] = useForm(
     {
       email: {
+        value: "",
+        isValid: false,
+      },
+      username: {
         value: "",
         isValid: false,
       },
@@ -28,13 +44,29 @@ const Register = () => {
     },
     false
   );
-
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const signupStateHandler = () => {
     setSignupState(true);
   };
 
-  const signupSubmitHandler = (event) => {
+  const signupSubmitHandler = async (event) => {
     event.preventDefault();
+    try {
+      const responseData = await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/users/auth/signup`,
+        "POST",
+        JSON.stringify({
+          email: formState.inputs.email.value,
+          username: formState.inputs.username.value,
+          password: formState.inputs.password.value,
+        }),
+        {
+          "Content-Type": "application/json",
+        }
+      );
+      console.log(responseData);
+      dispatch(authAction.setAuthToken(responseData.token));
+    } catch (error) {}
   };
   return (
     <div className="register">
@@ -44,7 +76,7 @@ const Register = () => {
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
           alt=""
         />
-        <Button className="btn-login" to="/login">
+        <Button className="btn btn--red btn-login" to="/login">
           Sign In
         </Button>
       </div>
@@ -69,7 +101,7 @@ const Register = () => {
             />
 
             <Button
-              className="btn-register"
+              className="btn btn--red btn-register"
               onClick={signupStateHandler}
               disabled={!formState.inputs.email.isValid}
             >
@@ -80,16 +112,38 @@ const Register = () => {
       )}
       {signupState && (
         <form className="signup-form" onSubmit={signupSubmitHandler}>
-          <h1>Start your free membership</h1>
+          {isLoading && <LoadingSpinner asOverlay />}
+          <h1 className="heading">
+            Welcome back! <span>Start your free membership</span>
+          </h1>
+          {error && !isLoading && <ErrorModal error={error} />}
           <Input
             id="email"
             element="input"
             label="Email"
             type="text"
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Email is required!"
+            validators={[
+              VALIDATOR_EMAIL(),
+              VALIDATOR_MINLENGTH(EMAIL_MINLENGTH),
+              VALIDATOR_MAXLENGTH(EMAIL_MAXLENGTH),
+            ]}
+            errorText="include '@' (3-60 characters)"
             errorStyle={{ color: "#ffa00a", fontSize: "15px" }}
-            value={formState.inputs.email.value}
+            onInput={inputHandler}
+            initialValue={formState.inputs.email.value}
+            initialValid={formState.inputs.email.isValid}
+          />
+          <Input
+            id="username"
+            element="input"
+            label="Username"
+            type="text"
+            validators={[
+              VALIDATOR_MINLENGTH(USERNAME_MINLENGTH),
+              VALIDATOR_MAXLENGTH(USERNAME_MAXLENGTH),
+            ]}
+            errorText="6-36 character(s)"
+            errorStyle={{ color: "#ffa00a", fontSize: "15px" }}
             onInput={inputHandler}
           />
           <Input
@@ -97,8 +151,8 @@ const Register = () => {
             element="input"
             label="Add a password"
             type="password"
-            validators={[VALIDATOR_REQUIRE()]}
-            errorText="Password is required!"
+            validators={[VALIDATOR_MINLENGTH(8)]}
+            errorText="at least 8 characters with (1, A, $, @,...)"
             errorStyle={{ color: "#ffa00a", fontSize: "15px" }}
             value={formState.inputs.password.value}
             onInput={inputHandler}
@@ -106,7 +160,7 @@ const Register = () => {
 
           <Button
             type="submit"
-            className="btn-register"
+            className="btn btn--red btn-signup"
             disabled={!formState.isValid}
           >
             Sign Up
