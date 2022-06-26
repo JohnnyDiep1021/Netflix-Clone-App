@@ -1,6 +1,6 @@
 .register {
-  width: 100vw;
-  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
   background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0) 0%,
@@ -9,14 +9,20 @@
     url("https://cdn.hipwallpaper.com/i/98/21/dUyCkp.jpg");
   background-size: cover;
   position: relative;
-  // & .top {
-  & .wrapper {
-    padding: 2rem 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & .regisNav {
     display: flex;
     align-items: center;
-    position: relative;
-    z-index: 99;
     justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    width: 100%;
+    padding: 2rem 5rem;
+    // border-bottom: 0.1rem solid #e6e6e6;
     & .logo {
       height: 4rem;
     }
@@ -32,8 +38,7 @@
       text-decoration: none;
     }
   }
-  // }
-  & .container {
+  & .welcome-container {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -46,15 +51,16 @@
     color: #fff;
     & h1 {
       display: block;
-      width: 50%;
+      // width: 50%;
       text-align: center;
-      font-size: 5rem;
+      font-size: 6.4rem;
     }
     & h2 {
       margin: 2rem;
+      font-size: 2.6rem;
     }
     & p {
-      font-size: 2rem;
+      font-size: 1.9rem;
     }
     & .input-signup-container {
       min-width: 70rem;
@@ -96,5 +102,15 @@
         cursor: pointer;
       }
     }
+  }
+  & .signup-form {
+    display: flex;
+    width: 37rem;
+    // height: 40rem;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 6rem 4rem;
   }
 }

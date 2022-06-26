@@ -43,7 +43,11 @@ function App() {
       </Switch>
     );
   }
-  return <Fragment>{routes}</Fragment>;
+  return (
+    <Fragment>
+      <main>{routes}</main>
+    </Fragment>
+  );
 }
 
 export default App;

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
 import {
   Play,
@@ -10,16 +10,17 @@ import {
 import "./MovieItem.scss";
 const MovieItem = (props) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [isPosterHovered, setIsPosterHovered] = useState(true);
+  // const [isPosterHovered, setIsPosterHovered] = useState(true);
   const trailer =
     "https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=139&oauth2_token_id=57447761";
 
-  const hidePosterHandler = () => {
-    setTimeout(() => {
-      setIsPosterHovered(false);
-      console.log(`hide outer poster`);
-    }, 2000);
-  };
+  // const hidePosterHandler = () => {
+  //   setTimeout(() => {
+  //     setIsPosterHovered(false);
+  //     console.log(`hide outer poster`);
+  //   }, 2000);
+  // };
+
   const showOnHoverHandler = () => {
     setIsHovered(true);
   };

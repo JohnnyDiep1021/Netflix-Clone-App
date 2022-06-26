@@ -1,8 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { useForm } from "../../../shared/hooks/form-hooks";
-import { VALIDATOR_REQUIRE } from "../../../shared/util/validators";
+import {
+  VALIDATOR_REQUIRE,
+  VALIDATOR_EMAIL,
+} from "../../../shared/util/validators";
 
 import Input from "../../../shared/components/UI/Input/Input";
 import Button from "../../../shared/components/UI/Button/Button";
@@ -10,22 +13,32 @@ import Button from "../../../shared/components/UI/Button/Button";
 import "./Register.scss";
 
 const Register = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [formState, inputHandler] = useForm({}, true);
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const [signupState, setSignupState] = useState(false);
 
-  const handleStart = () => {
-    setEmail(emailRef.current.value);
+  const [formState, inputHandler] = useForm(
+    {
+      email: {
+        value: "",
+        isValid: false,
+      },
+      password: {
+        value: "",
+        isValid: false,
+      },
+    },
+    false
+  );
+
+  const signupStateHandler = () => {
+    setSignupState(true);
   };
-  const handleFinish = () => {
-    setPassword(passwordRef.current.value);
+
+  const signupSubmitHandler = (event) => {
+    event.preventDefault();
   };
   return (
     <div className="register">
-      {/* <div className="top"> */}
-      <div className="wrapper">
+      <div className="regisNav">
         <img
           className="logo"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
@@ -35,39 +48,71 @@ const Register = () => {
           Sign In
         </Button>
       </div>
-      {/* </div> */}
-      <div className="container">
-        <h1>Unlimited movies, TV shows, and more</h1>
-        <h2>Watch anywhere. Cancel anytime.</h2>
-        <p>
-          Ready to watch? Enter your email to create or restart your membership
-        </p>
-        {!email ? (
+      {!signupState && (
+        <div className="welcome-container">
+          <h1>Unlimited movies, TV shows, and more</h1>
+          <h2>Watch anywhere. Cancel anytime.</h2>
+          <p>
+            Ready to watch? Enter your email to create or restart your
+            membership
+          </p>
           <div className="input-signup-container">
             <Input
               id="email"
               element="input"
               label="Email address"
               type="text"
-              signup
-              validators={[VALIDATOR_REQUIRE()]}
+              validators={[VALIDATOR_EMAIL()]}
               errorText="Email is required!"
               errorStyle={{ color: "#ffa00a", fontSize: "15px" }}
               onInput={inputHandler}
             />
-            <button className="btn-register" onClick={handleStart}>
+
+            <Button
+              className="btn-register"
+              onClick={signupStateHandler}
+              disabled={!formState.inputs.email.isValid}
+            >
               Get Started
-            </button>
+            </Button>
           </div>
-        ) : (
-          <form className="input">
-            <input type="password" placeholder="password" ref={passwordRef} />
-            <button className="btn-register" onClick={handleFinish}>
-              Start
-            </button>
-          </form>
-        )}
-      </div>
+        </div>
+      )}
+      {signupState && (
+        <form className="signup-form" onSubmit={signupSubmitHandler}>
+          <h1>Start your free membership</h1>
+          <Input
+            id="email"
+            element="input"
+            label="Email"
+            type="text"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Email is required!"
+            errorStyle={{ color: "#ffa00a", fontSize: "15px" }}
+            value={formState.inputs.email.value}
+            onInput={inputHandler}
+          />
+          <Input
+            id="password"
+            element="input"
+            label="Add a password"
+            type="password"
+            validators={[VALIDATOR_REQUIRE()]}
+            errorText="Password is required!"
+            errorStyle={{ color: "#ffa00a", fontSize: "15px" }}
+            value={formState.inputs.password.value}
+            onInput={inputHandler}
+          />
+
+          <Button
+            type="submit"
+            className="btn-register"
+            disabled={!formState.isValid}
+          >
+            Sign Up
+          </Button>
+        </form>
+      )}
     </div>
   );
 };

@@ -74,14 +74,11 @@
     & .login-form-other {
       color: #737373;
       flex-grow: 2;
-
       & .login-signup-now {
         font-size: 1.6rem;
         margin-top: 1.6rem;
         & a {
           color: #fff;
-          &:hover {
-          }
         }
       }
       & .term-of-use {

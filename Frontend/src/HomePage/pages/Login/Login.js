@@ -1,15 +1,14 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import { authAction } from "../../../shared/store/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { useForm } from "../../../shared/hooks/form-hooks";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 
 import {
   VALIDATOR_REQUIRE,
-  VALIDATOR_EMAIL,
   VALIDATOR_MINLENGTH,
   VALIDATOR_MAXLENGTH,
 } from "../../../shared/util/validators";
@@ -38,7 +37,7 @@ const Login = () => {
   );
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
-  const loginSubmithandler = async (event) => {
+  const loginSubmitHandler = async (event) => {
     event.preventDefault();
     console.log(process.env.REACT_APP_BACKEND_URL);
     try {
@@ -78,7 +77,7 @@ const Login = () => {
           {error && !isLoading && (
             <ErrorModal error={error} content={errorValidate(error)} />
           )}
-          <form onSubmit={loginSubmithandler}>
+          <form onSubmit={loginSubmitHandler}>
             <Input
               id="email"
               element="input"
@@ -110,7 +109,7 @@ const Login = () => {
           <div className="term-of-use">
             <p>
               This page is protected by Google reCAPTCHA to ensure you're not a
-              bot. <a href="#">Learn more</a>.
+              bot. <Link to="/register">Learn more</Link>.
             </p>
           </div>
         </div>
