@@ -1,10 +1,32 @@
-// import { InfoOutlined, PlayArrow } from "@material-ui/icons";
+import React, { useState, useEffect, Fragment } from "react";
+
+import { useSelector } from "react-redux";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
+
+import LoadingSpinner from "../../../shared/components/UI/Loading/LoadingSpinner";
 import { Play, Info } from "../../../shared/components/Icon/MovieIcons";
-import React from "react";
 
 import "./FeatureOtp.scss";
 
 const FeatureOption = (props) => {
+  const token = useSelector((state) => state.auth.token);
+  const [movieShowcase, setMovieShowcase] = useState();
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  useEffect(() => {
+    const fetchMovie = async () => {
+      try {
+        const responseData = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/movies/find/random`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        console.log(responseData[0]);
+        setMovieShowcase(responseData[0]);
+      } catch (error) {}
+    };
+    fetchMovie();
+  }, [token, sendRequest]);
   return (
     <div className="featured">
       {props.type && (
@@ -27,31 +49,25 @@ const FeatureOption = (props) => {
           </select>
         </div>
       )}
-      <img
-        src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-        alt=""
-      />
-      <div className="info">
-        <img
-          src="https://occ-0-1432-1433.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABUZdeG1DrMstq-YKHZ-dA-cx2uQN_YbCYx7RABDk0y7F8ZK6nzgCz4bp5qJVgMizPbVpIvXrd4xMBQAuNe0xmuW2WjoeGMDn1cFO.webp?r=df1"
-          alt=""
-        />
-        <span className="desc">
-          sadasdsagfaksjfiasjfisajdiosadjiosadjiojsdioasjdiosajdiajidsajodjsai
-          sadasdsagfaksjfiasjfisajdiosadjiosadjiojsdioasjdiosajdiajidsajodjsai
-          sadasdsagfaksjfiasjfisajdiosadjiosadjiojsdioasjdiosajdiajidsajodjsai
-        </span>
-        <div className="buttons">
-          <button className="play">
-            <Play width="25px" height="25px" />
-            <span>Play</span>
-          </button>
-          <button className="more">
-            <Info width="30px" height="30px" />
-            <span>More Info</span>
-          </button>
-        </div>
-      </div>
+      {movieShowcase && (
+        <Fragment>
+          <img src={movieShowcase.image} alt="" />
+          <div className="info">
+            <img src={movieShowcase.imageTitle} alt="" />
+            <span className="desc">{movieShowcase.desc}</span>
+            <div className="buttons">
+              <button className="play">
+                <Play width="25px" height="25px" />
+                <span>Play</span>
+              </button>
+              <button className="more">
+                <Info width="30px" height="30px" />
+                <span>More Info</span>
+              </button>
+            </div>
+          </div>
+        </Fragment>
+      )}
     </div>
   );
 };

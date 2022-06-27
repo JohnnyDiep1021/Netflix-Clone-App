@@ -1,8 +1,6 @@
 const List = require("../db/model/List");
 const HttpError = require("../utils/http-error");
 
-const { updateValidation } = require("../utils/utils.js");
-const lodash = require("lodash");
 const { validationResult } = require("express-validator");
 
 const listParams = async (req, res, next) => {

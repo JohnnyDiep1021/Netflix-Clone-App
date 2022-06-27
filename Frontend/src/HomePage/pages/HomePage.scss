@@ -1,4 +1,7 @@
 .home {
   background-color: var(--dark-color-700);
   overflow: hidden;
+  & .movie-list-container {
+    overflow: visible;
+  }
 }

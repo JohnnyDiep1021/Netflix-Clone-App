@@ -9,7 +9,6 @@ import Login from "./HomePage/pages/Login/Login";
 function App() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const token = useSelector((state) => state.auth.token);
-  console.log(isAuthenticated);
   console.log(token);
   let routes;
   if (token) {

@@ -53,7 +53,6 @@ const Login = () => {
         }
       );
       console.log(responseData);
-      dispatch(authAction.login());
       dispatch(authAction.setAuthToken(responseData.token));
     } catch (error) {}
   };
@@ -75,7 +74,11 @@ const Login = () => {
           <h1>Sign In</h1>
           {/* {error && <ErrorModal error={error} />} */}
           {error && !isLoading && (
-            <ErrorModal error={error} content={errorValidate(error)} />
+            <ErrorModal
+              error={error}
+              content={errorValidate(error)}
+              onClose={clearError}
+            />
           )}
           <form onSubmit={loginSubmitHandler}>
             <Input

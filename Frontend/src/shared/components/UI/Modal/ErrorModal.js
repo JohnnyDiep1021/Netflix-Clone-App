@@ -28,7 +28,7 @@ const ErrorModal = (props) => {
   switch (props.content) {
     case "password":
       errorMsg = (
-        <div className="inline-message">
+        <div className="inline-message" onClick={props.onlosek}>
           <b>{props.error}</b>
           <span> Please try again!</span>
         </div>
@@ -36,7 +36,7 @@ const ErrorModal = (props) => {
       break;
     case "email":
       errorMsg = (
-        <div className="inline-message">
+        <div className="inline-message" onClick={props.onClose}>
           <p>
             {props.error} Please try again or{" "}
             <Link to="/register" target="_blank">
@@ -48,7 +48,11 @@ const ErrorModal = (props) => {
       );
       break;
     default:
-      errorMsg = <div className="inline-message">{props.error}</div>;
+      errorMsg = (
+        <div className="inline-message" onClick={props.onClose}>
+          {props.error}
+        </div>
+      );
   }
   return errorMsg;
 };

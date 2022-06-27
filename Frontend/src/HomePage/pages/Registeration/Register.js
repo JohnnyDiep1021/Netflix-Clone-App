@@ -116,7 +116,9 @@ const Register = () => {
           <h1 className="heading">
             Welcome back! <span>Start your free membership</span>
           </h1>
-          {error && !isLoading && <ErrorModal error={error} />}
+          {error && !isLoading && (
+            <ErrorModal error={error} onClose={clearError} />
+          )}
           <Input
             id="email"
             element="input"

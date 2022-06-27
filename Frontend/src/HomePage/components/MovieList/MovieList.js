@@ -1,22 +1,22 @@
 import React, { useRef, useState } from "react";
+
 import MovieItem from "../MovieItem/MovieItem";
+
 import "./MovieList.scss";
-// import {
-//   ArrowBackIosOutlined,
-//   ArrowForwardIosOutlined,
-// } from "@material-ui/icons";
 import {
   ForwardArrow,
   BackwardArrow,
 } from "../../../shared/components/Icon/MovieIcons";
+
 let scrollAmount = 0;
-const MovieList = () => {
+const MovieList = (props) => {
   const [isMoved, setIsMoved] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   // const [scrollAmount, setScrollAmount] = useState(0);
   const carouselRef = useRef();
   const sliders = useRef();
-  const clickHandler = (direction) => {
+
+  const scrollHandler = (direction) => {
     setIsMoved(true);
 
     const totalCarouselWidth = carouselRef.current.clientWidth - 1664;
@@ -49,35 +49,9 @@ const MovieList = () => {
     carouselRef.current.style.transform = `translateX(${scrollAmount}px)`;
   };
 
-  // const scrollLeftHandler = (event) => {
-  //   if (scrollAmount >= 0) {
-  //     scrollAmount -= 218;
-  //   } else {
-  //     scrollAmount = 0;
-  //   }
-  //   console.log(scrollAmount);
-  //   sliders.current.scrollTo({
-  //     top: 0,
-  //     left: scrollAmount,
-  //     behavior: "smooth",
-  //   });
-  //   // listRef.current.style.transform = `translateX(-${scrollAmount}px)`;
-  // };
-  // const scrollRightHandler = (event) => {
-  //   const carouselTotalWidth = carouselRef.current.clientWidth;
-  //   if (scrollAmount <= carouselTotalWidth) {
-  //     scrollAmount += 218;
-  //   } else {
-  //     scrollAmount = 0;
-  //   }
-  //   console.log(scrollAmount);
-  //   sliders.current.scrollTo({
-  //     top: 0,
-  //     left: scrollAmount,
-  //     behavior: "smooth",
-  //   });
-  //   // listRef.current.style.transform = `translateX(${scrollAmount}px)`;
-  // };
+  const movieItems = props.movieList.content.map((id) => (
+    <MovieItem id={id} key={id} />
+  ));
   return (
     <div
       className="list"
@@ -88,12 +62,12 @@ const MovieList = () => {
         setIsHovered(false);
       }}
     >
-      <span className="listTitle">Continue to watch</span>
+      <span className="listTitle">{props.movieList.title}</span>
       <div className="carousel" ref={sliders}>
         <BackwardArrow
           className="sliderArrow left"
           onClick={() => {
-            clickHandler("left");
+            scrollHandler("left");
           }}
           // onClick={scrollLeftHandler}
           display={!isMoved && "none"}
@@ -103,21 +77,12 @@ const MovieList = () => {
           ref={carouselRef}
           style={{ zIndex: isHovered && 1 }}
         >
-          <MovieItem />
-          <MovieItem />
-          <MovieItem />
-          <MovieItem />
-          <MovieItem />
-          <MovieItem />
-          <MovieItem />
-          <MovieItem />
-          <MovieItem />
-          <MovieItem />
+          {movieItems}
         </ul>
         <ForwardArrow
           className="sliderArrow right"
           onClick={() => {
-            clickHandler("right");
+            scrollHandler("right");
           }}
           // onClick={scrollRightHandler}
         />

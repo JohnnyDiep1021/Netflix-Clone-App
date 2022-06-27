@@ -14,7 +14,10 @@ const signup = async (req, res, next) => {
     const existingEmail = await User.findOne({ email });
     const existingUsername = await User.findOne({ username });
     if (existingEmail || existingUsername)
-      throw new HttpError(`Username/ email has existed!`, 400);
+      throw new HttpError(
+        `Username/ email has existed! Please choose a new one.`,
+        400
+      );
 
     const user = new User({ ...req.body });
     await user.save();
