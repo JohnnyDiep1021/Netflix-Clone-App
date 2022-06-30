@@ -1,0 +1,10 @@
+.home-container {
+  // flex: 4;
+  width: 80%;
+  padding: 2rem;
+
+  & .home-widgets {
+    display: flex;
+    margin: 2rem;
+  }
+}
