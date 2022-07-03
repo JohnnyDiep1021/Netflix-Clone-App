@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 import MainNavigation from "./shared/components/Navigation/MainNavigation/MainNavigation";
@@ -19,34 +19,38 @@ function App() {
   const token = useSelector((state) => state.auth.token);
   const isAdmin = useSelector((state) => state.auth.user?.isAdmin);
   let routes;
-  console.log(token, isAdmin);
   if (token && isAdmin) {
-    console.log("logging in!");
     routes = (
-      <Switch>
-        <Route path="/" exact>
-          <Home />
-        </Route>
-        <Route path="/users" exact>
-          <UserList />
-        </Route>
-        <Route path="/users/:userId">
-          <User />
-        </Route>
-        <Route path="/newUser">
-          <NewUser />
-        </Route>
-        <Route path="/products" exact>
-          <ProductList />
-        </Route>
-        <Route path="/products/:productId">
-          <Product />
-        </Route>
-        <Route path="/newProduct">
-          <NewProduct />
-        </Route>
-        <Redirect to="/" />
-      </Switch>
+      <Fragment>
+        <MainNavigation />
+        <main className="main-container">
+          <SideBar />
+          <Switch>
+            <Route path="/" exact>
+              <Home />
+            </Route>
+            <Route path="/users" exact>
+              <UserList />
+            </Route>
+            <Route path="/users/:userId">
+              <User />
+            </Route>
+            <Route path="/newUser">
+              <NewUser />
+            </Route>
+            <Route path="/movies" exact>
+              <ProductList />
+            </Route>
+            <Route path="/products/:productId">
+              <Product />
+            </Route>
+            <Route path="/newProduct">
+              <NewProduct />
+            </Route>
+            <Redirect to="/" />
+          </Switch>
+        </main>
+      </Fragment>
     );
   } else {
     routes = (
@@ -58,15 +62,7 @@ function App() {
       </Switch>
     );
   }
-  return (
-    <Fragment>
-      <MainNavigation />
-      <main className="main-container">
-        <SideBar />
-        {routes}
-      </main>
-    </Fragment>
-  );
+  return <Fragment>{routes}</Fragment>;
 }
 
 export default App;

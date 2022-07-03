@@ -1,5 +1,6 @@
 import React from "react";
 
+import { PlayCircleOutline } from "@mui/icons-material";
 import {
   Home,
   Sale,
@@ -46,9 +47,9 @@ const SideBar = () => {
               </NavLink>
             </li>
             <li className="menu-item">
-              <NavLink to="/products">
-                <Product className="item-icon" />
-                Products
+              <NavLink to="/movies">
+                <PlayCircleOutline className="item-icon" />
+                Movies
               </NavLink>
             </li>
             {/* <li className="menu-item">

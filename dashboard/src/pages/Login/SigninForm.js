@@ -81,11 +81,7 @@ const Login = (props) => {
             onInput={inputHandler}
           />
           <div className="btn--form ">
-            <Button
-              type="submit"
-              className="btn"
-              disabled={!formState.isValid || error}
-            >
+            <Button type="submit" className="btn" disabled={!formState.isValid}>
               Log In
             </Button>
           </div>

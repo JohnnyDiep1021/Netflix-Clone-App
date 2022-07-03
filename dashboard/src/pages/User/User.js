@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   CalendarToday,
   LocationSearching,
@@ -6,7 +8,6 @@ import {
   PhoneAndroid,
   Publish,
 } from "@mui/icons-material";
-import React from "react";
 
 import Button from "../../shared/components/UI/Button/Button";
 

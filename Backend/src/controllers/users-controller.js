@@ -112,7 +112,9 @@ const getUserStats = async (req, res, next) => {
           },
         },
       ]);
-      res.json(data);
+      res.json({
+        userStats: data,
+      });
     }
   } catch (error) {
     next(error);
