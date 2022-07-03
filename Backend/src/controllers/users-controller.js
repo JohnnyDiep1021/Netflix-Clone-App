@@ -48,6 +48,28 @@ const login = async (req, res, next) => {
   }
 };
 
+const logout = async (req, res, next) => {
+  try {
+    req.user.tokens = req.user.tokens.filter(
+      (token) => token.token !== req.token
+    );
+    await req.user.save();
+    res.json({ message: `Logging out sucessfully!` });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const logoutAll = async (req, res, next) => {
+  try {
+    req.user.tokens = [];
+    await req.user.save();
+    res.json({ message: "Logging out all devices sucessfully!" });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const getUserById = async (req, res, next) => {
   try {
     res.json({ user: req.user.toObject({ getters: true }) });
@@ -137,6 +159,8 @@ const deleteProfile = async (req, res, next) => {
 module.exports = {
   signup,
   login,
+  logout,
+  logoutAll,
   getUserById,
   getAllUser,
   getUserStats,

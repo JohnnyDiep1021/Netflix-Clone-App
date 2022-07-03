@@ -18,6 +18,12 @@ userRouter.post(
 // LOGIN
 userRouter.post("/auth/login", usersController.login);
 
+// LOGOUT
+userRouter.post("/logout", auth, usersController.logout);
+
+// LOGOUT ALL USER
+userRouter.post("/logoutAll", auth, usersController.logoutAll);
+
 // GET USER PROFILE
 userRouter.get("/me", auth, usersController.getUserById);
 
@@ -26,6 +32,7 @@ userRouter.get("/", auth, usersController.getAllUser);
 
 // GET USER STATS
 userRouter.get("/stats", auth, usersController.getUserStats);
+
 // UPDATE
 userRouter.patch(
   "/:id",

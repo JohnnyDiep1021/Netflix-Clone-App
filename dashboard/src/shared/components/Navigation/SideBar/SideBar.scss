@@ -22,13 +22,29 @@
         & .menu-item {
           display: flex;
           align-items: center;
-          border-radius: 1rem;
-          padding: 0.5rem;
+          margin-bottom: 0.5rem;
+          // justify-content: stretch;
+
           cursor: pointer;
-          &.active,
-          &:hover {
-            background-color: rgb(240, 240, 255);
+
+          a:link,
+          a:visited {
+            width: 100%;
+            padding: 0.5rem;
+
+            border-radius: 1rem;
+            // padding: 0.5rem;
+            text-decoration: none;
+            color: #555;
+            transition: all 0.2s;
           }
+          a:hover,
+          a.active,
+          a:active {
+            background-color: rgb(240, 240, 255);
+            color: #3271e7;
+          }
+
           & .item-icon {
             width: 2rem;
             height: 2rem;

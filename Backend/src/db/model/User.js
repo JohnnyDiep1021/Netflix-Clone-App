@@ -71,16 +71,14 @@ UserSchema.methods.toJSON = function () {
 };
 UserSchema.statics.findByCredentials = async function ({
   password,
-  email,
   username,
 } = {}) {
   try {
-    if ((!email && !username) || !password) {
+    if (!username || !password) {
       throw Error(`Email/ username and password are required to login!`);
     }
-    let user;
-    if (email) user = await User.findOne({ email });
-    if (username) user = await User.findOne({ username });
+    let user = await User.findOne({ email: username });
+    if (!user) user = await User.findOne({ username });
     if (!user) {
       throw Error(`Sorry, we can't find an account with this email address.`);
     }

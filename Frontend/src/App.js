@@ -7,7 +7,6 @@ import Home from "./HomePage/pages/HomePage";
 import Register from "./HomePage/pages/Registeration/Register";
 import Login from "./HomePage/pages/Login/Login";
 function App() {
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   const token = useSelector((state) => state.auth.token);
   console.log(token);
   let routes;

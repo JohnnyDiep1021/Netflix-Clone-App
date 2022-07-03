@@ -38,7 +38,7 @@ const ErrorModal = (props) => {
       errorMsg = (
         <div className="inline-message" onClick={props.onClose}>
           <p>
-            {props.error} Please try again or{" "}
+            {props.error} Please try again or
             <Link to="/register" target="_blank">
               Create a new account
             </Link>

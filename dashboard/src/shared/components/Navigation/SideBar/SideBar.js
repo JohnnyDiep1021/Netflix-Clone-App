@@ -13,6 +13,7 @@ import {
   Message,
   Manage,
 } from "../../../../shared/components/Icon/Icons";
+import { NavLink } from "react-router-dom";
 import "./SideBar.scss";
 
 const SideBar = () => {
@@ -22,40 +23,46 @@ const SideBar = () => {
         <div className="sidebar-menu">
           <h3 className="menu-title">Dashboard</h3>
           <ul className="menu-list">
-            <li className="menu-item active">
-              <Home className="item-icon" /> Home
-            </li>
             <li className="menu-item">
+              <NavLink to="/" exact>
+                <Home className="item-icon" /> Home
+              </NavLink>
+            </li>
+            {/* <li className="menu-item">
               <Analytics className="item-icon" />
               Analytics
             </li>
             <li className="menu-item">
               <Sale className="item-icon" /> Sales
-            </li>
+            </li> */}
           </ul>
         </div>
         <div className="sidebar-menu">
           <h3 className="menu-title">Quick Menu</h3>
           <ul className="menu-list">
-            <li className="menu-item active">
-              <User className="item-icon" /> Users
+            <li className="menu-item">
+              <NavLink to="/users">
+                <User className="item-icon" /> Users
+              </NavLink>
             </li>
             <li className="menu-item">
-              <Product className="item-icon" />
-              Products
+              <NavLink to="/products">
+                <Product className="item-icon" />
+                Products
+              </NavLink>
             </li>
-            <li className="menu-item">
+            {/* <li className="menu-item">
               <Transaction className="item-icon" /> Transactions
             </li>
             <li className="menu-item">
               <Report className="item-icon" /> Reports
-            </li>
+            </li> */}
           </ul>
         </div>
-        <div className="sidebar-menu">
+        {/* <div className="sidebar-menu">
           <h3 className="menu-title">Notifications</h3>
           <ul className="menu-list">
-            <li className="menu-item active">
+            <li className="menu-item">
               <Email className="item-icon" /> Mail
             </li>
             <li className="menu-item">
@@ -70,7 +77,7 @@ const SideBar = () => {
         <div className="sidebar-menu">
           <h3 className="menu-title">Staff</h3>
           <ul className="menu-list">
-            <li className="menu-item active">
+            <li className="menu-item">
               <Manage className="item-icon" /> Manage
             </li>
             <li className="menu-item">
@@ -81,7 +88,7 @@ const SideBar = () => {
               <Report className="item-icon" /> Reports
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </div>
   );

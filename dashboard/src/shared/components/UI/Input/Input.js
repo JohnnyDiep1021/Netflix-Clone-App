@@ -17,15 +17,9 @@ const inputReducer = (state, action) => {
         value: action.val,
         isValid: validate(action.val, action.validators),
       };
-    case "FOCUS":
-      return {
-        ...state,
-        isFocus: true,
-      };
     case "TOUCH":
       return {
         ...state,
-        isFocus: false,
         isTouched: true,
       };
     default:
@@ -36,7 +30,6 @@ const inputReducer = (state, action) => {
 const Input = react.forwardRef((props, ref) => {
   const [inputState, dispatchInputAction] = useReducer(inputReducer, {
     value: props.initialValue || "",
-    isFocus: false,
     isTouched: false,
     isValid: props.initialValid || false,
   });
@@ -61,11 +54,7 @@ const Input = react.forwardRef((props, ref) => {
       type: "TOUCH",
     });
   };
-  const focusHandler = () => {
-    dispatchInputAction({
-      type: "FOCUS",
-    });
-  };
+
   const inputRef = useRef();
 
   const activate = () => {
@@ -85,14 +74,10 @@ const Input = react.forwardRef((props, ref) => {
           ref={inputRef}
           id={props.id}
           type={props.type}
-          className={`${
-            inputState.isFocus || inputState.value ? "hasText" : ""
-          }`}
           placeholder={props.placeholder}
           value={inputState.value}
           onChange={changeHandler}
           onBlur={touchHandler}
-          onFocus={focusHandler}
           step={props.step}
         />
       );
@@ -121,27 +106,48 @@ const Input = react.forwardRef((props, ref) => {
           onBlur={touchHandler}
           value={inputState.value}
         >
-          {props.children}
+          {props.children}{" "}
         </textarea>
       );
   }
+  // const inputElement =
+  //   props.element === "input" ? (
+  //     <input
+  //       ref={inputRef}
+  //       id={props.id}
+  //       type={props.type}
+  //       placeholder={props.placeholder}
+  //       value={inputState.value}
+  //       onChange={changeHandler}
+  //       onBlur={touchHandler}
+  //       step={props.step}
+  //     />
+  //   ) : (
+  //     <textarea
+  //       id={props.id}
+  //       rows={props.rows || 3}
+  //       onChange={changeHandler}
+  //       onBlur={touchHandler}
+  //       value={inputState.value}
+  //     >
+  //       {props.children}{" "}
+  //     </textarea>
+  //   );
   return (
-    <div className="input-container">
-      <div
-        className={`input ${
-          !inputState.isValid && inputState.isTouched && "invalid"
-        }`}
-      >
-        {inputElement}
-        <label htmlFor={props.id}>{props.label}</label>
-      </div>
+    <div
+      className={`input ${
+        !inputState.isValid && inputState.isTouched && "invalid"
+      }`}
+    >
+      <label htmlFor={props.id}>{props.label}</label>
+      {inputElement}
       {!inputState.isValid && inputState.isTouched && (
-        <div
+        <p
           className={`error-message ${props.errorClass}`}
           style={props.errorStyle}
         >
           {props.errorText}
-        </div>
+        </p>
       )}
     </div>
   );

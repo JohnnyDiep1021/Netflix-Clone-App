@@ -44,9 +44,9 @@ const UserList = () => {
         return (
           <Fragment>
             <Button
-              className="btn-status"
-              edit
+              className="btn-status "
               to={`/users/${params.row.id}`}
+              edit
             ></Button>
             <DeleteOutline
               className="userList-delete-icon"
