@@ -32,7 +32,7 @@ const WidgetSm = () => {
         {!isLoading &&
           newUsers &&
           newUsers.map((newUser) => (
-            <li className="widgetSm-list-item">
+            <li className="widgetSm-list-item" key={newUser._id}>
               <img
                 src={
                   newUser.profilePic ||
