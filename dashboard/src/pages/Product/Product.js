@@ -46,26 +46,22 @@ const Product = () => {
         <div className="productBottom">
           <form className="productForm">
             <div className="productFormLeft">
-              <label>Product Name</label>
-              <input type="text" placeholder="Apple AirPod" />
-              <label>In Stock</label>
-              <select name="inStock" id="idStock">
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
-              <label>Active</label>
-              <select name="active" id="active">
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
+              <label>Movie Title</label>
+              <input type="text" placeholder={movie.title} />
+              <label>Year</label>
+              <input type="text" placeholder={movie.year} />
+              <label>Genre</label>
+              <input type="text" placeholder={movie.genre} />
+              <label>Limit</label>
+              <input type="text" placeholder={movie.limit} />
+              <label>Trailer</label>
+              <input type="file" placeholder={movie.trailer} />
+              <label>Video</label>
+              <input type="file" placeholder={movie.video} />
             </div>
             <div className="productFormRight">
               <div className="productUpload">
-                <img
-                  src="https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                  alt=""
-                  className="productUploadImg"
-                />
+                <img src={movie.image} alt="" className="productUploadImg" />
                 <label htmlFor="file">
                   <Publish />
                 </label>

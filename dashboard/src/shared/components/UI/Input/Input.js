@@ -17,6 +17,12 @@ const inputReducer = (state, action) => {
         value: action.val,
         isValid: validate(action.val, action.validators),
       };
+    case "CHANGE_FILE":
+      return {
+        ...state,
+        value: action.val,
+        isValid: validate(action.val?.name, action.validators),
+      };
     case "TOUCH":
       return {
         ...state,
@@ -45,6 +51,14 @@ const Input = react.forwardRef((props, ref) => {
     dispatchInputAction({
       type: "CHANGE",
       val: event.target.value,
+      validators: props.validators,
+    });
+  };
+
+  const changeFileHandler = (event) => {
+    dispatchInputAction({
+      type: "CHANGE_FILE",
+      val: event.target.files[0],
       validators: props.validators,
     });
   };
@@ -82,6 +96,45 @@ const Input = react.forwardRef((props, ref) => {
         />
       );
       break;
+    case "file":
+      return (
+        <div
+          className={`input-file ${
+            !inputState.isValid && inputState.isTouched && "invalid"
+          }`}
+        >
+          <label htmlFor={props.id}>{props.label}</label>
+          <input
+            id={props.id}
+            accept={props.accept}
+            type="file"
+            onChange={changeFileHandler}
+            onBlur={touchHandler}
+          />
+          {!inputState.isValid && inputState.isTouched && (
+            <p
+              className={`error-message ${props.errorClass}`}
+              style={props.errorStyle}
+            >
+              {props.errorText}
+            </p>
+          )}
+        </div>
+      );
+
+    case "select":
+      inputElement = (
+        <select
+          // name="active"
+          id={props.id}
+          onChange={changeHandler}
+          onBlur={touchHandler}
+        >
+          <option value="false">No</option>
+          <option value="true">Yes</option>
+        </select>
+      );
+      break;
     case "flex-input":
       inputElement = (
         <span
@@ -106,7 +159,7 @@ const Input = react.forwardRef((props, ref) => {
           onBlur={touchHandler}
           value={inputState.value}
         >
-          {props.children}{" "}
+          {props.children}
         </textarea>
       );
   }

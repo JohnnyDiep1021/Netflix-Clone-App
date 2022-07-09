@@ -2,7 +2,21 @@
   width: 100%;
 }
 
-.input input {
+.input-file {
+  width: 100%;
+  & label {
+    color: gray;
+    font-weight: 600;
+    display: block;
+  }
+  & input {
+    padding: 1rem;
+    width: 100%;
+    border-radius: 1rem;
+  }
+}
+.input input,
+.input select {
   display: inline-block;
   margin-left: 0.5rem;
   width: 100%;
@@ -12,7 +26,8 @@
   border-radius: 6px;
 }
 
-.input input:focus {
+.input input:focus,
+.input select:focus {
   outline: none;
   border: 2px solid var(--primary-color);
   background-color: #fff;
@@ -22,7 +37,8 @@
   color: rgba(97, 97, 97, 0.4);
 }
 
-.input input {
+.input input,
+.input select {
   margin-bottom: 1rem;
 }
 
