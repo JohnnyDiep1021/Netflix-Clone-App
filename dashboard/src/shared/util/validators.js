@@ -5,20 +5,13 @@ const VALIDATOR_TYPE_MIN = "MIN";
 const VALIDATOR_TYPE_MAX = "MAX";
 const VALIDATOR_TYPE_EMAIL = "EMAIL";
 const VALIDATOR_TYPE_PASSWORD = "PASSWORD";
-const VALIDATOR_TYPE_FILE = "FILE";
-const VALIDATOR_TYPE_MIME = [
-  ".png",
-  ".jpeg",
-  ".jpg",
-  ".svg",
-  ".webp",
-  ".webm",
-  ".ogv",
-  ".mp4",
-  ".mpeg",
-];
+const VALIDATOR_IMAGE_FILE_TYPE = "IMAGE_FILE";
+const VALIDATOR_VIDEO_FILE_TYPE = "VIDEO_FILE";
+const VALIDATOR_IMAGE_TYPE = [".png", ".jpeg", ".jpg", ".svg", ".webp"];
+const VALIDATOR_VIDEO_TYPE = [".webm", ".ogv", ".mp4", ".mpeg"];
 export const VALIDATOR_REQUIRE = () => ({ type: VALIDATOR_TYPE_REQUIRE });
-export const VALIDATOR_FILE = () => ({ type: VALIDATOR_TYPE_FILE });
+export const VALIDATOR_IMAGE_FILE = () => ({ type: VALIDATOR_IMAGE_FILE_TYPE });
+export const VALIDATOR_VIDEO_FILE = () => ({ type: VALIDATOR_VIDEO_FILE_TYPE });
 export const VALIDATOR_MINLENGTH = (val) => ({
   type: VALIDATOR_TYPE_MINLENGTH,
   val: val,
@@ -56,14 +49,20 @@ export const validate = (value, validators) => {
     if (validator.type === VALIDATOR_TYPE_PASSWORD) {
       isValid = isValid && !value.toLowerCase().includes("password");
     }
-    if (validator.type === VALIDATOR_TYPE_FILE) {
+    if (validator.type === VALIDATOR_IMAGE_FILE_TYPE) {
       // console.log(value, typeof value);
-      const isValidPath = VALIDATOR_TYPE_MIME.some((type) =>
+      const isValidPath = VALIDATOR_IMAGE_TYPE.some((type) =>
         value.includes(type)
       );
-      // value.includes(".png") ||
-      // value.includes(".jpeg") ||
-      // value.includes(".jpg");
+
+      isValid = isValid && isValidPath;
+    }
+    if (validator.type === VALIDATOR_VIDEO_FILE_TYPE) {
+      // console.log(value, typeof value);
+      const isValidPath = VALIDATOR_VIDEO_TYPE.some((type) =>
+        value.includes(type)
+      );
+
       isValid = isValid && isValidPath;
     }
   }

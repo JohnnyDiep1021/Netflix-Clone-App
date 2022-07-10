@@ -19,6 +19,7 @@ const MovieView = () => {
         src={movie.video}
         controls
         autoPlay
+        loop
         poster={movie.image}
       >
         {/* <source

@@ -40,6 +40,7 @@ const Button = (props) => {
       } ${props.pending && "pending"} ${props.edit && "edit"}`}
       type={props.type || "button"}
       onClick={props.onClick}
+      onBlur={props.onBlur}
       disabled={props.disabled}
     >
       {props.approved && "Approve"} {props.declined && "Declined"}

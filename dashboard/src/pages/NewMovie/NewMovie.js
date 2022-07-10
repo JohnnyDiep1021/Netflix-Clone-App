@@ -3,17 +3,14 @@ import { useForm } from "../../shared/hooks/form-hooks";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import storage from "../../firebase";
 
-import {
-  VALIDATOR_REQUIRE,
-  VALIDATOR_FILE,
-} from "../../shared/util/validators";
-
+import { VALIDATOR_REQUIRE } from "../../shared/util/validators";
+import ImageUpload from "../../shared/components/UI/Upload/ImageUpload";
 import Input from "../../shared/components/UI/Input/Input";
-import "./NewProduct.scss";
+import Button from "../../shared/components/UI/Button/Button";
+import "./NewMovie.scss";
 
-const NewProduct = () => {
-  const [fileURL, setFileURL] = useState([]);
-  const [formState, inputHandler, setFormData] = useForm(
+const NewMovie = () => {
+  const [formState, inputHandler] = useForm(
     {
       title: { value: "", isValid: false },
       description: {
@@ -63,89 +60,17 @@ const NewProduct = () => {
     },
     false
   );
-  const upload = async (items) => {
-    try {
-      items.forEach((item) => {
-        // console.log(item.file);
-        const fileName = new Date().getTime() + item.label + item.file.name;
-        // console.log(item.file.split(`\\`)[2]);
-        const storageRef = ref(storage, "images/" + fileName);
-        const uploadTask = uploadBytesResumable(storageRef, item.file);
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-            const progress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log(`Upload is ${progress} % done`);
-            switch (snapshot.state) {
-              case "paused":
-                console.log(`Upload is paused`);
-                break;
-              case "running":
-                console.log("Upload is running");
-                break;
-              default:
-                break;
-            }
-          },
-          (error) => {
-            // handle unsucessful error
-          },
-          async () => {
-            // Upload completed successfully, now we can get the download URL
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            setFileURL((prevState) => {
-              return { ...prevState, [item.label]: downloadURL };
-            });
-            console.log(downloadURL);
-          }
-        );
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
     console.log(formState.inputs);
-    await upload([
-      {
-        file: formState.inputs.img.value,
-        label: "img",
-      },
-      {
-        file: formState.inputs.imgTitle.value,
-        label: "imgTitle",
-      },
-      {
-        file: formState.inputs.imgThumbnail.value,
-        label: "imgThumbnail",
-      },
-      {
-        file: formState.inputs.trailer.value,
-        label: "trailer",
-      },
-      {
-        file: formState.inputs.video.value,
-        label: "video",
-      },
-    ]);
-    setFormData({ ...formState.inputs, ...fileURL }, formState.isValid);
-    console.log(formState);
   };
   return (
     <div className="newProduct">
       <h1 className="addProductTitle">New Movie</h1>
       <form className="addProductForm" onSubmit={submitHandler}>
-        <div className="addProductItem">
-          {/* <input
-            type="file"
-            onChange={(event) => {
-              setImgUpload(event.target.files[0]);
-            }}
-          /> */}
-          <Input
+        <div className="addProductItem file">
+          {/* <Input
             element="file"
             id="img"
             label="Image"
@@ -153,28 +78,60 @@ const NewProduct = () => {
             accept=".jpg,.png,.jpeg,.webp,.svg"
             errorText="image is required!"
             onInput={inputHandler}
+          /> */}
+          <ImageUpload
+            imageFile
+            id="img"
+            label="mage"
+            accept=".jpg,.png,.jpeg,.webp,.svg"
+            errorText="image is required!"
+            onInput={inputHandler}
+            center
           />
         </div>
-        <div className="addProductItem">
-          <Input
-            element="file"
+        <div className="addProductItem file">
+          <ImageUpload
+            imageFile
             id="imgTitle"
-            label="Title image"
-            validators={[VALIDATOR_FILE()]}
+            label="title image"
             accept=".jpg,.png,.jpeg,.webp,.svg"
             errorText="title image is required!"
             onInput={inputHandler}
+            center
           />
         </div>
-        <div className="addProductItem">
-          <Input
-            element="file"
+        <div className="addProductItem file">
+          <ImageUpload
+            imageFile
             id="imgThumbnail"
-            label="Thumbnail image"
-            validators={[VALIDATOR_FILE()]}
+            label="thumbnail"
             accept=".jpg,.png,.jpeg,.webp,.svg"
             errorText="thumbnail is required!"
             onInput={inputHandler}
+            center
+          />
+        </div>
+        <div className="addProductItem file">
+          <ImageUpload
+            videoFile
+            element="video-file"
+            id="trailer"
+            label="trailer"
+            accept=".webm,.ogv,.mp4,.mpeg"
+            errorText="trailer is required!"
+            onInput={inputHandler}
+            center
+          />
+        </div>
+        <div className="addProductItem file">
+          <ImageUpload
+            videoFile
+            id="video"
+            label="video"
+            accept=".webm,.ogv,.mp4,.mpeg"
+            errorText="video is required!"
+            onInput={inputHandler}
+            center
           />
         </div>
         <div className="addProductItem">
@@ -259,32 +216,16 @@ const NewProduct = () => {
             onInput={inputHandler}
           />
         </div>
-        <div className="addProductItem">
-          <Input
-            element="file"
-            id="trailer"
-            label="Trailer"
-            validators={[VALIDATOR_FILE()]}
-            errorText="trailer is required!"
-            onInput={inputHandler}
-          />
-        </div>
-        <div className="addProductItem">
-          <Input
-            element="file"
-            id="video"
-            label="Video"
-            validators={[VALIDATOR_FILE()]}
-            errorText="video is required!"
-            onInput={inputHandler}
-          />
-        </div>
-        <button className="addProductButton" disabled={!formState.isValid}>
-          Create
-        </button>
       </form>
+      <Button
+        type="submit"
+        className="btn btn-upload btn-add-movie"
+        disabled={!formState.isValid}
+      >
+        Create
+      </Button>
     </div>
   );
 };
 
-export default NewProduct;
+export default NewMovie;

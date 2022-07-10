@@ -13,7 +13,7 @@ const Product = () => {
       <div className="product">
         <div className="productTitleContainer">
           <h1 className="productTitle">Movie</h1>
-          <Button className="product-add-btn" to="/newProduct">
+          <Button className="product-add-btn" to="/movies/new">
             Create
           </Button>
         </div>
