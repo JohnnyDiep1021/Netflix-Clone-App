@@ -1,6 +1,11 @@
 import react, { useRef, useState } from "react";
 import storage from "../../../../firebase";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import {
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
 
 import ErrorModal from "../Modal/ErrorModal";
 import LoadingSpinner from "../Loading/LoadingSpinner";
@@ -10,9 +15,9 @@ import "./ImageUpload.scss";
 const ImageUpload = (props) => {
   const [error, setError] = useState("");
   const [previewUrl, setPreviewUrl] = useState();
+  const [fileRef, setFileRef] = useState();
   const [isValid, setIsValid] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-
   const filePickerRef = useRef();
 
   const pickedHandler = async (event) => {
@@ -21,13 +26,15 @@ const ImageUpload = (props) => {
       let imageUrl;
       let pickedFile;
       let fileIsValid = isValid;
+      setIsLoading(true);
       // is only 1 file submitted?
       if (event.target.files && event.target.files.length === 1) {
-        setIsLoading(true);
         pickedFile = event.target.files[0];
         // console.log(pickedFile.name, pickedFile.type);
-        const fileName = new Date().getTime() + pickedFile.name;
-        const storageRef = ref(storage, "images/" + fileName);
+        const fileLocation = `images/${new Date().getTime()}-${
+          pickedFile.name
+        }`;
+        const storageRef = ref(storage, fileLocation);
         const uploadTask = uploadBytesResumable(storageRef, pickedFile);
         uploadTask.on(
           "state_changed",
@@ -53,31 +60,47 @@ const ImageUpload = (props) => {
           async () => {
             // Upload completed successfully, now we can get the download URL
             const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            // console.log(downloadURL);
+            // Then delete the existed file in the Firebase storage
+            if (fileRef) {
+              console.log(fileRef);
+              const deletedFileRef = ref(storage, fileRef);
+              const deleteReponse = deleteObject(deletedFileRef)
+                .then(() => {
+                  console.log(
+                    `Deleted previous file ${previewUrl} successfully!`
+                  );
+                })
+                .catch((error) => {
+                  error.message = `An error occurred. Could not delete previous file!`;
+                  throw error;
+                });
+            }
             imageUrl = downloadURL;
-            setPreviewUrl(downloadURL);
-            setIsValid(true);
             fileIsValid = true;
+            setPreviewUrl(downloadURL);
+            setFileRef(fileLocation);
+            setIsValid(true);
             setIsLoading(false);
           }
         );
-
-        // if (uploadResponseData.ok) {
-        //   imageUrl = responseData.url.split("?")[0];
-        //   setPreviewUrl(imageUrl);
-        //   setIsValid(true);
-        //   fileIsValid = true;
-        // }
       } else {
-        setIsValid(false);
-        fileIsValid = false;
+        // get triggered when canceling the uploading of another file after a file has already been uploaded
+        if (!previewUrl) {
+          fileIsValid = false;
+          setIsValid(false);
+        }
         setIsLoading(false);
       }
-      props.onInput(props.id, imageUrl, fileIsValid);
+      console.log(previewUrl);
+      if (previewUrl && isValid) {
+        props.onInput(props.id, previewUrl, isValid);
+      } else {
+        props.onInput(props.id, imageUrl, fileIsValid);
+      }
     } catch (error) {
-      error.message = `An error occurred. Could not upload image!`;
+      error.message =
+        error.message || `An error occurred. Could not upload file!`;
       setError(error.message);
-      console.log(error);
     }
   };
 

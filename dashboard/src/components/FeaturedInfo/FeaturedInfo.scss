@@ -2,7 +2,8 @@
   display: flex;
   justify-content: space-between;
   & .feature-item {
-    flex: 1;
+    // flex: 1;
+    width: 26.67%;
     margin: 0 2rem;
     padding: 3rem;
     border-radius: 1rem;

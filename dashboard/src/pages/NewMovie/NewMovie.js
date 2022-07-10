@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useForm } from "../../shared/hooks/form-hooks";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import storage from "../../firebase";
 
 import { VALIDATOR_REQUIRE } from "../../shared/util/validators";
 import ImageUpload from "../../shared/components/UI/Upload/ImageUpload";
@@ -70,15 +68,6 @@ const NewMovie = () => {
       <h1 className="addProductTitle">New Movie</h1>
       <form className="addProductForm" onSubmit={submitHandler}>
         <div className="addProductItem file">
-          {/* <Input
-            element="file"
-            id="img"
-            label="Image"
-            validators={[VALIDATOR_FILE()]}
-            accept=".jpg,.png,.jpeg,.webp,.svg"
-            errorText="image is required!"
-            onInput={inputHandler}
-          /> */}
           <ImageUpload
             imageFile
             id="img"
@@ -202,11 +191,6 @@ const NewMovie = () => {
           />
         </div>
         <div className="addProductItem">
-          {/* <label>Is Series?</label>
-          <select name="active" id="isSeries">
-            <option value="false">No</option>
-            <option value="true">Yes</option>
-          </select> */}
           <Input
             element="select"
             id="isSeries"
@@ -216,14 +200,16 @@ const NewMovie = () => {
             onInput={inputHandler}
           />
         </div>
+        <div className="btn-container">
+          <Button
+            type="submit"
+            className="btn btn-upload btn-add-movie"
+            disabled={!formState.isValid}
+          >
+            Create
+          </Button>
+        </div>
       </form>
-      <Button
-        type="submit"
-        className="btn btn-upload btn-add-movie"
-        disabled={!formState.isValid}
-      >
-        Create
-      </Button>
     </div>
   );
 };
