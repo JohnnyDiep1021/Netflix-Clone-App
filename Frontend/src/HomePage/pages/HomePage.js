@@ -12,7 +12,7 @@ const Home = (props) => {
   const token = useSelector((state) => state.auth.token);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [movieList, setMovieList] = useState([]);
-  const { type = "series", genre = "" } = props;
+  const { type = "movies", genre = "" } = props;
   useEffect(() => {
     const fetchMovieList = async () => {
       try {

@@ -15,6 +15,8 @@
   --bg-black-700: #1d1d1d;
   --light-text-color: #fff;
   --dark-text-color: #8c8c8c;
+  --danger-color-light: rgb(243, 73, 73);
+  --danger-color-dark: rgb(250, 40, 40);
 }
 
 html {
@@ -31,11 +33,60 @@ body {
   // overflow-y: visible;
 }
 
-.link {
+.link,
+a {
   color: inherit;
   text-decoration: none;
 }
 
-a {
-  text-decoration: none;
+@keyframes appear {
+  0% {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+  80% {
+    transform: translateY(-1rem);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes popup {
+  0% {
+    transform: translateY(-1rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4rem);
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4rem);
+  }
 }

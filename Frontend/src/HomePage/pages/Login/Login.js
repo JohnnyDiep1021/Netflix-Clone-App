@@ -45,7 +45,7 @@ const Login = () => {
         `${process.env.REACT_APP_BACKEND_URL}/users/auth/login`,
         "POST",
         JSON.stringify({
-          email: formState.inputs.email.value,
+          username: formState.inputs.email.value,
           password: formState.inputs.password.value,
         }),
         {

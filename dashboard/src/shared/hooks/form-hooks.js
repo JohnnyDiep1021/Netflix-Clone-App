@@ -39,7 +39,7 @@ export const useForm = (initialInputs, initialFormValidity) => {
 
   // same function will be re-used whenever the whole JSX component re-render
   const inputHandler = useCallback((id, value, isValid) => {
-    console.log(value);
+    // console.log(value);
     dispatchFormAction({
       type: "INPUT_CHANGE",
       value: value,

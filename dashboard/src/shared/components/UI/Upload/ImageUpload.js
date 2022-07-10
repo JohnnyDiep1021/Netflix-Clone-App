@@ -21,14 +21,14 @@ const ImageUpload = (props) => {
   const filePickerRef = useRef();
 
   const pickedHandler = async (event) => {
-    console.log(event.target.files);
+    // console.log(event.target.files);
     try {
       let imageUrl;
       let pickedFile;
       let fileIsValid = isValid;
-      setIsLoading(true);
       // is only 1 file submitted?
       if (event.target.files && event.target.files.length === 1) {
+        setIsLoading(true);
         pickedFile = event.target.files[0];
         // console.log(pickedFile.name, pickedFile.type);
         const fileLocation = `images/${new Date().getTime()}-${
@@ -62,9 +62,9 @@ const ImageUpload = (props) => {
             const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
             // Then delete the existed file in the Firebase storage
             if (fileRef) {
-              console.log(fileRef);
+              // console.log(fileRef);
               const deletedFileRef = ref(storage, fileRef);
-              const deleteReponse = deleteObject(deletedFileRef)
+              deleteObject(deletedFileRef)
                 .then(() => {
                   console.log(
                     `Deleted previous file ${previewUrl} successfully!`
@@ -77,6 +77,7 @@ const ImageUpload = (props) => {
             }
             imageUrl = downloadURL;
             fileIsValid = true;
+            props.onInput(props.id, imageUrl, fileIsValid);
             setPreviewUrl(downloadURL);
             setFileRef(fileLocation);
             setIsValid(true);
@@ -85,17 +86,13 @@ const ImageUpload = (props) => {
         );
       } else {
         // get triggered when canceling the uploading of another file after a file has already been uploaded
-        if (!previewUrl) {
-          fileIsValid = false;
-          setIsValid(false);
+        if (previewUrl && isValid) {
+          return props.onInput(props.id, previewUrl, isValid);
         }
-        setIsLoading(false);
-      }
-      console.log(previewUrl);
-      if (previewUrl && isValid) {
-        props.onInput(props.id, previewUrl, isValid);
-      } else {
-        props.onInput(props.id, imageUrl, fileIsValid);
+        // if (!previewUrl) {
+        fileIsValid = false;
+        setIsValid(false);
+        // }
       }
     } catch (error) {
       error.message =
@@ -152,6 +149,7 @@ const ImageUpload = (props) => {
             type="button"
             className="btn btn-upload"
             onClick={pickImageHandler}
+            disabled={isLoading}
           >
             Upload
           </Button>

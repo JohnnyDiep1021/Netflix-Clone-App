@@ -129,9 +129,9 @@ const Input = react.forwardRef((props, ref) => {
           id={props.id}
           onChange={changeHandler}
           onBlur={touchHandler}
+          value={inputState.value}
         >
-          <option value="false">No</option>
-          <option value="true">Yes</option>
+          {props.children}
         </select>
       );
       break;

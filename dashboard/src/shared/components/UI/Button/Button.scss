@@ -92,12 +92,13 @@
 }
 
 .btn--danger {
-  background: rgb(244, 168, 6);
-  border-color: rgb(244, 168, 6);
+  background: var(--danger-color-dark);
+  border-color: var(--danger-color-dark);
+  font-weight: 600;
   &:hover,
   &:active {
-    background: rgba(248, 205, 15);
-    border-color: rgba(248, 205, 15);
+    background: var(--danger-color-light);
+    border-color: var(--danger-color-light);
   }
 }
 

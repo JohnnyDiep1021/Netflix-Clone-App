@@ -31,11 +31,14 @@ const MovieSchema = new mongoose.Schema(
       type: String,
     },
     limit: {
-      type: Number,
+      type: String,
     },
     genre: {
       type: String,
       required: true,
+    },
+    duration: {
+      type: String,
     },
     isSeries: {
       type: Boolean,

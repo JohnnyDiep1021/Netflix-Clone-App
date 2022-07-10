@@ -83,8 +83,9 @@ const MovieItem = (props) => {
           {isHovered && (
             <video
               className={`trailer-video ${!isHovered && "deactive"}`}
-              src={movieItem.trailer}
+              src={movieItem.trailer || trailer}
               autoPlay={isHovered}
+              controls
               loop
             />
           )}
