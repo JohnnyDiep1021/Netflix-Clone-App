@@ -7,8 +7,8 @@ import Home from "./pages/Home/Home";
 import UserList from "./pages/UserList/UserList";
 import User from "./pages/User/User";
 import NewUser from "./pages/NewUser/NewUser";
-import ProductList from "./pages/ProductList/ProductList";
-import Product from "./pages/Product/Product";
+import MovieList from "./pages/MovieList/MovieList";
+import MovieItem from "./pages/Movie/MovieItem";
 import NewMovie from "./pages/NewMovie/NewMovie";
 import Login from "./pages/Login/SigninForm";
 import { useSelector } from "react-redux";
@@ -39,13 +39,13 @@ function App() {
               <NewUser />
             </Route>
             <Route path="/movies" exact>
-              <ProductList />
-            </Route>
-            <Route path="/products/:productId">
-              <Product />
+              <MovieList />
             </Route>
             <Route path="/movies/new">
               <NewMovie />
+            </Route>
+            <Route path="/movies/:movieId">
+              <MovieItem />
             </Route>
             <Redirect to="/" />
           </Switch>

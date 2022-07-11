@@ -8,14 +8,13 @@ import { DeleteOutline } from "@mui/icons-material";
 // import { productRows } from "../../shared/util/util";
 
 import Button from "../../shared/components/UI/Button/Button";
-import LoadingSpinner from "../../shared/components/UI/Loading/LoadingSpinner";
-import "./ProductList.scss";
+import "./MovieList.scss";
 
-const ProductList = () => {
+const MovieList = () => {
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movies.movies);
   const token = useSelector((state) => state.auth.token);
-  const { isLoading, sendRequest } = useHttpClient();
+  const { sendRequest } = useHttpClient();
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -33,7 +32,8 @@ const ProductList = () => {
       } catch (error) {}
     };
     fetchMovies();
-  }, [sendRequest, token]);
+  }, [sendRequest, token, dispatch]);
+
   const handleDelete = async (id) => {
     try {
       const deleteMovie = await sendRequest(
@@ -78,7 +78,7 @@ const ProductList = () => {
             <Button
               className="btn-status "
               to={{
-                pathname: `/products/${params.row._id}`,
+                pathname: `/movies/${params.row._id}`,
                 movie: params.row,
               }}
               edit
@@ -109,4 +109,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default MovieList;

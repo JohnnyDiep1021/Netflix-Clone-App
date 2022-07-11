@@ -4,10 +4,11 @@ import { useLocation } from "react-router-dom";
 import { Publish } from "@mui/icons-material";
 
 import Button from "../../shared/components/UI/Button/Button";
-import "./Product.scss";
-const Product = () => {
+import "./MovieItem.scss";
+const MovieItem = () => {
   const location = useLocation();
   const movie = location.movie;
+  console.log(movie);
   return (
     <div className="product-container">
       <div className="product">
@@ -76,4 +77,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default MovieItem;
