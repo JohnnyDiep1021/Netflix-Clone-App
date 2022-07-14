@@ -1,6 +1,10 @@
 import React from "react";
 
-import { PlayCircleOutline } from "@mui/icons-material";
+import {
+  AddCircle,
+  PlayCircleOutline,
+  AddCircleOutline,
+} from "@mui/icons-material";
 import {
   Home,
   Sale,
@@ -47,9 +51,15 @@ const SideBar = () => {
               </NavLink>
             </li>
             <li className="menu-item">
-              <NavLink to="/movies">
+              <NavLink to="/movies" exact>
                 <PlayCircleOutline className="item-icon" />
                 Movies
+              </NavLink>
+            </li>
+            <li className="menu-item">
+              <NavLink to="/movies/new">
+                <AddCircle className="item-icon" />
+                New Movies
               </NavLink>
             </li>
             {/* <li className="menu-item">

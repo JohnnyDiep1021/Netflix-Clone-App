@@ -12,20 +12,39 @@ const MovieSchema = new mongoose.Schema(
       required: true,
     },
     image: {
-      type: String,
-      required: true,
+      file: { type: String, required: true },
+      fileRef: {
+        type: String,
+        required: true,
+      },
     },
     imageTitle: {
-      type: String,
+      file: { type: String, required: true },
+      fileRef: {
+        type: String,
+        required: true,
+      },
     },
     imgSm: {
-      type: String,
+      file: { type: String, required: true },
+      fileRef: {
+        type: String,
+        required: true,
+      },
     },
     trailer: {
-      type: String,
+      file: { type: String, required: true },
+      fileRef: {
+        type: String,
+        required: true,
+      },
     },
     video: {
-      type: String,
+      file: { type: String, required: true },
+      fileRef: {
+        type: String,
+        required: true,
+      },
     },
     year: {
       type: String,

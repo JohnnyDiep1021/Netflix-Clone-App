@@ -58,7 +58,11 @@ const MovieList = () => {
       renderCell: (params) => {
         return (
           <div className="productList-item">
-            <img className="productList-img" src={params.row.image} alt="" />
+            <img
+              className="productList-img"
+              src={params.row.image.file}
+              alt=""
+            />
             {params.row.title}
           </div>
         );

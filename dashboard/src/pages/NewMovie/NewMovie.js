@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 
 import {
   VALIDATOR_MAXLENGTH,
+  VALIDATOR_MIN,
   VALIDATOR_MINLENGTH,
   VALIDATOR_REQUIRE,
 } from "../../shared/util/validators";
@@ -85,11 +86,26 @@ const NewMovie = () => {
           duration: formState.inputs.duration.value,
           limit: formState.inputs.limit.value,
           isSeries: formState.inputs.isSeries.value,
-          image: formState.inputs.image.value,
-          imageTitle: formState.inputs.imageTitle.value,
-          imgSm: formState.inputs.imgSm.value,
-          trailer: formState.inputs.trailer.value,
-          video: formState.inputs.video.value,
+          image: {
+            file: formState.inputs.image.value.fileUrl,
+            fileRef: formState.inputs.image.value.fileRef,
+          },
+          imageTitle: {
+            file: formState.inputs.imageTitle.value.fileUrl,
+            fileRef: formState.inputs.imageTitle.value.fileRef,
+          },
+          imgSm: {
+            file: formState.inputs.imgSm.value.fileUrl,
+            fileRef: formState.inputs.imgSm.value.fileRef,
+          },
+          trailer: {
+            file: formState.inputs.trailer.value.fileUrl,
+            fileRef: formState.inputs.trailer.value.fileRef,
+          },
+          video: {
+            file: formState.inputs.video.value.fileUrl,
+            fileRef: formState.inputs.video.value.fileRef,
+          },
         }),
         {
           Authorization: `Bearer ${token}`,
@@ -169,7 +185,6 @@ const NewMovie = () => {
               id="title"
               type="text"
               label="Title"
-              placeholder="Join Wick"
               validators={[VALIDATOR_MINLENGTH(8), VALIDATOR_MAXLENGTH(191)]}
               errorText="title is required (8 - 191 characters)"
               onInput={inputHandler}
@@ -192,8 +207,8 @@ const NewMovie = () => {
               id="year"
               type="number"
               label="Year"
-              validators={[VALIDATOR_REQUIRE()]}
-              errorText="published year is required!"
+              validators={[VALIDATOR_MIN(1)]}
+              errorText="published year is required (> 0)"
               onInput={inputHandler}
             />
           </div>
