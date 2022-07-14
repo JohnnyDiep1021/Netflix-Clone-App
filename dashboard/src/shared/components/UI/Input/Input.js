@@ -17,6 +17,12 @@ const inputReducer = (state, action) => {
         value: action.val,
         isValid: validate(action.val, action.validators),
       };
+    case "CHANGE_SELECT":
+      return {
+        ...state,
+        value: action.val,
+        isValid: validate(action.val, action.validators),
+      };
     case "CHANGE_FILE":
       return {
         ...state,
@@ -51,6 +57,19 @@ const Input = react.forwardRef((props, ref) => {
     dispatchInputAction({
       type: "CHANGE",
       val: event.target.value,
+      validators: props.validators,
+    });
+  };
+
+  const changeSelectHandler = (event) => {
+    const value = Array.from(
+      event.target.selectedOptions,
+      (option) => option.value
+    );
+    // console.log(value);
+    dispatchInputAction({
+      type: "CHANGE_SELECT",
+      val: value,
       validators: props.validators,
     });
   };
@@ -126,10 +145,12 @@ const Input = react.forwardRef((props, ref) => {
       inputElement = (
         <select
           // name="active"
+          className={`${props.multiple && "select"}`}
           id={props.id}
-          onChange={changeHandler}
+          onChange={props.multiple ? changeSelectHandler : changeHandler}
           onBlur={touchHandler}
           value={inputState.value}
+          multiple={props.multiple}
         >
           {props.children}
         </select>

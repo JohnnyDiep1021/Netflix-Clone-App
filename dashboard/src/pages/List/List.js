@@ -1,76 +1,63 @@
 import React, { Fragment, useEffect } from "react";
+import { listsAction } from "../../shared/store/lists";
 import { useSelector, useDispatch } from "react-redux";
-import { moviesAction } from "../../shared/store/movies";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteOutline, AddCircle } from "@mui/icons-material";
 
 import Button from "../../shared/components/UI/Button/Button";
-import "./MovieList.scss";
+import "./List.scss";
 
-const MovieList = () => {
+const List = () => {
   const dispatch = useDispatch();
-  const movies = useSelector((state) => state.movies.movies);
+  const lists = useSelector((state) => state.lists.lists);
   const token = useSelector((state) => state.auth.token);
   const { sendRequest } = useHttpClient();
 
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchList = async () => {
       try {
         const responseData = await sendRequest(
-          `${process.env.REACT_APP_BACKEND_URL}/movies`,
+          `${process.env.REACT_APP_BACKEND_URL}/lists`,
           "GET",
           null,
           {
             Authorization: `Bearer ${token}`,
           }
         );
-        // console.log(responseData.movies);
-        dispatch(moviesAction.getMovies(responseData.movies));
+        console.log(responseData.lists);
+        dispatch(listsAction.setLists(responseData.lists));
       } catch (error) {}
     };
-    fetchMovies();
+    fetchList();
   }, [sendRequest, token, dispatch]);
 
   const handleDelete = async (id) => {
     try {
-      const deleteMovie = await sendRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/movies/${id}`,
+      const deleteList = await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/lists/${id}`,
         "DELETE",
         null,
         {
           Authorization: `Bearer ${token}`,
         }
       );
-      console.log(deleteMovie);
-      dispatch(moviesAction.deleteMovieById(id));
+      dispatch(listsAction.deleteListById(id));
+      console.log(deleteList);
     } catch (error) {}
   };
 
   const columns = [
     { field: "_id", headerName: "ID", width: 100 },
     {
-      field: "movie",
-      headerName: "Movie",
+      field: "title",
+      headerName: "Title",
       width: 350,
-      renderCell: (params) => {
-        return (
-          <div className="productList-item">
-            <img
-              className="productList-img"
-              src={params.row.image.file}
-              alt=""
-            />
-            {params.row.title}
-          </div>
-        );
-      },
     },
     { field: "genre", headerName: "Genre", width: 150 },
-    { field: "year", headerName: "Year", width: 150 },
-    { field: "limit", headerName: "Limit", width: 150 },
-    { field: "isSeries", headerName: "isSeries", width: 150 },
+    { field: "type", headerName: "Type", width: 150 },
+    { field: "content", headerName: "Content", width: 200 },
     {
       field: "action",
       headerName: "Action",
@@ -81,8 +68,8 @@ const MovieList = () => {
             <Button
               className="btn-status"
               to={{
-                pathname: `/movies/${params.row._id}`,
-                movie: params.row,
+                pathname: `/lists/${params.row._id}`,
+                list: params.row,
               }}
               edit
             ></Button>
@@ -99,13 +86,13 @@ const MovieList = () => {
   return (
     <div className="productList-container">
       <div className="movie-btn-container">
-        <Button to="/movies/new" className=" btn-icon">
+        <Button to="/lists/new" className=" btn-icon">
           <AddCircle className="item-icon" />
-          New Movie
+          New Movie List
         </Button>
       </div>
       <DataGrid
-        rows={movies}
+        rows={lists}
         disableSelectionOnClick
         columns={columns}
         pageSize={8}
@@ -118,4 +105,4 @@ const MovieList = () => {
   );
 };
 
-export default MovieList;
+export default List;

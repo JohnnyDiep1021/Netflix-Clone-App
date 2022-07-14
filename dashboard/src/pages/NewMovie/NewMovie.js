@@ -87,23 +87,23 @@ const NewMovie = () => {
           limit: formState.inputs.limit.value,
           isSeries: formState.inputs.isSeries.value,
           image: {
-            file: formState.inputs.image.value.fileUrl,
+            file: formState.inputs.image.value.file,
             fileRef: formState.inputs.image.value.fileRef,
           },
           imageTitle: {
-            file: formState.inputs.imageTitle.value.fileUrl,
+            file: formState.inputs.imageTitle.value.file,
             fileRef: formState.inputs.imageTitle.value.fileRef,
           },
           imgSm: {
-            file: formState.inputs.imgSm.value.fileUrl,
+            file: formState.inputs.imgSm.value.file,
             fileRef: formState.inputs.imgSm.value.fileRef,
           },
           trailer: {
-            file: formState.inputs.trailer.value.fileUrl,
+            file: formState.inputs.trailer.value.file,
             fileRef: formState.inputs.trailer.value.fileRef,
           },
           video: {
-            file: formState.inputs.video.value.fileUrl,
+            file: formState.inputs.video.value.file,
             fileRef: formState.inputs.video.value.fileRef,
           },
         }),

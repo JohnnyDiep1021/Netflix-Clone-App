@@ -4,6 +4,7 @@ import {
   AddCircle,
   PlayCircleOutline,
   AddCircleOutline,
+  List,
 } from "@mui/icons-material";
 import {
   Home,
@@ -57,9 +58,9 @@ const SideBar = () => {
               </NavLink>
             </li>
             <li className="menu-item">
-              <NavLink to="/movies/new">
-                <AddCircle className="item-icon" />
-                New Movies
+              <NavLink to="/lists">
+                <List className="item-icon" />
+                Movie List
               </NavLink>
             </li>
             {/* <li className="menu-item">

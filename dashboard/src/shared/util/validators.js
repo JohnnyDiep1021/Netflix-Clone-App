@@ -28,42 +28,47 @@ export const VALIDATOR_PASSWORD = () => ({ type: VALIDATOR_TYPE_PASSWORD });
 export const validate = (value, validators) => {
   let isValid = true;
   for (const validator of validators) {
-    if (validator.type === VALIDATOR_TYPE_REQUIRE) {
-      isValid = isValid && value.trim().length > 0;
-    }
-    if (validator.type === VALIDATOR_TYPE_MINLENGTH) {
-      isValid = isValid && value.trim().length >= validator.val;
-    }
-    if (validator.type === VALIDATOR_TYPE_MAXLENGTH) {
-      isValid = isValid && value.trim().length <= validator.val;
-    }
-    if (validator.type === VALIDATOR_TYPE_MIN) {
-      isValid = isValid && +value >= validator.val;
-    }
-    if (validator.type === VALIDATOR_TYPE_MAX) {
-      isValid = isValid && +value <= validator.val;
-    }
-    if (validator.type === VALIDATOR_TYPE_EMAIL) {
-      isValid = isValid && /^\S+@\S+\.\S+$/.test(value);
-    }
-    if (validator.type === VALIDATOR_TYPE_PASSWORD) {
-      isValid = isValid && !value.toLowerCase().includes("password");
-    }
-    if (validator.type === VALIDATOR_IMAGE_FILE_TYPE) {
-      // console.log(value, typeof value);
-      const isValidPath = VALIDATOR_IMAGE_TYPE.some((type) =>
-        value.includes(type)
-      );
+    if (Array.isArray(value)) {
+      if (validator.type === VALIDATOR_TYPE_REQUIRE) {
+        isValid = isValid && value.length > 0;
+      }
+    } else {
+      if (validator.type === VALIDATOR_TYPE_REQUIRE) {
+        isValid = isValid && value.trim().length > 0;
+      }
+      if (validator.type === VALIDATOR_TYPE_MINLENGTH) {
+        isValid = isValid && value.trim().length >= validator.val;
+      }
+      if (validator.type === VALIDATOR_TYPE_MAXLENGTH) {
+        isValid = isValid && value.trim().length <= validator.val;
+      }
+      if (validator.type === VALIDATOR_TYPE_MIN) {
+        isValid = isValid && +value >= validator.val;
+      }
+      if (validator.type === VALIDATOR_TYPE_MAX) {
+        isValid = isValid && +value <= validator.val;
+      }
+      if (validator.type === VALIDATOR_TYPE_EMAIL) {
+        isValid = isValid && /^\S+@\S+\.\S+$/.test(value);
+      }
+      if (validator.type === VALIDATOR_TYPE_PASSWORD) {
+        isValid = isValid && !value.toLowerCase().includes("password");
+      }
+      if (validator.type === VALIDATOR_IMAGE_FILE_TYPE) {
+        // console.log(value, typeof value);
+        const isValidPath = VALIDATOR_IMAGE_TYPE.some((type) =>
+          value.includes(type)
+        );
+        isValid = isValid && isValidPath;
+      }
+      if (validator.type === VALIDATOR_VIDEO_FILE_TYPE) {
+        // console.log(value, typeof value);
+        const isValidPath = VALIDATOR_VIDEO_TYPE.some((type) =>
+          value.includes(type)
+        );
 
-      isValid = isValid && isValidPath;
-    }
-    if (validator.type === VALIDATOR_VIDEO_FILE_TYPE) {
-      // console.log(value, typeof value);
-      const isValidPath = VALIDATOR_VIDEO_TYPE.some((type) =>
-        value.includes(type)
-      );
-
-      isValid = isValid && isValidPath;
+        isValid = isValid && isValidPath;
+      }
     }
   }
   return isValid;

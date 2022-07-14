@@ -2,6 +2,7 @@
   &,
   &:link,
   &:visited {
+    display: inline-block;
     text-transform: uppercase;
     text-decoration: none;
     padding: 1.6rem;
@@ -30,13 +31,38 @@
 .btn-upload {
   background-color: #ebf1fe;
   border: 0.5px solid rgb(118, 118, 118);
-  padding: 1rem 4rem;
+  padding: 1rem 2rem;
   text-transform: capitalize;
   color: rgb(126, 124, 124);
   &:hover {
     background-color: rgba(223, 223, 223);
+    color: #000;
   }
 }
+
+.btn-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  border-radius: 0.4rem;
+  background-color: #ebf1fe;
+  color: rgb(126, 124, 124);
+  border: 0.5px solid rgb(118, 118, 118);
+  padding: 0.5rem;
+  text-transform: capitalize;
+  transition: all 0.25s ease;
+  & .item-icon {
+    font-size: 2rem;
+    margin-right: 0.5rem;
+  }
+  &:hover {
+    background-color: rgba(223, 223, 223);
+    color: #000;
+  }
+}
+
 .btn-status {
   padding: 0.5rem 0.7rem;
   border: none;
@@ -160,15 +186,4 @@
 .btn-close:hover {
   border-radius: 50%;
   background-color: rgb(66, 64, 64, 0.2);
-}
-
-.btn-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  background: none;
-  cursor: pointer;
-  width: 4rem;
-  height: 4rem;
 }
