@@ -23,8 +23,8 @@ const NewList = () => {
     {
       title: { value: "", isValid: false },
       type: {
-        value: "",
-        isValid: false,
+        value: "movies",
+        isValid: true,
       },
       genre: {
         value: "",
@@ -95,14 +95,18 @@ const NewList = () => {
           </div>
           <div className="addProductItem">
             <Input
-              element="input"
+              element="select"
               id="type"
-              type="text"
               label="Type"
+              errorText="is this a series or movie?"
               validators={[VALIDATOR_REQUIRE()]}
-              errorText="list type is required"
+              initialValue="movies"
+              initialValid={true}
               onInput={inputHandler}
-            />
+            >
+              <option value="movies">movies</option>
+              <option value="series">series</option>
+            </Input>
           </div>
           <div className="addProductItem">
             <Input

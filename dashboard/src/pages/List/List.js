@@ -49,7 +49,7 @@ const List = () => {
   };
 
   const columns = [
-    { field: "_id", headerName: "ID", width: 100 },
+    { field: "_id", headerName: "ID", width: 150 },
     {
       field: "title",
       headerName: "Title",
@@ -57,7 +57,7 @@ const List = () => {
     },
     { field: "genre", headerName: "Genre", width: 150 },
     { field: "type", headerName: "Type", width: 150 },
-    { field: "content", headerName: "Content", width: 200 },
+    { field: "content", headerName: "Content", width: 300 },
     {
       field: "action",
       headerName: "Action",

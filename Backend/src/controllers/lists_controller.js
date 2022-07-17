@@ -1,6 +1,6 @@
 const List = require("../db/model/List");
 const HttpError = require("../utils/http-error");
-
+const { updateValidation } = require("../utils/utils.js");
 const { validationResult } = require("express-validator");
 
 const listParams = async (req, res, next) => {
@@ -48,10 +48,40 @@ const createList = async (req, res, next) => {
   }
 };
 
+const updateList = async (req, res, next) => {
+  try {
+    if (req.user.isAdmin) {
+      const errors = validationResult(req);
+      if (!errors.isEmpty())
+        throw new HttpError(
+          `List title, genre, type, and content are required!`,
+          422
+        );
+      const updates = await updateValidation("List", req.body);
+      console.log(updates);
+      if (updates.error) throw new HttpError(updates.error, 400);
+      updates.forEach((update) => {
+        req.list[update] = req.body[update];
+      });
+      await req.list.save();
+      res.json({ list: req.list.toObject({ getters: true }) });
+    } else {
+      throw new HttpError(
+        "You are not authorized to update an existing list",
+        403
+      );
+    }
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
 const getAllLists = async (req, res, next) => {
   try {
     const typeQuery = req.query.type;
     const genreQuery = req.query.genre;
+    // console.log(typeQuery, genreQuery);
     let lists = [];
     if (typeQuery) {
       if (genreQuery) {
@@ -103,6 +133,7 @@ const deleteList = async (req, res, next) => {
 module.exports = {
   listParams,
   createList,
+  updateList,
   getAllLists,
   deleteList,
 };

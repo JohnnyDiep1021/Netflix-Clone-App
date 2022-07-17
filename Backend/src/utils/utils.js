@@ -1,5 +1,6 @@
 const User = require("../db/model/User");
 const Movie = require("../db/model/Movie");
+const List = require("../db/model/List");
 const HttpError = require("./http-error");
 const lodash = require("lodash");
 
@@ -7,9 +8,10 @@ const findDatabaseByName = function (name) {
   switch (name) {
     case "Movie":
       return Movie;
-
     case "User":
       return User;
+    case "List":
+      return List;
     default:
       return null;
   }

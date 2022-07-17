@@ -73,7 +73,7 @@ const MovieItem = (props) => {
         <Fragment>
           {!isHovered && (
             <img
-              src={movieItem.image}
+              src={movieItem.image.file}
               // className={`poster ${isPosterHovered && "hide"}`}
               className={`poster`}
               alt="movie poster"
@@ -83,7 +83,7 @@ const MovieItem = (props) => {
           {isHovered && (
             <video
               className={`trailer-video ${!isHovered && "deactive"}`}
-              src={movieItem.trailer || trailer}
+              src={movieItem.trailer.file || trailer}
               autoPlay={isHovered}
               controls
               loop

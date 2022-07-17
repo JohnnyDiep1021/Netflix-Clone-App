@@ -17,10 +17,10 @@ function App() {
           <Home />
         </Route>
         <Route path="/movies">
-          <Home type="movies" />
+          <Home type="movies" genre="" />
         </Route>
         <Route path="/series">
-          <Home type="series" />
+          <Home type="series" genre="" />
         </Route>
         <Route path="/watch">
           <MovieView />

@@ -25,5 +25,8 @@ const ListSchema = new mongoose.Schema(
   }
 );
 
+ListSchema.statics.getProperty = async function () {
+  return Object.keys(this.schema.obj);
+};
 const List = mongoose.model("List", ListSchema);
 module.exports = List;

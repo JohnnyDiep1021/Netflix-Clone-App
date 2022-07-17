@@ -19,6 +19,19 @@ listRouter.post(
   listsController.createList
 );
 
+// UPDATE movie
+listRouter.patch(
+  "/:listId",
+  auth,
+  [
+    check("title").not().isEmpty(),
+    check("type").not().isEmpty(),
+    check("genre").not().isEmpty(),
+    check("content").not().isEmpty(),
+  ],
+  listsController.updateList
+);
+
 // GET ALL MOVIES
 listRouter.get("/", auth, listsController.getAllLists);
 

@@ -16,11 +16,11 @@ const MovieView = () => {
       </Button>
       <video
         className="video"
-        src={movie.video}
+        src={movie.video.file}
         controls
         autoPlay
         loop
-        poster={movie.image}
+        poster={movie.image.file}
       >
         {/* <source
           src="https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4"

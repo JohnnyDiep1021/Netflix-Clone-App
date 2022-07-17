@@ -27,13 +27,17 @@ const FeatureOption = (props) => {
     };
     fetchMovie();
   }, [token, sendRequest]);
+  const genreChangeHandler = (e) => {
+    props.setGenre(e.target.value);
+  };
   return (
     <div className="featured">
       {props.type && (
         <div className="category">
           <span>{props.type === "movies" ? "Movies" : "Series"}</span>
-          <select name="genre" id="genre">
+          <select name="genre" id="genre" onChange={genreChangeHandler}>
             <option value="adventure">Adventure</option>
+            <option value="action">Action</option>
             <option value="comedy">Comedy</option>
             <option value="crime">Crime</option>
             <option value="fantasy">Fantasy</option>
@@ -50,10 +54,15 @@ const FeatureOption = (props) => {
         </div>
       )}
       {movieShowcase && (
-        <Fragment>
-          <img src={movieShowcase.image} alt="" />
+        <div
+          className="showcase-container"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0),rgba(255,255,255,0),rgba(11, 11, 11)),url(${movieShowcase.image.file})`,
+          }}
+        >
+          {/* <img src={movieShowcase.image.file} alt="" /> */}
           <div className="info">
-            <img src={movieShowcase.imageTitle} alt="" />
+            <img src={movieShowcase.imageTitle.file} alt="" />
             <span className="desc">{movieShowcase.desc}</span>
             <div className="buttons">
               <button className="play">
@@ -66,7 +75,7 @@ const FeatureOption = (props) => {
               </button>
             </div>
           </div>
-        </Fragment>
+        </div>
       )}
     </div>
   );

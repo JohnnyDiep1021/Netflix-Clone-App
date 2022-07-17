@@ -9,13 +9,20 @@ import Navbar from "../../shared/components/Navigation/Navbar/Navbar";
 import "./HomePage.scss";
 
 const Home = (props) => {
+  const { type } = props;
   const token = useSelector((state) => state.auth.token);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const [genre, setGenre] = useState(props.genre);
   const [movieList, setMovieList] = useState([]);
-  const { type = "movies", genre = "" } = props;
+  console.log(type, genre);
   useEffect(() => {
     const fetchMovieList = async () => {
       try {
+        console.log(
+          `${process.env.REACT_APP_BACKEND_URL}/lists${
+            type && "?type=" + type
+          }${genre && "&genre=" + genre}`
+        );
         const responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_URL}/lists${
             type && "?type=" + type
@@ -35,7 +42,7 @@ const Home = (props) => {
   return (
     <div className="home">
       <Navbar />
-      <FeatureOption type={type} />
+      <FeatureOption type={type} setGenre={setGenre} />
       <div className="movie-list-container">
         {movieList.map((list) => (
           <MovieList movieList={list} key={list._id} />
