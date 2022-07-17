@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import "./Button.scss";
 
@@ -16,17 +16,32 @@ const Button = (props) => {
     );
   }
   if (props.to) {
-    return (
-      <Link
-        to={props.to}
-        exact={props.exact}
-        onClick={props.onClick}
-        className={`${props.className}`}
-        target={props.target}
-      >
-        {props.children}
-      </Link>
-    );
+    switch (props.element) {
+      case "link":
+        return (
+          <Link
+            to={props.to}
+            exact={props.exact}
+            onClick={props.onClick}
+            className={`${props.className}`}
+            target={props.target}
+          >
+            {props.children}
+          </Link>
+        );
+      case "navLink":
+        return (
+          <NavLink
+            to={props.to}
+            exact={props.exact}
+            onClick={props.onClick}
+            className={`${props.className}`}
+            target={props.target}
+          >
+            {props.children}
+          </NavLink>
+        );
+    }
   }
   return (
     <button

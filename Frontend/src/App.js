@@ -14,13 +14,13 @@ function App() {
     routes = (
       <Switch>
         <Route path="/" exact>
-          <Home />
+          <Home type="" />
         </Route>
         <Route path="/movies">
-          <Home type="movies" genre="" />
+          <Home type="movies" />
         </Route>
         <Route path="/series">
-          <Home type="series" genre="" />
+          <Home type="series" />
         </Route>
         <Route path="/watch">
           <MovieView />

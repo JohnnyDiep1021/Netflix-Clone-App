@@ -26,6 +26,21 @@
   //   }
   // }
 }
+
+.btn-func-icon {
+  padding: 0.5rem 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-right: 1.5rem;
+  cursor: pointer;
+}
+
 .btn-popup {
   font: inherit;
   padding: 0.5rem 1.5rem;
@@ -83,26 +98,26 @@
   animation-fill-mode: backwards;
 }
 
-.btn-text:link,
-.btn-text:visited {
-  font-size: 1.6rem;
-  color: var(--light-text-color);
-  display: inline-block;
-  text-decoration: none;
-  border-bottom: 1px solid var(--light-text-color);
-  padding: 3px;
-  transition: all 0.2s;
-}
-
-.btn-text:hover {
-  background-color: var(--light-text-color);
-  color: var(--light-text-color);
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
-  transform: translateY((-2px));
-}
-.btn-text:active {
-  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.15);
-  transform: translateY((0));
+.link {
+  &:link,
+  &:visited {
+    padding: 0.2rem 0.4rem;
+    margin-right: 1.5rem;
+    border-radius: 0.4rem;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  &:hover,
+  &:active,
+  &.active {
+    background-color: rgb(247, 247, 247);
+    color: #000;
+  }
+  &:focus {
+    outline: 1px solid white;
+  }
 }
 
 .btn-close {
@@ -120,11 +135,10 @@
   width: 2.4rem;
   height: 2.4rem;
   transition: all 0.2s;
-}
-
-.btn-close:hover {
-  border-radius: 50%;
-  background-color: rgb(66, 64, 64, 0.2);
+  &:hover {
+    border-radius: 50%;
+    background-color: rgb(66, 64, 64, 0.2);
+  }
 }
 
 .btn-icon {

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+
+import Button from "../../UI/Button/Button";
 import { Search, Notification, ArrowDown } from "../../Icon/MovieIcons";
 import "./Navbar.scss";
 
@@ -17,17 +18,17 @@ const Navbar = () => {
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
             alt=""
           />
-          <NavLink to="/" className="link">
+          <Button element="navLink" to="/" exact className="link">
             <span>Homepage</span>
-          </NavLink>
-          <NavLink to="/series" className="link">
+          </Button>
+          <Button element="navLink" to="/series" className="link">
             <span>Series</span>
-          </NavLink>
-          <NavLink to="/movies" className="link">
+          </Button>
+          <Button element="navLink" to="/movies" className="link">
             <span>Movies</span>
-          </NavLink>
-          <span>New and Popular</span>
-          <span>My List</span>
+          </Button>
+          {/* <span>New and Popular</span>
+          <span>My List</span> */}
         </div>
         <div className="right">
           <Search className="icon" />

@@ -6,11 +6,10 @@ import Button from "../../../shared/components/UI/Button/Button";
 
 import "./MovieView.scss";
 const MovieView = () => {
-  const location = useLocation();
-  const { movie } = location;
+  const { movie } = useLocation();
   return (
     <div className="movie-view">
-      <Button className="btn-return" to="/">
+      <Button element="link" className="btn-return" to="/">
         <ArrowReturn width="20px" height="20px" />
         Home
       </Button>

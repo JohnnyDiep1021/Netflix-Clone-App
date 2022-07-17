@@ -1,14 +1,18 @@
 import React, { useState, useEffect, Fragment } from "react";
 
-import { useSelector } from "react-redux";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
+import { movieAction } from "../../../shared/store/movie";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import LoadingSpinner from "../../../shared/components/UI/Loading/LoadingSpinner";
 import { Play, Info } from "../../../shared/components/Icon/MovieIcons";
+import Button from "../../../shared/components/UI/Button/Button";
+import LoadingSpinner from "../../../shared/components/UI/Loading/LoadingSpinner";
 
 import "./FeatureOtp.scss";
 
 const FeatureOption = (props) => {
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const [movieShowcase, setMovieShowcase] = useState();
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
@@ -28,10 +32,11 @@ const FeatureOption = (props) => {
     fetchMovie();
   }, [token, sendRequest]);
   const genreChangeHandler = (e) => {
-    props.setGenre(e.target.value);
+    dispatch(movieAction.setGenre(e.target.value));
   };
   return (
     <div className="featured">
+      {isLoading && <LoadingSpinner asOverlay />}
       {props.type && (
         <div className="category">
           <span>{props.type === "movies" ? "Movies" : "Series"}</span>
@@ -62,17 +67,21 @@ const FeatureOption = (props) => {
         >
           {/* <img src={movieShowcase.image.file} alt="" /> */}
           <div className="info">
-            <img src={movieShowcase.imageTitle.file} alt="" />
+            <img src={movieShowcase.imageTitle.file} alt="title" />
             <span className="desc">{movieShowcase.desc}</span>
             <div className="buttons">
-              <button className="play">
-                <Play width="25px" height="25px" />
+              <Button
+                element="link"
+                to={{ pathname: "/watch", movie: movieShowcase }}
+                className="btn-func-icon play"
+              >
+                <Play width="30px" height="30px" />
                 <span>Play</span>
-              </button>
-              <button className="more">
-                <Info width="30px" height="30px" />
+              </Button>
+              <Button className="btn-func-icon more">
+                <Info width="25px" height="25px" />
                 <span>More Info</span>
-              </button>
+              </Button>
             </div>
           </div>
         </div>

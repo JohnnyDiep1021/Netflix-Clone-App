@@ -9,6 +9,7 @@
   transition: all 0.3s ease;
   &.scrolled {
     background-color: var(--dark-color-700);
+    box-shadow: 0 0.2rem 1.2rem 0 rgba(255, 255, 255, 0.4);
   }
 
   & .container {
@@ -20,21 +21,23 @@
     & .left {
       display: flex;
       align-items: center;
+      font-size: 1.6rem;
       img {
-        height: 2.5rem;
-        margin-right: 4rem;
+        height: 3rem;
+        margin-right: 3rem;
       }
+
       span {
-        margin-right: 2rem;
         cursor: pointer;
       }
     }
     & .right {
       display: flex;
       align-items: center;
+      font-size: 1.6rem;
       & .icon {
-        width: 1.6rem;
-        height: 1.6rem;
+        width: 2rem;
+        height: 2rem;
         margin: 0rem 1.5rem;
         cursor: pointer;
       }
@@ -59,9 +62,9 @@
       }
 
       img {
-        width: 3rem;
-        height: 3rem;
-        border-radius: 0.5rem;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 1rem;
         object-fit: cover;
         cursor: pointer;
       }

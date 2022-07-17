@@ -94,6 +94,7 @@ const MovieItem = (props) => {
               <div className="left">
                 <Button
                   className="btn-icon play-active"
+                  element="link"
                   to={{ pathname: "/watch", movie: movieItem }}
                 >
                   <Play />
@@ -115,10 +116,17 @@ const MovieItem = (props) => {
               </div>
             </div>
             <div className="description__text">
-              <span className="description__match">97% Match</span>
-              <span className="description__limit">{movieItem.limit}</span>
-              <span className="description__duration">1h 14m</span>
-              <div className="genre">{movieItem.genre}</div>
+              <div className="description__top">
+                <span className="description__match">97% Match</span>
+                <span className="description__limit">{movieItem.limit}</span>
+                <span className="description__duration">
+                  {movieItem.duration}
+                </span>
+              </div>
+
+              <div className="description__bottom">
+                <span className="description__genre">{movieItem.genre}</span>
+              </div>
             </div>
           </div>
         </Fragment>
