@@ -65,7 +65,9 @@ const Register = () => {
         }
       );
       console.log(responseData);
-      dispatch(authAction.setAuthToken(responseData.token));
+      dispatch(
+        authAction.login({ user: responseData.user, token: responseData.token })
+      );
     } catch (error) {}
   };
   return (
@@ -76,7 +78,7 @@ const Register = () => {
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
           alt=""
         />
-        <Button className="btn btn--red btn-login" to="/login">
+        <Button element="link" className="btn btn--red btn-login" to="/login">
           Sign In
         </Button>
       </div>

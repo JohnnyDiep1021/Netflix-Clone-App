@@ -2,10 +2,13 @@ import { Fragment } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import Footer from "./HomePage/components/Footer/Footer";
 import MovieView from "./HomePage/components/MovieView/MovieView";
 import Home from "./HomePage/pages/HomePage";
 import Register from "./HomePage/pages/Registeration/Register";
 import Login from "./HomePage/pages/Login/Login";
+
+import "./App.scss";
 function App() {
   const token = useSelector((state) => state.auth.token);
   console.log(token);
@@ -44,6 +47,7 @@ function App() {
   return (
     <Fragment>
       <main>{routes}</main>
+      <Footer />
     </Fragment>
   );
 }

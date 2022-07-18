@@ -1,0 +1,18 @@
+.footer {
+  background-color: var(--bg-black-700);
+  font-size: 1.6rem;
+  padding: 7.5rem 4.5rem 0;
+  & .footer-container {
+    padding-bottom: 2rem;
+    max-width: 100rem;
+    margin: 0 auto;
+    & a {
+      color: var(--link-text-color);
+    }
+    & .footer-links {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

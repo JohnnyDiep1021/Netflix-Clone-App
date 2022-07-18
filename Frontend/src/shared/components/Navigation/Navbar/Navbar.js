@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { NavLink } from "react-router-dom";
 import Button from "../../UI/Button/Button";
 import { Search, Notification, ArrowDown } from "../../Icon/MovieIcons";
 import "./Navbar.scss";
@@ -14,10 +14,13 @@ const Navbar = () => {
     <div className={`${isScrolled ? "navbar scrolled" : "navbar"}`}>
       <div className="container">
         <div className="left">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
-            alt=""
-          />
+          <NavLink to="/" exact>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
+              alt=""
+            />
+          </NavLink>
+
           <Button element="navLink" to="/" exact className="link">
             <span>Homepage</span>
           </Button>

@@ -53,7 +53,9 @@ const Login = () => {
         }
       );
       console.log(responseData);
-      dispatch(authAction.setAuthToken(responseData.token));
+      dispatch(
+        authAction.login({ user: responseData.user, token: responseData.token })
+      );
     } catch (error) {}
   };
   return (
