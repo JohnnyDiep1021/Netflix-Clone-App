@@ -27,7 +27,8 @@
     height: 100%;
     cursor: pointer;
     object-fit: cover;
-
+    border-top-left-radius: 0.4rem;
+    border-top-right-radius: 0.4rem;
     &.trailer-video {
       &.deactive {
         display: none;

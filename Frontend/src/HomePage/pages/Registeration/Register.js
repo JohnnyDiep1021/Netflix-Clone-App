@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 
 import { authAction } from "../../../shared/store/auth";
 import { useDispatch } from "react-redux";
@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { useForm } from "../../../shared/hooks/form-hooks";
 
+import Footer from "../../components/Footer/Footer";
 import Input from "../../../shared/components/UI/Input/Input";
 import Button from "../../../shared/components/UI/Button/Button";
 import ErrorModal from "../../../shared/components/UI/Modal/ErrorModal";
@@ -71,107 +72,112 @@ const Register = () => {
     } catch (error) {}
   };
   return (
-    <div className="register">
-      <div className="regisNav">
-        <img
-          className="logo"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
-          alt=""
-        />
-        <Button element="link" className="btn btn--red btn-login" to="/login">
-          Sign In
-        </Button>
-      </div>
-      {!signupState && (
-        <div className="welcome-container">
-          <h1>Unlimited movies, TV shows, and more</h1>
-          <h2>Watch anywhere. Cancel anytime.</h2>
-          <p>
-            Ready to watch? Enter your email to create or restart your
-            membership
-          </p>
-          <div className="input-signup-container">
+    <Fragment>
+      <div className="register">
+        <div className="regisNav">
+          <img
+            className="logo"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
+            alt=""
+          />
+          <Button element="link" className="btn btn--red btn-login" to="/login">
+            Sign In
+          </Button>
+        </div>
+        {!signupState && (
+          <div className="welcome-container">
+            <h1>Unlimited movies, TV shows, and more</h1>
+            <h2>Watch anywhere. Cancel anytime.</h2>
+            <p>
+              Ready to watch? Enter your email to create or restart your
+              membership
+            </p>
+            <div className="input-signup-container">
+              <Input
+                id="email"
+                element="input"
+                label="Email address"
+                type="text"
+                validators={[VALIDATOR_EMAIL()]}
+                errorText="Email is required!"
+                errorStyle={{ color: "#ffa00a", fontSize: "15px" }}
+                onInput={inputHandler}
+              />
+
+              <Button
+                className="btn btn--red btn-register"
+                onClick={signupStateHandler}
+                disabled={!formState.inputs.email.isValid}
+              >
+                Get Started
+              </Button>
+            </div>
+          </div>
+        )}
+        {signupState && (
+          <form className="signup-form" onSubmit={signupSubmitHandler}>
+            {isLoading && <LoadingSpinner asOverlay />}
+            <h1 className="heading">
+              Welcome back! <span>Start your free membership</span>
+            </h1>
+            {error && !isLoading && (
+              <ErrorModal error={error} onClose={clearError} />
+            )}
             <Input
               id="email"
               element="input"
-              label="Email address"
+              label="Email"
               type="text"
-              validators={[VALIDATOR_EMAIL()]}
-              errorText="Email is required!"
+              validators={[
+                VALIDATOR_EMAIL(),
+                VALIDATOR_MINLENGTH(EMAIL_MINLENGTH),
+                VALIDATOR_MAXLENGTH(EMAIL_MAXLENGTH),
+              ]}
+              errorText="include '@' (3-60 characters)"
               errorStyle={{ color: "#ffa00a", fontSize: "15px" }}
+              onInput={inputHandler}
+              initialValue={formState.inputs.email.value}
+              initialValid={formState.inputs.email.isValid}
+            />
+            <Input
+              id="username"
+              element="input"
+              label="Username"
+              type="text"
+              validators={[
+                VALIDATOR_MINLENGTH(USERNAME_MINLENGTH),
+                VALIDATOR_MAXLENGTH(USERNAME_MAXLENGTH),
+              ]}
+              errorText="6-36 character(s)"
+              errorStyle={{ color: "#ffa00a", fontSize: "15px" }}
+              onInput={inputHandler}
+            />
+            <Input
+              id="password"
+              element="input"
+              label="Add a password"
+              type="password"
+              validators={[VALIDATOR_MINLENGTH(8)]}
+              errorText="at least 8 characters with (1, A, $, @,...)"
+              errorStyle={{ color: "#ffa00a", fontSize: "15px" }}
+              value={formState.inputs.password.value}
               onInput={inputHandler}
             />
 
             <Button
-              className="btn btn--red btn-register"
-              onClick={signupStateHandler}
-              disabled={!formState.inputs.email.isValid}
+              type="submit"
+              className="btn btn--red btn-signup"
+              disabled={!formState.isValid}
             >
-              Get Started
+              Sign Up
             </Button>
-          </div>
-        </div>
-      )}
-      {signupState && (
-        <form className="signup-form" onSubmit={signupSubmitHandler}>
-          {isLoading && <LoadingSpinner asOverlay />}
-          <h1 className="heading">
-            Welcome back! <span>Start your free membership</span>
-          </h1>
-          {error && !isLoading && (
-            <ErrorModal error={error} onClose={clearError} />
-          )}
-          <Input
-            id="email"
-            element="input"
-            label="Email"
-            type="text"
-            validators={[
-              VALIDATOR_EMAIL(),
-              VALIDATOR_MINLENGTH(EMAIL_MINLENGTH),
-              VALIDATOR_MAXLENGTH(EMAIL_MAXLENGTH),
-            ]}
-            errorText="include '@' (3-60 characters)"
-            errorStyle={{ color: "#ffa00a", fontSize: "15px" }}
-            onInput={inputHandler}
-            initialValue={formState.inputs.email.value}
-            initialValid={formState.inputs.email.isValid}
-          />
-          <Input
-            id="username"
-            element="input"
-            label="Username"
-            type="text"
-            validators={[
-              VALIDATOR_MINLENGTH(USERNAME_MINLENGTH),
-              VALIDATOR_MAXLENGTH(USERNAME_MAXLENGTH),
-            ]}
-            errorText="6-36 character(s)"
-            errorStyle={{ color: "#ffa00a", fontSize: "15px" }}
-            onInput={inputHandler}
-          />
-          <Input
-            id="password"
-            element="input"
-            label="Add a password"
-            type="password"
-            validators={[VALIDATOR_MINLENGTH(8)]}
-            errorText="at least 8 characters with (1, A, $, @,...)"
-            errorStyle={{ color: "#ffa00a", fontSize: "15px" }}
-            value={formState.inputs.password.value}
-            onInput={inputHandler}
-          />
-
-          <Button
-            type="submit"
-            className="btn btn--red btn-signup"
-            disabled={!formState.isValid}
-          >
-            Sign Up
-          </Button>
-        </form>
-      )}
-    </div>
+          </form>
+        )}
+      </div>
+      <div className="story-container">
+        <Footer />
+      </div>
+    </Fragment>
   );
 };
 

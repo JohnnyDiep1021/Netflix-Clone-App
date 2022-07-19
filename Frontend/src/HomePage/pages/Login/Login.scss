@@ -1,6 +1,6 @@
 .login {
   min-width: 100%;
-  min-height: 90vh;
+  min-height: 100vh;
   background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0) 0%,
@@ -9,7 +9,6 @@
     url("https://assets.nflxext.com/ffe/siteui/vlv3/8ee18735-ada3-45be-b383-a94701054bb9/c9e54739-cb41-4445-b88e-2246b8c16cea/VN-en-20220613-popsignuptwoweeks-perspective_alpha_website_small.jpg");
   background-size: cover;
   position: relative;
-
   & .top {
     & .wrapper {
       padding: 2rem 5rem;
@@ -25,6 +24,7 @@
     width: 45rem;
     height: 66rem;
     margin: 0 auto;
+    margin-bottom: 9rem;
     position: relative;
     padding: 6rem 6.8rem 4rem;
     border-radius: 0.4rem;
@@ -89,6 +89,12 @@
           color: #0771eb;
         }
       }
+    }
+  }
+  & .footer-container {
+    background-color: rgba(0, 0, 0, 0.75);
+    & .footer {
+      background-color: transparent;
     }
   }
 }

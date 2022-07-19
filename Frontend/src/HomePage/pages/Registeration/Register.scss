@@ -1,6 +1,6 @@
 .register {
   min-width: 100%;
-  min-height: 90vh;
+  min-height: 80vh;
   background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0) 0%,
@@ -12,6 +12,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border-bottom: 0.8rem solid #222;
+
   & .regisNav {
     display: flex;
     align-items: center;
@@ -32,8 +34,8 @@
     }
   }
   & .welcome-container {
-    // width: 100%;
-    // height: 100%;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;

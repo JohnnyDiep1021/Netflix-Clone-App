@@ -1,33 +1,67 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { movieAction } from "../../../store/movie";
+import { useDispatch } from "react-redux";
+
 import Button from "../../UI/Button/Button";
 import { Search, Notification, ArrowDown } from "../../Icon/MovieIcons";
 import "./Navbar.scss";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const [isScrolled, setIsScrolled] = useState(false);
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
+
+  const homeClickHandler = () => {
+    dispatch(movieAction.setType(""));
+    dispatch(movieAction.setGenre(""));
+  };
+  const seriesClickHandler = () => {
+    dispatch(movieAction.setType("series"));
+    dispatch(movieAction.setGenre(""));
+  };
+  const moviesClickHandler = () => {
+    dispatch(movieAction.setType("movies"));
+    dispatch(movieAction.setGenre(""));
+  };
+
   return (
     <div className={`${isScrolled ? "navbar scrolled" : "navbar"}`}>
       <div className="container">
         <div className="left">
-          <NavLink to="/" exact>
+          <NavLink to="/" onClick={homeClickHandler} exact>
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
               alt=""
             />
           </NavLink>
 
-          <Button element="navLink" to="/" exact className="link">
+          <Button
+            element="navLink"
+            to="/"
+            exact
+            className="link"
+            onClick={homeClickHandler}
+          >
             <span>Homepage</span>
           </Button>
-          <Button element="navLink" to="/series" className="link">
+          <Button
+            element="navLink"
+            to="/series"
+            className="link"
+            onClick={seriesClickHandler}
+          >
             <span>Series</span>
           </Button>
-          <Button element="navLink" to="/movies" className="link">
+          <Button
+            element="navLink"
+            to="/movies"
+            className="link"
+            onClick={moviesClickHandler}
+          >
             <span>Movies</span>
           </Button>
           {/* <span>New and Popular</span>

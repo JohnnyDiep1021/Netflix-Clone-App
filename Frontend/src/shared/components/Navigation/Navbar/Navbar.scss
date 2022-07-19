@@ -8,8 +8,9 @@
   z-index: 999;
   transition: all 0.3s ease;
   &.scrolled {
-    background-color: var(--dark-color-700);
+    background-color: rgb(11, 11, 11, 0.75);
     box-shadow: 0 0.2rem 1.2rem 0 rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(4px);
   }
 
   & .container {

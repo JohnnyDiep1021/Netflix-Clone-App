@@ -58,7 +58,7 @@ const MovieItem = (props) => {
     <li
       key={props.id}
       className={`movie-item`}
-      onMouseOut={hideOnLeaveHandler}
+      onMouseLeave={hideOnLeaveHandler}
       // onMouseOver={hidePosterHandler}
     >
       {/* {isPosterHovered && (
@@ -77,7 +77,7 @@ const MovieItem = (props) => {
               // className={`poster ${isPosterHovered && "hide"}`}
               className={`poster`}
               alt="movie poster"
-              onClick={showOnHoverHandler}
+              // onClick={showOnHoverHandler}
             />
           )}
           {isHovered && (
@@ -89,7 +89,8 @@ const MovieItem = (props) => {
               loop
             />
           )}
-          <div className="description">
+
+          <div className="description" onMouseOver={showOnHoverHandler}>
             <div className="description__btn">
               <div className="left">
                 <Button

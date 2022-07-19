@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialMovieState = {
-  type: "movies",
+  type: "",
   genre: "",
 };
 
@@ -9,10 +9,13 @@ const movieSlice = createSlice({
   name: "movie",
   initialState: initialMovieState,
   reducers: {
-    setType(state, action = { payload: "movies" }) {
+    setType(state, action) {
+      console.log(action);
       state.type = action.payload;
     },
-    setGenre(state, action = { payload: "" }) {
+    setGenre(state, action) {
+      console.log(action);
+
       state.genre = action.payload;
     },
   },
