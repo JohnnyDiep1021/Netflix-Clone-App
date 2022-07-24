@@ -3,6 +3,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import { useSelector } from "react-redux";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 
+import MovieDetail from "../MovieDetail/MovieDetail";
 import Button from "../../../shared/components/UI/Button/Button";
 import LoadingSpinner from "../../../shared/components/UI/Loading/LoadingSpinner";
 import {
