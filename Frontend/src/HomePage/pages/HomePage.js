@@ -2,6 +2,7 @@ import React, { useState, useEffect, Fragment } from "react";
 import { useSelector } from "react-redux";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 
+import MovieDetail from "../components/MovieDetail/MovieDetail";
 import Footer from "../components/Footer/Footer";
 import MovieList from "../components/MovieList/MovieList";
 import FeatureOption from "../components/Feature/FeatureOtp";
@@ -58,6 +59,7 @@ const Home = (props) => {
             ))
           )}
         </div>
+        <MovieDetail />
       </div>
       <Footer />
     </Fragment>

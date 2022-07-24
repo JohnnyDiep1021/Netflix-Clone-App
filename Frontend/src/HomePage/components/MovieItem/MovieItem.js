@@ -13,7 +13,11 @@ import {
   Add,
   DropDown,
 } from "../../../shared/components/Icon/MovieIcons";
-
+import AddIcon from "@mui/icons-material/Add";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import "./MovieItem.scss";
 
 const MovieItem = (props) => {
@@ -84,9 +88,8 @@ const MovieItem = (props) => {
           {isHovered && (
             <video
               className={`trailer-video ${!isHovered && "deactive"}`}
-              src={movieItem.trailer.file || trailer}
+              src={movieItem.trailer.file}
               autoPlay={isHovered}
-              controls
               loop
             />
           )}
@@ -99,22 +102,22 @@ const MovieItem = (props) => {
                   element="link"
                   to={{ pathname: "/watch", movie: movieItem }}
                 >
-                  <Play />
+                  <PlayArrowIcon />
                 </Button>
-                <button className="btn-icon">
-                  <Add />
-                </button>
-                <button className="btn-icon">
-                  <ThumbUp />
-                </button>
-                <button className="btn-icon">
-                  <ThumbDown />
-                </button>
+                <Button className="btn-icon">
+                  <AddIcon />
+                </Button>
+                <Button className="btn-icon">
+                  <ThumbUpOffAltIcon />
+                </Button>
+                <Button className="btn-icon">
+                  <ThumbDownOffAltIcon />
+                </Button>
               </div>
               <div className="right">
-                <button className="btn-icon">
-                  <DropDown />
-                </button>
+                <Button className="btn-icon">
+                  <ExpandMoreIcon />
+                </Button>
               </div>
             </div>
             <div className="description__text">

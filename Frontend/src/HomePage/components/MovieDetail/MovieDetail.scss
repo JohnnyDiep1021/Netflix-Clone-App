@@ -1,0 +1,33 @@
+.modal-movie-detail {
+  width: 120rem;
+  background-color: rgb(124, 122, 122);
+  left: calc(50% - 60rem);
+  transform: translateX(0);
+  & .top {
+    position: relative;
+    & .intrt-btn-container {
+      // position: absolute;
+      // top: 50%;
+      & .left {
+        display: flex;
+        & .btn-func-icon {
+          font-size: 1.6rem;
+          padding: 0.5rem 2rem;
+          margin: 0;
+          justify-content: space-between;
+          & svg {
+            font-size: 3.2rem;
+          }
+        }
+        & .btn-icon {
+          font-size: 3rem;
+          width: 3.6rem;
+          height: 3.6rem;
+          & svg {
+            font-size: 2.2rem;
+          }
+        }
+      }
+    }
+  }
+}

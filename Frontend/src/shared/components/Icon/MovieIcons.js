@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import "./MovieIcons.scss";
 
 export const ThumbUp = (props) => {

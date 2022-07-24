@@ -73,7 +73,7 @@ const FeatureOption = (props) => {
               <Button
                 element="link"
                 to={{ pathname: "/watch", movie: movieShowcase }}
-                className="btn-func-icon play"
+                className="btn-func-icon striking"
               >
                 <Play width="30px" height="30px" />
                 <span>Play</span>

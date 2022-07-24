@@ -41,6 +41,7 @@ const Button = (props) => {
             {props.children}
           </NavLink>
         );
+      default:
     }
   }
   return (
@@ -49,6 +50,7 @@ const Button = (props) => {
       type={props.type || "button"}
       onClick={props.onClick}
       disabled={props.disabled}
+      alt={props.alt}
     >
       {props.children}
     </button>

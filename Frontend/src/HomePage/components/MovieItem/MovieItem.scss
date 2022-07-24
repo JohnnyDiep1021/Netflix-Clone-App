@@ -58,31 +58,6 @@
         align-items: center;
         gap: 0.6rem;
       }
-      & .btn-icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 2.4rem;
-        height: 2.4rem;
-        color: rgb(191, 189, 189);
-        background: none;
-        border: 0.1rem solid rgb(191, 189, 189);
-        border-radius: 50%;
-        cursor: pointer;
-        transition: all 0.25s ease;
-
-        &:hover {
-          color: var(--light-text-color);
-          border: 0.15rem solid var(--light-text-color);
-        }
-        &.play-active {
-          background: rgba(255, 255, 255, 0.8) !important;
-          color: #000 !important;
-          &:hover {
-            background: rgba(255, 255, 255) !important;
-          }
-        }
-      }
     }
     & .description__text {
       font-size: 1.28rem;

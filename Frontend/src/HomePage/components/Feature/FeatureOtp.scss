@@ -54,14 +54,6 @@
       & .buttons {
         display: flex;
         & .btn-func-icon {
-          &.play {
-            background-color: rgb(255, 255, 255, 0.8);
-            color: var(--dark-color-700);
-            &:hover {
-              background-color: rgb(255, 255, 255);
-              font-weight: 600;
-            }
-          }
           &.more {
             background-color: rgb(128, 128, 128, 0.7);
             color: white;

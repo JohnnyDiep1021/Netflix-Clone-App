@@ -1,17 +1,40 @@
 import React from "react";
 
+import Button from "../../../shared/components/UI/Button/Button";
+
+import Modal from "../../../shared/components/UI/Modal/Modal";
+import AddIcon from "@mui/icons-material/Add";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+
 import "./MovieDetail.scss";
-const MovieDetail = () => {
+
+const MovieDetail = (props) => {
   return (
-    <div className="movie-detail">
+    <Modal className="modal-movie-detail" show={true}>
       <div className="top">
-        <video />
-        <div className="img-title-container">
+        <video controls autoPlay loop />
+        {/* <div className="img-title-container">
           <img />
-        </div>
-        <div className="inter-container">
-          <div className="inter-btn-left"></div>
-          <div className="inter-btn-right"></div>
+        </div> */}
+        <div className="intrt-btn-container">
+          <div className="left">
+            <Button className="btn-func-icon striking">
+              <PlayArrowIcon />
+              <span>Play</span>
+            </Button>
+            <Button className="btn-icon">
+              <AddIcon />
+            </Button>
+            <Button className="btn-icon">
+              <ThumbUpOffAltIcon />
+            </Button>
+            <Button className="btn-icon">
+              <ThumbDownOffAltIcon />
+            </Button>
+          </div>
+          <div className="right"></div>
         </div>
       </div>
       <div className="bottom">
@@ -21,7 +44,7 @@ const MovieDetail = () => {
         </div>
         <div className="episodes-container"></div>
       </div>
-    </div>
+    </Modal>
   );
 };
 
