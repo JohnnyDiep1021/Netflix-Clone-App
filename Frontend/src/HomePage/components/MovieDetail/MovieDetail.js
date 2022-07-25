@@ -9,6 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import CloseIcon from "@mui/icons-material/Close";
 
 import "./MovieDetail.scss";
 
@@ -48,11 +49,53 @@ const MovieDetail = (props) => {
             </Button>
           </div>
         </div>
+        <Button className="btn-icon btn-close">
+          <CloseIcon />
+        </Button>
       </div>
       <div className="bottom">
         <div className="description-container">
-          <div className="description"></div>
-          <div className="category"></div>
+          <div className="description">
+            <div className="publish-info">
+              <span className="matching">93% Match</span>
+              <span className="year">2019</span>
+              <span className="type">MV</span>
+              <span className="duration">120 mins</span>
+            </div>
+            <div className="description-info">
+              <p className="warning">
+                Some audio languages may be pending: we're prioritizing the
+                safety of voice actors
+              </p>
+              <p>
+                A beautiful love of a young couple. They fell in love with each
+                other since their first dating. They had been through thick and
+                thin. However, the boy gradually recognized that he did not
+                fully understand his girlfriend's intentions, leading to
+                unexpected conflicts in love. Eventually, his girlfriends was so
+                regretful as he passed away in a car accident.
+              </p>
+            </div>
+          </div>
+          <div className="category">
+            <div className="cast">
+              <p>
+                <span>Cast:</span>
+                Anh Tu, Diem My, Hoai Linh, My Dung, Kim Chi
+              </p>
+            </div>
+            <div className="genre">
+              <p>
+                <span>Genre:</span>Romantic MV
+              </p>
+            </div>
+            <div className="adj">
+              <p>
+                <span>This MV is:</span>
+                Romantic, Heartbroken
+              </p>
+            </div>
+          </div>
         </div>
         <div className="episodes-container"></div>
       </div>

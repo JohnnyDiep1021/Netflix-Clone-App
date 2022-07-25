@@ -160,21 +160,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: none;
   border-radius: 50%;
-  background: none;
   position: absolute;
   top: 2.5%;
   left: 96%;
   transform: translateX(-100%);
   cursor: pointer;
-  width: 2.4rem;
-  height: 2.4rem;
   transition: all 0.2s;
-  &:hover {
-    border-radius: 50%;
-    background-color: rgb(66, 64, 64, 0.2);
-  }
 }
 
 .btn-exit {
