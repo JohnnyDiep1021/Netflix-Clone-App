@@ -1,0 +1,45 @@
+.list {
+  width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 6rem;
+  // position: relative;
+  & .listTitle {
+    display: inline-block;
+    color: white;
+    font-size: 2rem;
+    font-weight: 500;
+    margin-left: 5rem;
+    margin-bottom: 1rem;
+  }
+
+  & .carousel {
+    position: relative;
+
+    & .carouselbox {
+      display: flex;
+      margin-left: 5rem;
+      position: relative;
+      width: max-content;
+      transition: all 1s ease;
+    }
+    & .sliderArrow {
+      width: 5rem;
+      height: 100%;
+      background-color: rgb(22, 22, 22, 0.5);
+      color: white;
+      position: absolute;
+      z-index: 99;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      cursor: pointer;
+
+      &.left {
+        left: 0;
+      }
+      &.right {
+        right: 0;
+      }
+    }
+  }
+}

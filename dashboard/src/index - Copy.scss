@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0%;
+  box-sizing: inherit;
+}
+
+:root {
+  --primary-color: #3271e7;
+  --primary-color-light: #1566fc;
+  --dark-color-700: #0b0b0b;
+  --bg-black-700: #1d1d1d;
+  --light-text-color: #fff;
+  --dark-text-color: #8c8c8c;
+  --danger-color-light: rgb(243, 73, 73);
+  --danger-color-dark: rgb(250, 40, 40);
+}
+
+html {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 1.4rem;
+  // background-color: #3f3f3f;
+  // overflow-x: hidden;
+  // overflow-y: visible;
+}
+
+.link,
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@keyframes appear {
+  0% {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+  80% {
+    transform: translateY(-1rem);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes popup {
+  0% {
+    transform: translateY(-1rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4rem);
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4rem);
+  }
+}

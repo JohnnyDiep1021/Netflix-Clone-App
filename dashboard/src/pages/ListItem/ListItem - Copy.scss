@@ -1,0 +1,146 @@
+.list-container {
+  width: 80%;
+  padding: 2rem;
+  & .productTitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    & .product-add-btn {
+      text-align: center;
+      width: 80px;
+      border: none;
+      padding: 5px;
+      background-color: teal;
+      color: white;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  }
+
+  & .productTop {
+    & .productTopRight {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 2rem;
+      margin: 2rem;
+      -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+      box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+      & .productInfoTop {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        & .productInfoItem {
+          display: flex;
+          align-items: center;
+          font-size: 1.6rem;
+          & .productInfoImg {
+            width: 8rem;
+            height: 8rem;
+            border-radius: 0.6rem;
+            object-fit: cover;
+            margin-right: 20px;
+          }
+          & .productName {
+            font-weight: 350;
+            margin-right: 1rem;
+          }
+          & .product-id {
+            font-weight: 200;
+          }
+        }
+      }
+      & .productInfoBottom {
+        .productForm {
+          display: flex;
+          justify-content: space-between;
+          flex-direction: column;
+          gap: 3rem;
+          & .productForm-top {
+            display: flex;
+            & .input {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              width: 100%;
+
+              &:nth-child(3) {
+                width: 50%;
+                & select {
+                  width: 60%;
+                }
+              }
+
+              &:last-child {
+                width: 100% !important;
+                & select {
+                  width: 80% !important;
+                }
+              }
+
+              & label {
+                font-size: 1.4rem;
+                font-weight: 600;
+                margin-bottom: 10px;
+                color: rgb(126, 126, 126);
+              }
+              & input {
+                width: 80%;
+                margin-bottom: 10px;
+                border: none;
+                flex-wrap: wrap;
+                border-radius: 0;
+                padding: 0.5rem;
+                border-bottom: 1px solid rgb(161, 161, 161);
+                background-color: transparent;
+                &:focus {
+                  background-color: transparent;
+                  border: transparent;
+                  border-bottom: 1px solid rgb(161, 161, 161);
+                }
+                &:-webkit-autofill,
+                &:-webkit-autofill:hover,
+                &:-webkit-autofill:focus,
+                &:-webkit-autofill:active {
+                  border: transparent;
+                  border-bottom: 1px solid rgb(161, 161, 161);
+                  background-clip: text;
+                }
+              }
+            }
+            & .productForm-top--left {
+              display: flex;
+              flex-direction: column;
+              width: 100%;
+            }
+            // & .productForm-top--Right {
+            //   display: flex;
+            //   flex-direction: column;
+            //   width: 50%;
+            //   justify-content: space-evenly;
+            // }
+          }
+          & .productForm-bottom {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+          }
+          & .btn-update {
+            color: white;
+            background-color: rgb(35, 35, 245);
+            // text-transform: capitalize;
+            align-self: center;
+            font-weight: 600;
+            padding: 1rem 4rem;
+            border-radius: 0.8rem;
+            cursor: pointer;
+            &:hover {
+              background-color: rgb(15, 15, 185);
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.chart-container {
+  margin: 2rem;
+  padding: 2rem;
+  -webkit-box-shadow: 0 0 1.5rem -1rem rgba(0, 0, 0, 0.75);
+  box-shadow: 0 0 1.5rem -1rem rgba(0, 0, 0, 0.75);
+
+  & .chart-title {
+    text-transform: capitalize;
+    margin-bottom: 2rem;
+  }
+}
