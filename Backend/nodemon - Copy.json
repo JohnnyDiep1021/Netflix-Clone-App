@@ -1,0 +1,8 @@
+{
+  "env": {
+    "DB_USER": "johnny-netflix-app",
+    "DB_PASSWORD": "Dbdev1234",
+    "DB_NAME": "netflix-api",
+    "JWT_KEY": "vh5iz1VsJeciZ8TA"
+  }
+}

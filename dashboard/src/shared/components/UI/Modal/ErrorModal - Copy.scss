@@ -1,0 +1,17 @@
+.inline-message {
+  padding: 1rem 2rem;
+  display: table;
+  width: 100%;
+  color: var(--light-text-color);
+  background: rgb(247, 103, 103);
+  font-weight: 700;
+  border-radius: 0.4rem;
+  font-size: 1.4rem;
+  margin-bottom: 1.6rem;
+  line-height: 1.2;
+}
+
+a {
+  // display: inline-block;
+  color: var(--light-text-color);
+}
