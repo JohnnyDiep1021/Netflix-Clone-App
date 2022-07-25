@@ -1,30 +1,57 @@
 .modal-movie-detail {
   width: 120rem;
-  background-color: rgb(124, 122, 122);
+  background-color: rgb(114, 114, 114);
   left: calc(50% - 60rem);
   transform: translateX(0);
   & .top {
     position: relative;
+
+    & .poster-video-container {
+      position: relative;
+      & .bg-filter {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0),
+          rgba(255, 255, 255, 0),
+          rgb(61, 61, 61)
+        );
+      }
+
+      & .poster-video {
+        border-top-left-radius: 1.2rem;
+        border-top-right-radius: 1.2rem;
+        width: 100%;
+      }
+    }
+
     & .intrt-btn-container {
-      // position: absolute;
-      // top: 50%;
-      & .left {
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      top: 75%;
+      width: 100%;
+      padding: 2rem 6rem;
+      & .left,
+      & .right {
         display: flex;
+        gap: 1rem;
         & .btn-func-icon {
           font-size: 1.6rem;
           padding: 0.5rem 2rem;
           margin: 0;
-          justify-content: space-between;
           & svg {
-            font-size: 3.2rem;
+            font-size: 3.6rem;
           }
         }
         & .btn-icon {
           font-size: 3rem;
-          width: 3.6rem;
-          height: 3.6rem;
+          width: 4.2rem;
+          height: 4.2rem;
           & svg {
-            font-size: 2.2rem;
+            font-size: 2.4rem;
           }
         }
       }
