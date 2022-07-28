@@ -64,6 +64,14 @@ const Navbar = () => {
           >
             <span>Movies</span>
           </Button>
+          <Button
+            element="navLink"
+            to="/watchlist"
+            className="link"
+            onClick={moviesClickHandler}
+          >
+            <span>Your Watch List</span>
+          </Button>
           {/* <span>New and Popular</span>
           <span>My List</span> */}
         </div>

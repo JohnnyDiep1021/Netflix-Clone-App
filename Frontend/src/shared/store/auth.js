@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialAuthState = {
   user: null,
   token: null,
+  watchlist: [],
 };
 
 const authSlice = createSlice({
@@ -23,6 +24,9 @@ const authSlice = createSlice({
     logout(state) {},
     setAuthToken(state, action) {
       state.token = action.payload;
+    },
+    setWatchList(state, action) {
+      state.watchlist = action.payload;
     },
   },
 });

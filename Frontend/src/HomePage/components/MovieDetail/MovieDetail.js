@@ -5,7 +5,7 @@ import Button from "../../../shared/components/UI/Button/Button";
 import Modal from "../../../shared/components/UI/Modal/Modal";
 
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import AddIcon from "@mui/icons-material/Add";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
@@ -34,7 +34,7 @@ const MovieDetail = (props) => {
               <span>Play</span>
             </Button>
             <Button className="btn-icon">
-              <AddIcon />
+              <FavoriteIcon />
             </Button>
             <Button className="btn-icon">
               <ThumbUpOffAltIcon />

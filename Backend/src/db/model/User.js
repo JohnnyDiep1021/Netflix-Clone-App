@@ -35,6 +35,16 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    watchList: [
+      {
+        movie: {
+          type: mongoose.Schema.Types.ObjectId,
+          required: true,
+          unique: true,
+          ref: "Movie",
+        },
+      },
+    ],
     tokens: [
       {
         token: {
@@ -93,11 +103,9 @@ UserSchema.statics.findByCredentials = async function ({
     throw error;
   }
 };
-
 UserSchema.statics.getProperty = async function () {
   return Object.keys(this.schema.obj);
 };
-
 UserSchema.pre("save", async function (next) {
   const user = this;
 

@@ -25,7 +25,7 @@ const FeatureOption = (props) => {
           null,
           { Authorization: `Bearer ${token}` }
         );
-        console.log(responseData[0]);
+        // console.log(responseData[0]);
         setMovieShowcase(responseData[0]);
       } catch (error) {}
     };

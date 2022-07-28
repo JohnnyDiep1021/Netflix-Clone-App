@@ -33,6 +33,15 @@ userRouter.get("/", auth, usersController.getAllUser);
 // GET USER STATS
 userRouter.get("/stats", auth, usersController.getUserStats);
 
+// GET MOVIE FROM WATCH LIST
+userRouter.get("/watchlist", auth, usersController.getWatchList);
+
+// ADD MOVIE TO WATCH LIST
+userRouter.patch("/watchlist/add", auth, usersController.addWatchList);
+
+// REMOVE MOVIE FROM WATCH LIST
+userRouter.patch("/watchlist/remove", auth, usersController.removeWatchList);
+
 // UPDATE
 userRouter.patch(
   "/:id",

@@ -1,19 +1,14 @@
 import React, { useState, useEffect, Fragment } from "react";
 
-import { useSelector } from "react-redux";
+import { authAction } from "../../../shared/store/auth";
+import { useSelector, useDispatch } from "react-redux";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 
 import MovieDetail from "../MovieDetail/MovieDetail";
 import Button from "../../../shared/components/UI/Button/Button";
 import LoadingSpinner from "../../../shared/components/UI/Loading/LoadingSpinner";
-import {
-  Play,
-  ThumbDown,
-  ThumbUp,
-  Add,
-  DropDown,
-} from "../../../shared/components/Icon/MovieIcons";
-import AddIcon from "@mui/icons-material/Add";
+
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -21,20 +16,13 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import "./MovieItem.scss";
 
 const MovieItem = (props) => {
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const [isHovered, setIsHovered] = useState(false);
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
-  // const [isPosterHovered, setIsPosterHovered] = useState(true);
+  const { isLoading, sendRequest } = useHttpClient();
   const [movieItem, setMovieItem] = useState();
-  const trailer =
-    "https://player.vimeo.com/external/371433846.sd.mp4?s=236da2f3c0fd273d2c6d9a064f3ae35579b2bbdf&profile_id=139&oauth2_token_id=57447761";
+  const [isMovieAdded, setIsMovieAdded] = useState(false);
 
-  // const hidePosterHandler = () => {
-  //   setTimeout(() => {
-  //     setIsPosterHovered(false);
-  //     console.log(`hide outer poster`);
-  //   }, 2000);
-  // };
   useEffect(() => {
     const fetchMovieItem = async () => {
       try {
@@ -44,19 +32,65 @@ const MovieItem = (props) => {
           null,
           { Authorization: `Bearer ${token}` }
         );
-        console.log(responseData.movie.image);
+        const responseDataWatchList = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/users/watchlist`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        dispatch(authAction.setWatchList(responseDataWatchList.watchList));
+        setIsMovieAdded(
+          responseDataWatchList.watchList.some(
+            (item) => item.movie === props.id
+          )
+        );
         setMovieItem(responseData.movie);
       } catch (error) {}
     };
     fetchMovieItem();
-  }, [sendRequest, token]);
+  }, [sendRequest, token, props.id]);
+
+  const watchListHandler = async () => {
+    try {
+      if (!isMovieAdded) {
+        const responseData = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/users/watchlist/add`,
+          "PATCH",
+          JSON.stringify({
+            movie: movieItem._id,
+          }),
+          {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          }
+        );
+        console.log(responseData);
+        setIsMovieAdded(true);
+        dispatch(authAction.setWatchList(responseData.watchList));
+      } else {
+        const responseData = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/users/watchlist/remove`,
+          "PATCH",
+          JSON.stringify({
+            movie: movieItem._id,
+          }),
+          {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          }
+        );
+        console.log(responseData);
+        setIsMovieAdded(false);
+        dispatch(authAction.setWatchList(responseData.watchList));
+      }
+    } catch (error) {}
+  };
 
   const showOnHoverHandler = () => {
     setIsHovered(true);
   };
   const hideOnLeaveHandler = () => {
     setIsHovered(false);
-    // setIsPosterHovered(true);
   };
 
   return (
@@ -66,13 +100,6 @@ const MovieItem = (props) => {
       onMouseLeave={hideOnLeaveHandler}
       // onMouseOver={hidePosterHandler}
     >
-      {/* {isPosterHovered && (
-      <img
-        src="https://occ-0-1723-92.1.nflxso.net/dnm/api/v6/X194eJsgWBDE2aQbaNdmCXGUP-Y/AAAABU7D36jL6KiLG1xI8Xg_cZK-hYQj1L8yRxbQuB0rcLCnAk8AhEK5EM83QI71bRHUm0qOYxonD88gaThgDaPu7NuUfRg.jpg?r=4ee"
-        className={`poster`}
-        alt="movie poster"
-      />
-    )} */}
       {isLoading && <LoadingSpinner asOverlay />}
       {movieItem && (
         <Fragment>
@@ -104,8 +131,11 @@ const MovieItem = (props) => {
                 >
                   <PlayArrowIcon />
                 </Button>
-                <Button className="btn-icon">
-                  <AddIcon />
+                <Button
+                  className={`btn-icon ${isMovieAdded && "added"}`}
+                  onClick={watchListHandler}
+                >
+                  <FavoriteIcon />
                 </Button>
                 <Button className="btn-icon">
                   <ThumbUpOffAltIcon />

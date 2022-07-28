@@ -19,32 +19,55 @@ const Button = (props) => {
     switch (props.element) {
       case "link":
         return (
-          <Link
-            to={props.to}
-            exact={props.exact}
-            onClick={props.onClick}
-            className={`${props.className}`}
-            target={props.target}
-          >
-            {props.children}
-          </Link>
+          <div>
+            <Link
+              to={props.to}
+              exact={props.exact}
+              onClick={props.onClick}
+              className={`${props.className}`}
+              target={props.target}
+            >
+              {props.children}
+            </Link>
+          </div>
         );
       case "navLink":
         return (
-          <NavLink
-            to={props.to}
-            exact={props.exact}
-            onClick={props.onClick}
-            className={`${props.className}`}
-            target={props.target}
-          >
-            {props.children}
-          </NavLink>
+          <div>
+            <NavLink
+              to={props.to}
+              exact={props.exact}
+              onClick={props.onClick}
+              className={`${props.className}`}
+              target={props.target}
+            >
+              {props.children}
+            </NavLink>
+          </div>
         );
       default:
     }
   }
+  if (props.element === "sub-btn") {
+    return (
+      <div>
+        <span className="btn-title">title</span>
+        <button
+          className={props.className}
+          type={props.type || "button"}
+          onClick={props.onClick}
+          disabled={props.disabled}
+          alt={props.alt}
+        >
+          {props.children}
+        </button>
+        ;
+      </div>
+    );
+  }
   return (
+    // <div>
+    // <title>title</title>
     <button
       className={props.className}
       type={props.type || "button"}
@@ -54,6 +77,7 @@ const Button = (props) => {
     >
       {props.children}
     </button>
+    // </div>
   );
 };
 

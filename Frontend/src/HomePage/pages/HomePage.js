@@ -6,7 +6,6 @@ import MovieDetail from "../components/MovieDetail/MovieDetail";
 import Footer from "../components/Footer/Footer";
 import MovieList from "../components/MovieList/MovieList";
 import FeatureOption from "../components/Feature/FeatureOtp";
-import Navbar from "../../shared/components/Navigation/Navbar/Navbar";
 
 import "./HomePage.scss";
 
@@ -17,16 +16,9 @@ const Home = (props) => {
 
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [movieList, setMovieList] = useState([]);
-  console.log(type, genre);
   useEffect(() => {
     const fetchMovieList = async () => {
       try {
-        console.log(
-          `${process.env.REACT_APP_BACKEND_URL}/lists${
-            type && `?type=${type}`
-          }${genre && `&genre=${genre}`}`
-        );
-
         const responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_URL}/lists${
             type ? `?type=${type}` : ""
@@ -46,7 +38,6 @@ const Home = (props) => {
   return (
     <Fragment>
       <div className="home">
-        <Navbar />
         <FeatureOption type={type} />
         <div className="movie-list-container">
           {movieList.length === 0 ? (

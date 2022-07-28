@@ -145,6 +145,36 @@ const updateUser = async (req, res, next) => {
   }
 };
 
+const getWatchList = async (req, res, next) => {
+  try {
+    res.json({ watchList: req.user.watchList });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const addWatchList = async (req, res, next) => {
+  try {
+    req.user.watchList = req.user.watchList.concat({ movie: req.body.movie });
+    await req.user.save();
+    res.json({ watchList: req.user.watchList });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const removeWatchList = async (req, res, next) => {
+  try {
+    req.user.watchList = req.user.watchList.filter(
+      (item) => item.movie.toString() !== req.body.movie.toString()
+    );
+    await req.user.save();
+    res.json({ watchList: req.user.watchList });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const deleteProfile = async (req, res, next) => {
   try {
     if (req.user._id.toString() === req.params.id || req.user.isAdmin) {
@@ -167,5 +197,8 @@ module.exports = {
   getAllUser,
   getUserStats,
   updateUser,
+  getWatchList,
+  addWatchList,
+  removeWatchList,
   deleteProfile,
 };

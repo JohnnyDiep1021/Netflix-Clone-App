@@ -10,12 +10,9 @@ const movieSlice = createSlice({
   initialState: initialMovieState,
   reducers: {
     setType(state, action) {
-      console.log(action);
       state.type = action.payload;
     },
     setGenre(state, action) {
-      console.log(action);
-
       state.genre = action.payload;
     },
   },
