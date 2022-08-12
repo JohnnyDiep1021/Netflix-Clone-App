@@ -155,7 +155,7 @@ const MovieItem = (props) => {
                 <span className="description__match">97% Match</span>
                 <span className="description__limit">{movieItem.limit}</span>
                 <span className="description__duration">
-                  {movieItem.duration}
+                  {movieItem.duration} mins
                 </span>
               </div>
 

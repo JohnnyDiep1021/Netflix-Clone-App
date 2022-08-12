@@ -47,9 +47,18 @@ const MovieSchema = new mongoose.Schema(
       },
     },
     year: {
-      type: String,
+      type: Number,
     },
     limit: {
+      type: String,
+    },
+    casting: {
+      type: String,
+    },
+    matching: {
+      type: Number,
+    },
+    label: {
       type: String,
     },
     genre: {
@@ -57,7 +66,8 @@ const MovieSchema = new mongoose.Schema(
       required: true,
     },
     duration: {
-      type: String,
+      type: Number,
+      required: true,
     },
     isSeries: {
       type: Boolean,

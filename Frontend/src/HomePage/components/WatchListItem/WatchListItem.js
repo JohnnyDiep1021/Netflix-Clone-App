@@ -10,7 +10,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import Button from "../../../shared/components/UI/Button/Button";
 import "./WatchListItem.scss";
 
-const WatchListItem = () => {
+const WatchListItem = (props) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
