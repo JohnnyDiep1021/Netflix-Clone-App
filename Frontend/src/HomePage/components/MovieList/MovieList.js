@@ -1,20 +1,40 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { authAction } from "../../../shared/store/auth";
+import { useHttpClient } from "../../../shared/hooks/http-hook";
 
 import MovieItem from "../MovieItem/MovieItem";
 
-import "./MovieList.scss";
 import {
   ForwardArrow,
   BackwardArrow,
 } from "../../../shared/components/Icon/MovieIcons";
 
+import "./MovieList.scss";
+
 let scrollAmount = 0;
 const MovieList = (props) => {
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
   const [isMoved, setIsMoved] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   // const [scrollAmount, setScrollAmount] = useState(0);
   const carouselRef = useRef();
   const sliders = useRef();
+  const { sendRequest } = useHttpClient();
+  useEffect(() => {
+    const fetchWatchList = async () => {
+      const responseDataWatchList = await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/users/watchlist`,
+        "GET",
+        null,
+        { Authorization: `Bearer ${token}` }
+      );
+      dispatch(authAction.setWatchList(responseDataWatchList.watchList));
+    };
+    fetchWatchList();
+  }, [token, dispatch, sendRequest]);
 
   const scrollHandler = (direction) => {
     setIsMoved(true);

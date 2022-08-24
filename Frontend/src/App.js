@@ -53,7 +53,7 @@ function App() {
   }
   return (
     <Fragment>
-      <main>{routes}</main>
+      <main className="main-container">{routes}</main>
     </Fragment>
   );
 }

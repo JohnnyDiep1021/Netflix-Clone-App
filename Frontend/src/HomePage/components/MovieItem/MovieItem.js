@@ -18,6 +18,8 @@ import "./MovieItem.scss";
 const MovieItem = (props) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+  const watchList = useSelector((state) => state.auth.watchlist);
+
   const [isHovered, setIsHovered] = useState(false);
   const { isLoading, sendRequest } = useHttpClient();
   const [movieItem, setMovieItem] = useState();
@@ -32,18 +34,7 @@ const MovieItem = (props) => {
           null,
           { Authorization: `Bearer ${token}` }
         );
-        const responseDataWatchList = await sendRequest(
-          `${process.env.REACT_APP_BACKEND_URL}/users/watchlist`,
-          "GET",
-          null,
-          { Authorization: `Bearer ${token}` }
-        );
-        dispatch(authAction.setWatchList(responseDataWatchList.watchList));
-        setIsMovieAdded(
-          responseDataWatchList.watchList.some(
-            (item) => item.movie === props.id
-          )
-        );
+        setIsMovieAdded(watchList.some((item) => item.movie === props.id));
         setMovieItem(responseData.movie);
       } catch (error) {}
     };

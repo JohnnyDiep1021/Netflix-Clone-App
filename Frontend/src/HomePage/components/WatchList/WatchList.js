@@ -4,16 +4,15 @@ import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { useSelector } from "react-redux";
 
 import WatchListItem from "../WatchListItem/WatchListItem";
-
 import "./WatchList.scss";
 
 const WatchList = () => {
   const token = useSelector((state) => state.auth.token);
   const [watchList, setWatchList] = useState([]);
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { sendRequest } = useHttpClient();
   useEffect(() => {
     const fetchWatchList = async () => {
-      const responseData = sendRequest(
+      const responseData = await sendRequest(
         `${process.env.REACT_APP_BACKEND_URL}/users/watchlist`,
         "GET",
         null,
@@ -24,14 +23,12 @@ const WatchList = () => {
       console.log(responseData);
       setWatchList(responseData.watchList);
     };
+    fetchWatchList();
   }, [token, sendRequest]);
   return (
     <div className="watchList-container">
       <ul className="watchList-list">
-        <WatchListItem />
-        <WatchListItem />
-        <WatchListItem />
-        <WatchListItem />
+        {watchList && watchList.map((item) => <WatchListItem movieId={item} />)}
       </ul>
     </div>
   );

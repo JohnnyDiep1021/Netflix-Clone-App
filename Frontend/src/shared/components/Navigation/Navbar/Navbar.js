@@ -70,7 +70,7 @@ const Navbar = () => {
             className="link"
             onClick={moviesClickHandler}
           >
-            <span>Your Watch List</span>
+            <span>My Watch List</span>
           </Button>
           {/* <span>New and Popular</span>
           <span>My List</span> */}
