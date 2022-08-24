@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 
-import { authAction } from "../../../shared/store/auth";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useMovieBtn } from "../../../shared/hooks/movie-hooks";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 
 import MovieDetail from "../MovieDetail/MovieDetail";
@@ -16,14 +16,14 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import "./MovieItem.scss";
 
 const MovieItem = (props) => {
-  const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const watchList = useSelector((state) => state.auth.watchlist);
-
+  const { watchListToggleHandler, addMovieState, message } = useMovieBtn(
+    watchList.some((item) => item.movie === props.id)
+  );
   const [isHovered, setIsHovered] = useState(false);
   const { isLoading, sendRequest } = useHttpClient();
   const [movieItem, setMovieItem] = useState();
-  const [isMovieAdded, setIsMovieAdded] = useState(false);
 
   useEffect(() => {
     const fetchMovieItem = async () => {
@@ -34,54 +34,28 @@ const MovieItem = (props) => {
           null,
           { Authorization: `Bearer ${token}` }
         );
-        setIsMovieAdded(watchList.some((item) => item.movie === props.id));
         setMovieItem(responseData.movie);
       } catch (error) {}
     };
     fetchMovieItem();
   }, [sendRequest, token, props.id]);
 
-  const watchListHandler = async () => {
-    try {
-      if (!isMovieAdded) {
-        const responseData = await sendRequest(
-          `${process.env.REACT_APP_BACKEND_URL}/users/watchlist/add`,
-          "PATCH",
-          JSON.stringify({
-            movie: movieItem._id,
-          }),
-          {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          }
-        );
-        console.log(responseData);
-        setIsMovieAdded(true);
-        dispatch(authAction.setWatchList(responseData.watchList));
-      } else {
-        const responseData = await sendRequest(
-          `${process.env.REACT_APP_BACKEND_URL}/users/watchlist/remove`,
-          "PATCH",
-          JSON.stringify({
-            movie: movieItem._id,
-          }),
-          {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          }
-        );
-        console.log(responseData);
-        setIsMovieAdded(false);
-        dispatch(authAction.setWatchList(responseData.watchList));
-      }
-    } catch (error) {}
-  };
-
   const showOnHoverHandler = () => {
     setIsHovered(true);
   };
   const hideOnLeaveHandler = () => {
     setIsHovered(false);
+  };
+
+  const triggerHandler = async (domEle) => {
+    try {
+      // console.log(domEle);
+      console.log(`video is playing`);
+      if (domEle.requestFullscreen) await domEle.requestFullscreen();
+      else if (domEle.webkitRequestFullscreen)
+        await domEle.webkitRequestFullscreen();
+      else if (domEle.msRequestFullScreen) await domEle.msRequestFullScreen();
+    } catch (error) {}
   };
 
   return (
@@ -118,13 +92,22 @@ const MovieItem = (props) => {
                 <Button
                   className="btn-icon play-active"
                   element="link"
-                  to={{ pathname: "/watch", movie: movieItem }}
+                  to={{
+                    pathname: "/watch",
+                    movie: movieItem,
+                    trigger: triggerHandler,
+                  }}
+                  onClick={() => {
+                    triggerHandler();
+                  }}
                 >
                   <PlayArrowIcon />
                 </Button>
                 <Button
-                  className={`btn-icon ${isMovieAdded && "added"}`}
-                  onClick={watchListHandler}
+                  className={`btn-icon ${addMovieState && "added"}`}
+                  onClick={async () => {
+                    await watchListToggleHandler(movieItem._id);
+                  }}
                 >
                   <FavoriteIcon />
                 </Button>
@@ -149,7 +132,6 @@ const MovieItem = (props) => {
                   {movieItem.duration} mins
                 </span>
               </div>
-
               <div className="description__bottom">
                 <span className="description__genre">{movieItem.genre}</span>
               </div>

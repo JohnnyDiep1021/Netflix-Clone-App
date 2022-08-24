@@ -17,22 +17,25 @@ function App() {
   if (token) {
     routes = (
       <Fragment>
-        <Navbar />
         <Switch>
           <Route path="/" exact>
+            <Navbar />
             <Home type="" />
           </Route>
           <Route path="/movies">
+            <Navbar />
             <Home type="movies" />
           </Route>
           <Route path="/series">
+            <Navbar />
             <Home type="series" />
+          </Route>
+          <Route path="/watchlist">
+            <Navbar />
+            <WatchList />
           </Route>
           <Route path="/watch">
             <MovieView />
-          </Route>
-          <Route path="/watchlist">
-            <WatchList />
           </Route>
           <Redirect to="/" />
         </Switch>

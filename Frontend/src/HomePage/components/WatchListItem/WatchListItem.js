@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { useSelector } from "react-redux";
 
+import { useMovieBtn } from "../../../shared/hooks/movie-hooks";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -16,19 +17,24 @@ const WatchListItem = (props) => {
   const [movie, setMovie] = useState();
   const [isHovered, setIsHovered] = useState(false);
   const { sendRequest } = useHttpClient();
+  const { watchListToggleHandler, addMovieState, message } = useMovieBtn(true);
+
   useEffect(() => {
-    const fetchMovieItem = async () => {
+    const fetchInitData = async () => {
       const responseData = await sendRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/movies/${props.movieId.movie}`,
+        `${
+          process.env.REACT_APP_BACKEND_URL
+        }/movies/${props.movieId.toString()}`,
         "GET",
         null,
         { Authorization: `Bearer ${token}` }
       );
-      console.log(responseData);
+      // console.log(responseData);
       setMovie(responseData.movie);
     };
-    fetchMovieItem();
+    fetchInitData();
   }, [token, props.movieId, sendRequest]);
+
   return (
     <Fragment>
       <li
@@ -101,7 +107,7 @@ const WatchListItem = (props) => {
                   <Button
                     className="btn-func-icon striking"
                     element="link"
-                    // to={{ pathname: "/watch", movie: movieItem }}
+                    to={{ pathname: "/watch", movie: movie }}
                   >
                     <PlayArrowIcon />
                     Play
@@ -109,8 +115,10 @@ const WatchListItem = (props) => {
                 </div>
                 <div className="right-btn">
                   <Button
-                    className={`btn-icon `}
-                    // onClick={watchListHandler}
+                    className={`btn-icon ${addMovieState && "added"}`}
+                    onClick={async () => {
+                      await watchListToggleHandler(props.movieId);
+                    }}
                   >
                     <FavoriteIcon />
                   </Button>
