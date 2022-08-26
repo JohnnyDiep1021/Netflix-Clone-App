@@ -6,10 +6,17 @@ import Button from "../../../shared/components/UI/Button/Button";
 
 import "./MovieView.scss";
 const MovieView = () => {
-  const { movie, trigger } = useLocation();
+  // const { movie, trigger } = useLocation();
+  const { movie } = useLocation();
   const fullscreenHandler = async (event) => {
     try {
-      trigger(event.target);
+      // trigger(event.target);
+      const domEle = event.target;
+      console.log(`video is playing`);
+      if (domEle.requestFullscreen) await domEle.requestFullscreen();
+      else if (domEle.webkitRequestFullscreen)
+        await domEle.webkitRequestFullscreen();
+      else if (domEle.msRequestFullScreen) await domEle.msRequestFullScreen();
     } catch (error) {}
   };
   return (

@@ -47,16 +47,16 @@ const MovieItem = (props) => {
     setIsHovered(false);
   };
 
-  const triggerHandler = async (domEle) => {
-    try {
-      // console.log(domEle);
-      console.log(`video is playing`);
-      if (domEle.requestFullscreen) await domEle.requestFullscreen();
-      else if (domEle.webkitRequestFullscreen)
-        await domEle.webkitRequestFullscreen();
-      else if (domEle.msRequestFullScreen) await domEle.msRequestFullScreen();
-    } catch (error) {}
-  };
+  // const triggerHandler = async (domEle) => {
+  //   try {
+  //     // console.log(domEle);
+  //     console.log(`video is playing`);
+  //     if (domEle.requestFullscreen) await domEle.requestFullscreen();
+  //     else if (domEle.webkitRequestFullscreen)
+  //       await domEle.webkitRequestFullscreen();
+  //     else if (domEle.msRequestFullScreen) await domEle.msRequestFullScreen();
+  //   } catch (error) {}
+  // };
 
   return (
     <li
@@ -95,11 +95,11 @@ const MovieItem = (props) => {
                   to={{
                     pathname: "/watch",
                     movie: movieItem,
-                    trigger: triggerHandler,
+                    // trigger: triggerHandler,
                   }}
-                  onClick={() => {
-                    triggerHandler();
-                  }}
+                  // onClick={() => {
+                  //   triggerHandler();
+                  // }}
                 >
                   <PlayArrowIcon />
                 </Button>
