@@ -10,11 +10,6 @@
   animation: backdropPopup 1.2s infinite linear;
 }
 
-.hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-
 .modal {
   position: fixed;
   width: 35rem;
@@ -28,50 +23,54 @@
   border-radius: 1.2rem;
   /* box-shadow: 0 2px 8px 6px rgba(0, 0, 0, 0.25); */
 
-  animation: slide-down 350ms ease-out forwards;
-}
-
-.modal.popup {
-  width: 35rem;
-  top: 30vh;
-  left: calc(50% - 17.5rem);
-  font-size: 1.6rem;
-  border-radius: 0.8rem;
-  background-color: white;
-  /* padding: 1rem; */
-  box-shadow: 0 0 8px 6px rgba(0, 0, 0, 0.3);
-}
-
-.modal__header.msg-header {
-  background-color: rgb(255, 209, 2);
-}
-
-.popup-hidden {
-  animation: slide-up 350ms ease-out forwards;
-}
-
-.modal__header {
-  width: 100%;
-  padding: 1rem;
-  border-top-right-radius: 0.8rem;
-  border-top-left-radius: 0.8rem;
-  background-color: rgba(238, 165, 8);
-  color: black;
-}
-
-.modal__header h2 {
-  /* margin: 0.5rem; */
-}
-
-.modal__content {
-  /* margin: 0.5rem; */
-  padding: 1rem;
-}
-
-.modal__footer {
-  padding: 1rem 0.5rem;
-  display: flex;
-  justify-content: flex-end;
+  // animation: slideDown 350ms ease-out forwards;
+  &.popup {
+    width: 35rem;
+    top: 30vh;
+    left: calc(50% - 17.5rem);
+    font-size: 1.6rem;
+    border-radius: 0.8rem;
+    background-color: white;
+    /* padding: 1rem; */
+    box-shadow: 0 0 8px 6px rgba(0, 0, 0, 0.3);
+  }
+  &.msg {
+    width: auto;
+    top: 10vh;
+    left: 50%;
+    // transform: translateX(0);
+    font-size: 1.4rem;
+    border-radius: 0.6rem;
+    background-color: white;
+    box-shadow: 0 0 8px 6px rgba(0, 0, 0, 0.3);
+  }
+  &.popup-hidden {
+    animation: slideUp 350ms ease-out forwards;
+  }
+  & .modal__header {
+    width: 100%;
+    padding: 1rem;
+    border-top-right-radius: 0.8rem;
+    border-top-left-radius: 0.8rem;
+    background-color: rgba(238, 165, 8);
+    color: black;
+    &.msg-header {
+      background-color: rgb(255, 209, 2);
+    }
+    & h2 {
+      /* margin: 0.5rem; */
+    }
+  }
+  & .modal__content {
+    /* margin: 0.5rem; */
+    padding: 1rem 1.5rem;
+    font-weight: 500;
+  }
+  & .modal__footer {
+    padding: 1rem 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 
 @media (min-width: 768px) {
@@ -79,9 +78,9 @@
     width: 40rem;
     left: calc(50% - 20rem);
     top: 20vh;
-  }
-  .modal.popup {
-    width: 50rem;
-    left: calc(50% - 25rem);
+    &.popup {
+      width: 50rem;
+      left: calc(50% - 25rem);
+    }
   }
 }

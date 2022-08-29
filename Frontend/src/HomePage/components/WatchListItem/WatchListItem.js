@@ -17,20 +17,24 @@ const WatchListItem = (props) => {
   const [movie, setMovie] = useState();
   const [isHovered, setIsHovered] = useState(false);
   const { sendRequest } = useHttpClient();
-  const { watchListToggleHandler, addMovieState, message } = useMovieBtn(true);
+  const { watchListToggleHandler, addMovieState, message } = useMovieBtn(
+    props.movieId
+  );
 
   useEffect(() => {
     const fetchInitData = async () => {
-      const responseData = await sendRequest(
-        `${
-          process.env.REACT_APP_BACKEND_URL
-        }/movies/${props.movieId.toString()}`,
-        "GET",
-        null,
-        { Authorization: `Bearer ${token}` }
-      );
-      // console.log(responseData);
-      setMovie(responseData.movie);
+      try {
+        const responseData = await sendRequest(
+          `${
+            process.env.REACT_APP_BACKEND_URL
+          }/movies/${props.movieId.toString()}`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        // console.log(responseData);
+        setMovie(responseData.movie);
+      } catch (error) {}
     };
     fetchInitData();
   }, [token, props.movieId, sendRequest]);
@@ -59,6 +63,7 @@ const WatchListItem = (props) => {
                   src={movie.trailer.file}
                   autoPlay
                   loop
+                  muted
                   className={`movie-trailer ${!isHovered && "deactive"}`}
                 />
               )}

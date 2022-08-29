@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+
+import { ANIMATION_STYLE, ANIMATION_TIMEOUT } from "../../../shared/util/util";
+import { useSelector } from "react-redux";
+import { useMovieBtn } from "../../../shared/hooks/movie-hooks";
 
 import Button from "../../../shared/components/UI/Button/Button";
-
+import { MessageCornerModal } from "../../../shared/components/UI/Modal/MessageModal";
 import Modal from "../../../shared/components/UI/Modal/Modal";
 
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
@@ -9,13 +13,27 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import CloseIcon from "@mui/icons-material/Close";
 
 import "./MovieDetail.scss";
 
 const MovieDetail = (props) => {
+  const [isMuted, setIsMuted] = useState(false);
+  const { watchListToggleHandler, addMovieState, message, clearMessage } =
+    useMovieBtn(props.id);
+  const muteHandler = () => {
+    if (!isMuted) return setIsMuted(true);
+    setIsMuted(false);
+  };
   return (
-    <Modal className="modal-movie-detail" show={false}>
+    <Modal
+      className="modal-movie-detail"
+      show={props.show}
+      onClose={props.onClose}
+      aniClassNames={ANIMATION_STYLE.movie}
+      aniTiming={ANIMATION_TIMEOUT.movieAniTiming}
+    >
       <div className="top">
         <div className="poster-video-container">
           <div className="bg-filter"></div>
@@ -23,7 +41,7 @@ const MovieDetail = (props) => {
             src="https://firebasestorage.googleapis.com/v0/b/netflix-76544.appspot.com/o/images%2F1657793609946-ANH%20T%C3%9A%20-%20%20Cho%20con%20tim%20m%E1%BB%99t%20l%C3%BD%20do%20%5BOFFICIAL%20MV%5D.mp4?alt=media&token=05e2bc5e-3f22-40a3-8e07-d2d1248595b6"
             autoPlay
             loop
-            muted
+            muted={isMuted}
             className="poster-video"
           />
         </div>
@@ -33,7 +51,12 @@ const MovieDetail = (props) => {
               <PlayArrowIcon />
               <span>Play</span>
             </Button>
-            <Button className="btn-icon">
+            <Button
+              className={`btn-icon ${addMovieState && "added"}`}
+              onClick={async () => {
+                await watchListToggleHandler(props.id);
+              }}
+            >
               <FavoriteIcon />
             </Button>
             <Button className="btn-icon">
@@ -44,18 +67,18 @@ const MovieDetail = (props) => {
             </Button>
           </div>
           <div className="right">
-            <Button className="btn-icon">
-              <VolumeUpIcon />
+            <Button className="btn-icon" onClick={muteHandler}>
+              {!isMuted ? <VolumeUpIcon /> : <VolumeOffIcon />}
             </Button>
           </div>
         </div>
-        <Button className="btn-icon btn-close">
+        <Button className="btn-icon btn-close" onClick={props.onClose}>
           <CloseIcon />
         </Button>
       </div>
       <div className="bottom">
         <div className="description-container">
-          <div className="description">
+          <div className="detail-description">
             <div className="publish-info">
               <span className="matching">93% Match</span>
               <span className="year">2019</span>
@@ -81,7 +104,7 @@ const MovieDetail = (props) => {
             <div className="cast">
               <p>
                 <span>Cast:</span>
-                Anh Tu, Diem My, Hoai Linh, My Dung, Kim Chi
+                Anh Tu, Diem My
               </p>
             </div>
             <div className="genre">
@@ -99,6 +122,11 @@ const MovieDetail = (props) => {
         </div>
         <div className="episodes-container"></div>
       </div>
+      <MessageCornerModal
+        show={message.isShow}
+        message={message.msg}
+        onClose={clearMessage}
+      />
     </Modal>
   );
 };

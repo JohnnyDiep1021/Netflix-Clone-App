@@ -1,15 +1,17 @@
 import React from "react";
 
+import { ANIMATION_STYLE, ANIMATION_TIMEOUT } from "../../../util/util";
 import Modal from "./Modal";
 import Button from "../Button/Button";
 
-const MessageModal = (props) => {
+export const MessagePopupModal = (props) => {
   return (
     <Modal
-      element="popup"
+      element="warning"
       onClose={props.onClose}
       header="Message"
       headerClass="msg-header"
+      contentClass={props.contentClass}
       show={!!props.message}
       footer={
         <Button onClick={props.onClose} className="btn-popup btn--sucess">
@@ -22,4 +24,17 @@ const MessageModal = (props) => {
   );
 };
 
-export default MessageModal;
+export const MessageCornerModal = (props) => {
+  return (
+    <Modal
+      element="message"
+      contentClass={props.contentClass}
+      show={!!props.show}
+      message={props.message}
+      aniClassNames={ANIMATION_STYLE.popup}
+      aniTiming={ANIMATION_TIMEOUT.popupAniTiming}
+    >
+      <p>{props.message}</p>
+    </Modal>
+  );
+};

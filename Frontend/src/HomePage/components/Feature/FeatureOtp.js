@@ -5,6 +5,8 @@ import { movieAction } from "../../../shared/store/movie";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
+import MovieDetail from "../MovieDetail/MovieDetail";
+
 import { Play, Info } from "../../../shared/components/Icon/MovieIcons";
 import Button from "../../../shared/components/UI/Button/Button";
 import LoadingSpinner from "../../../shared/components/UI/Loading/LoadingSpinner";
@@ -15,6 +17,7 @@ const FeatureOption = (props) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const [movieShowcase, setMovieShowcase] = useState();
+  const [showDetail, setShowDetail] = useState(false);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   useEffect(() => {
     const fetchMovie = async () => {
@@ -33,6 +36,12 @@ const FeatureOption = (props) => {
   }, [token, sendRequest]);
   const genreChangeHandler = (e) => {
     dispatch(movieAction.setGenre(e.target.value));
+  };
+  const showDetailHandler = () => {
+    setShowDetail(true);
+  };
+  const hideDetailHandler = () => {
+    setShowDetail(false);
   };
   return (
     <div className="featured">
@@ -78,13 +87,23 @@ const FeatureOption = (props) => {
                 <Play width="30px" height="30px" />
                 <span>Play</span>
               </Button>
-              <Button className="btn-func-icon more">
+              <Button
+                className="btn-func-icon more"
+                onClick={showDetailHandler}
+              >
                 <Info width="25px" height="25px" />
                 <span>More Info</span>
               </Button>
             </div>
           </div>
         </div>
+      )}
+      {movieShowcase && (
+        <MovieDetail
+          show={showDetail}
+          onClose={hideDetailHandler}
+          id={movieShowcase._id}
+        />
       )}
     </div>
   );

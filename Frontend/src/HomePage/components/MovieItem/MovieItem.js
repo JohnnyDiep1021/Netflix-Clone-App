@@ -1,12 +1,13 @@
 import React, { useState, useEffect, Fragment } from "react";
-
 import { useSelector } from "react-redux";
+
 import { useMovieBtn } from "../../../shared/hooks/movie-hooks";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 
 import MovieDetail from "../MovieDetail/MovieDetail";
 import Button from "../../../shared/components/UI/Button/Button";
 import LoadingSpinner from "../../../shared/components/UI/Loading/LoadingSpinner";
+import { MessageCornerModal } from "../../../shared/components/UI/Modal/MessageModal";
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
@@ -17,14 +18,15 @@ import "./MovieItem.scss";
 
 const MovieItem = (props) => {
   const token = useSelector((state) => state.auth.token);
-  const watchList = useSelector((state) => state.auth.watchlist);
+  // console.log(watchList, isAdded);
+
   const { watchListToggleHandler, addMovieState, message } = useMovieBtn(
-    watchList.some((item) => item.movie === props.id)
+    props.id
   );
   const [isHovered, setIsHovered] = useState(false);
   const { isLoading, sendRequest } = useHttpClient();
   const [movieItem, setMovieItem] = useState();
-
+  const [showDetail, setShowDetail] = useState(false);
   useEffect(() => {
     const fetchMovieItem = async () => {
       try {
@@ -46,7 +48,12 @@ const MovieItem = (props) => {
   const hideOnLeaveHandler = () => {
     setIsHovered(false);
   };
-
+  const showDetailHandler = () => {
+    setShowDetail(true);
+  };
+  const hideDetailHandler = () => {
+    setShowDetail(false);
+  };
   // const triggerHandler = async (domEle) => {
   //   try {
   //     // console.log(domEle);
@@ -77,11 +84,12 @@ const MovieItem = (props) => {
               // onClick={showOnHoverHandler}
             />
           )}
-          {isHovered && (
+          {isHovered && !showDetail && (
             <video
               className={`trailer-video ${!isHovered && "deactive"}`}
               src={movieItem.trailer.file}
               autoPlay={isHovered}
+              muted
               loop
             />
           )}
@@ -119,7 +127,7 @@ const MovieItem = (props) => {
                 </Button>
               </div>
               <div className="right">
-                <Button className="btn-icon">
+                <Button className="btn-icon" onClick={showDetailHandler}>
                   <ExpandMoreIcon />
                 </Button>
               </div>
@@ -139,6 +147,14 @@ const MovieItem = (props) => {
           </div>
         </Fragment>
       )}
+      {movieItem && (
+        <MovieDetail
+          show={showDetail}
+          onClose={hideDetailHandler}
+          id={props.id}
+        />
+      )}
+      <MessageCornerModal show={message.isShow} message={message.msg} />
     </li>
   );
 };

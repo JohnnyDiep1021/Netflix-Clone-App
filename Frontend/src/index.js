@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./shared/store/store";
 
+import "./animation.scss";
 import "./index.scss";
 import App from "./App";
 

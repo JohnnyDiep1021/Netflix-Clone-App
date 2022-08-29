@@ -2,9 +2,8 @@
   min-width: 80rem;
   background-color: rgb(28, 28, 28);
   left: calc(50% - 40rem);
-  top: 5vh;
+  top: 8vh;
   transform: translateX(0);
-  animation: detailPopup 1.6s infinite linear;
   & .top {
     position: relative;
     height: 45rem;
@@ -85,7 +84,7 @@
       font-size: 1.4rem;
       color: rgb(199, 199, 199);
 
-      & .description {
+      & .detail-description {
         flex: 2;
         margin-right: 4rem;
         & .publish-info {
