@@ -5,7 +5,6 @@ import { useHttpClient } from "./http-hook";
 
 import { authAction } from "../store/auth";
 
-let list;
 export const useMovieBtn = (id = "") => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -54,7 +53,6 @@ export const useMovieBtn = (id = "") => {
         setMessage({ msg: "Removed movie from watch list", isShow: true });
       }
       clearMessage();
-      console.log(watchList);
     } catch (error) {
       throw error;
     }
