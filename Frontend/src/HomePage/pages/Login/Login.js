@@ -53,7 +53,7 @@ const Login = () => {
           "Content-Type": "application/json",
         }
       );
-      console.log(responseData);
+      // console.log(responseData);
       dispatch(
         authAction.login({ user: responseData.user, token: responseData.token })
       );

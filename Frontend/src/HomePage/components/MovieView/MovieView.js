@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { ArrowReturn } from "../../../shared/components/Icon/MovieIcons";
 
 import Button from "../../../shared/components/UI/Button/Button";
@@ -7,6 +7,7 @@ import Button from "../../../shared/components/UI/Button/Button";
 import "./MovieView.scss";
 const MovieView = () => {
   // const { movie, trigger } = useLocation();
+  const history = useHistory();
   const { movie } = useLocation();
   const fullscreenHandler = async (event) => {
     try {
@@ -21,7 +22,12 @@ const MovieView = () => {
   };
   return (
     <div className="movie-view">
-      <Button element="link" className="btn-return" to="/">
+      <Button
+        className="btn-return"
+        onClick={() => {
+          history.goBack();
+        }}
+      >
         <ArrowReturn width="20px" height="20px" />
         Home
       </Button>

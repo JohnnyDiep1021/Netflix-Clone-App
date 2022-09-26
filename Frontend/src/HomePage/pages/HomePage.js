@@ -40,7 +40,7 @@ const Home = (props) => {
         );
 
         dispatch(authAction.setWatchList(responseDataWatchList.watchList));
-        console.log(responseData.lists);
+        // console.log(responseData.lists);
         setMovieList(responseData.lists);
       } catch (error) {}
     };

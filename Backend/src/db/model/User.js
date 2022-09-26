@@ -35,16 +35,10 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    watchList: [
-      {
-        movie: {
-          type: mongoose.Schema.Types.ObjectId,
-          required: true,
-          unique: true,
-          ref: "Movie",
-        },
-      },
-    ],
+    watchList: {
+      type: Array,
+      default: [],
+    },
     tokens: [
       {
         token: {

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialMovieState = {
   type: "",
   genre: "",
+  showDetail: false,
 };
 
 const movieSlice = createSlice({
@@ -14,6 +15,12 @@ const movieSlice = createSlice({
     },
     setGenre(state, action) {
       state.genre = action.payload;
+    },
+    showDetailHandler(state) {
+      state.showDetail = true;
+    },
+    hideDetailHandler(state) {
+      state.showDetail = false;
     },
   },
 });

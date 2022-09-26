@@ -11,11 +11,10 @@ export const useMovieBtn = (id = "") => {
   const watchList = useSelector((state) => state.auth.watchlist);
   const { sendRequest } = useHttpClient();
   const [addMovieState, setAddMovieState] = useState(
-    watchList.some((item) => item.movie === id)
+    watchList.some((movieId) => movieId === id)
   );
   const [message, setMessage] = useState({ msg: undefined, isShow: false });
   const watchListToggleHandler = useCallback(async () => {
-    console.log(addMovieState);
     try {
       if (!addMovieState) {
         const responseData = await sendRequest(
@@ -29,11 +28,16 @@ export const useMovieBtn = (id = "") => {
             "Content-Type": "application/json",
           }
         );
-        console.log(responseData);
+        // console.log(responseData);
+        if (!responseData.movieIsExisted) {
+          dispatch(authAction.setWatchList(responseData.watchList));
+          console.log("Added movie to watch list");
+        }
         setAddMovieState(true);
-        dispatch(authAction.setWatchList(responseData.watchList));
-        console.log("Added movie to watch list");
-        setMessage({ msg: "Added movie to watch list", isShow: true });
+        setMessage({
+          msg: responseData.message || "Added movie to watch list",
+          isShow: true,
+        });
       } else {
         const responseData = await sendRequest(
           `${process.env.REACT_APP_BACKEND_URL}/users/watchlist/remove`,
@@ -46,11 +50,16 @@ export const useMovieBtn = (id = "") => {
             "Content-Type": "application/json",
           }
         );
-        console.log(responseData);
+        // console.log(responseData);
+        if (!responseData.movieIsExisted) {
+          dispatch(authAction.setWatchList(responseData.watchList));
+          console.log("Removed movie from watch list");
+        }
         setAddMovieState(false);
-        dispatch(authAction.setWatchList(responseData.watchList));
-        console.log("Removed movie from watch list");
-        setMessage({ msg: "Removed movie from watch list", isShow: true });
+        setMessage({
+          msg: responseData.message || "Removed movie from watch list",
+          isShow: true,
+        });
       }
       clearMessage();
     } catch (error) {

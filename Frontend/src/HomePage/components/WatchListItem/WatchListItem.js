@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { useMovieBtn } from "../../../shared/hooks/movie-hooks";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 
+import MovieDetail from "../MovieDetail/MovieDetail";
+
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
@@ -14,9 +16,12 @@ import "./WatchListItem.scss";
 
 const WatchListItem = (props) => {
   const token = useSelector((state) => state.auth.token);
+  const { sendRequest } = useHttpClient();
+
   const [movie, setMovie] = useState();
   const [isHovered, setIsHovered] = useState(false);
-  const { sendRequest } = useHttpClient();
+  const [showDetail, setShowDetail] = useState(false);
+
   const { watchListToggleHandler, addMovieState, message } = useMovieBtn(
     props.movieId
   );
@@ -39,6 +44,12 @@ const WatchListItem = (props) => {
     fetchInitData();
   }, [token, props.movieId, sendRequest]);
 
+  const showDetailHandler = () => {
+    setShowDetail(true);
+  };
+  const hideDetailHandler = () => {
+    setShowDetail(false);
+  };
   return (
     <Fragment>
       <li
@@ -51,14 +62,14 @@ const WatchListItem = (props) => {
         {movie && (
           <Fragment>
             <div className="left">
-              {!isHovered && (
+              {(!isHovered || showDetail) && (
                 <img
                   src={movie.image.file}
                   alt="movie-poster"
                   className="movie-poster"
                 />
               )}
-              {isHovered && (
+              {isHovered && !showDetail && (
                 <video
                   src={movie.trailer.file}
                   autoPlay
@@ -112,7 +123,7 @@ const WatchListItem = (props) => {
                   <Button
                     className="btn-func-icon striking"
                     element="link"
-                    to={{ pathname: "/watch", movie: movie }}
+                    to={{ pathname: "/watch", movie }}
                   >
                     <PlayArrowIcon />
                     Play
@@ -133,13 +144,21 @@ const WatchListItem = (props) => {
                   <Button className="btn-icon">
                     <ThumbDownOffAltIcon />
                   </Button>
-                  <Button className="btn-icon">
+                  <Button className="btn-icon" onClick={showDetailHandler}>
                     <ExpandMoreIcon />
                   </Button>
                 </div>
               </div>
             </div>
           </Fragment>
+        )}
+        {movie && (
+          <MovieDetail
+            show={showDetail}
+            onClose={hideDetailHandler}
+            id={props.movieId}
+            movie={movie}
+          />
         )}
       </li>
     </Fragment>

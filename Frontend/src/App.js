@@ -12,7 +12,7 @@ import "./App.scss";
 import WatchList from "./HomePage/components/WatchList/WatchList";
 function App() {
   const token = useSelector((state) => state.auth.token);
-  console.log(token);
+  // console.log(token);
   let routes;
   if (token) {
     routes = (

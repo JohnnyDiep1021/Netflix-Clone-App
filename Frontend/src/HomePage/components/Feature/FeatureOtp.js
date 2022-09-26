@@ -28,7 +28,8 @@ const FeatureOption = (props) => {
           null,
           { Authorization: `Bearer ${token}` }
         );
-        // console.log(responseData[0]);
+        console.log(responseData[0]);
+        console.log(movieShowcase);
         setMovieShowcase(responseData[0]);
       } catch (error) {}
     };
@@ -103,6 +104,7 @@ const FeatureOption = (props) => {
           show={showDetail}
           onClose={hideDetailHandler}
           id={movieShowcase._id}
+          movie={movieShowcase}
         />
       )}
     </div>

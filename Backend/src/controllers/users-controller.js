@@ -155,8 +155,17 @@ const getWatchList = async (req, res, next) => {
 
 const addWatchList = async (req, res, next) => {
   try {
-    req.user.watchList = req.user.watchList.concat({ movie: req.body.movie });
+    const isMovieExisted = req.user.watchList.some(
+      (movieId) => movieId === req.body.movie
+    );
+    if (isMovieExisted)
+      return res.json({
+        movieIsExisted: isMovieExisted,
+        message: `movie existed on the watch list!`,
+      });
+    req.user.watchList.push(req.body.movie);
     await req.user.save();
+    console.log(req.user.watchList);
     res.json({ watchList: req.user.watchList });
   } catch (error) {
     next(error);
@@ -165,12 +174,21 @@ const addWatchList = async (req, res, next) => {
 
 const removeWatchList = async (req, res, next) => {
   try {
+    const isMovieExisted = req.user.watchList.some(
+      (movieId) => movieId === req.body.movie
+    );
+    if (!isMovieExisted)
+      return res.json({
+        movieIsExisted: !isMovieExisted,
+        message: `No movie was found to remove!`,
+      });
     req.user.watchList = req.user.watchList.filter(
-      (item) => item.movie.toString() !== req.body.movie.toString()
+      (movieId) => movieId !== req.body.movie
     );
     await req.user.save();
     res.json({ watchList: req.user.watchList });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };

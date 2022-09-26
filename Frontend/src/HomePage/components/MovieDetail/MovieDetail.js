@@ -19,6 +19,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import "./MovieDetail.scss";
 
 const MovieDetail = (props) => {
+  // console.log(props.movie);
   const [isMuted, setIsMuted] = useState(false);
   const { watchListToggleHandler, addMovieState, message, clearMessage } =
     useMovieBtn(props.id);
@@ -47,7 +48,11 @@ const MovieDetail = (props) => {
         </div>
         <div className="intrt-btn-container">
           <div className="left">
-            <Button className="btn-func-icon striking">
+            <Button
+              className="btn-func-icon striking"
+              element="link"
+              to={{ pathname: "/watch", movie: props.movie }}
+            >
               <PlayArrowIcon />
               <span>Play</span>
             </Button>

@@ -152,6 +152,7 @@ const MovieItem = (props) => {
           show={showDetail}
           onClose={hideDetailHandler}
           id={props.id}
+          movie={movieItem}
         />
       )}
       <MessageCornerModal show={message.isShow} message={message.msg} />
