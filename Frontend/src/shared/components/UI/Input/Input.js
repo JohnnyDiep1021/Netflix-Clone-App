@@ -34,6 +34,7 @@ const inputReducer = (state, action) => {
 };
 
 const Input = react.forwardRef((props, ref) => {
+  const inputRef = useRef();
   const [inputState, dispatchInputAction] = useReducer(inputReducer, {
     value: props.initialValue || "",
     isFocus: false,
@@ -42,11 +43,10 @@ const Input = react.forwardRef((props, ref) => {
   });
 
   const { id, onInput } = props;
-  const { value, isValid } = inputState;
-
+  const { value, isValid, isFocus } = inputState;
   useEffect(() => {
-    onInput(id, value, isValid);
-  }, [id, value, isValid, onInput]);
+    onInput(id, value, inputRef?.current?.value, isValid, isFocus);
+  }, [id, value, isValid, inputRef?.current?.value, onInput, isFocus]);
 
   const changeHandler = (event) => {
     dispatchInputAction({
@@ -66,7 +66,6 @@ const Input = react.forwardRef((props, ref) => {
       type: "FOCUS",
     });
   };
-  const inputRef = useRef();
 
   const activate = () => {
     inputRef.current.focus();
@@ -115,6 +114,7 @@ const Input = react.forwardRef((props, ref) => {
     default:
       inputElement = (
         <textarea
+          ref={inputRef}
           id={props.id}
           rows={props.rows || 3}
           onChange={changeHandler}

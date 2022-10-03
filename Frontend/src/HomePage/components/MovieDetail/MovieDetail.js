@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import { ANIMATION_STYLE, ANIMATION_TIMEOUT } from "../../../shared/util/util";
-import { useSelector } from "react-redux";
 import { useMovieBtn } from "../../../shared/hooks/movie-hooks";
 
 import Button from "../../../shared/components/UI/Button/Button";
@@ -39,7 +38,7 @@ const MovieDetail = (props) => {
           <div className="bg-filter"></div>
           <video
             src={props.movie.trailer.file}
-            autoPlay
+            autoPlay={props.show}
             loop
             muted={isMuted}
             className="poster-video"

@@ -78,17 +78,34 @@ const updateMovie = async (req, res, next) => {
 };
 const getAllMovies = async (req, res, next) => {
   try {
-    if (req.user.isAdmin) {
-      const movies = await (await Movie.find()).reverse();
-      res.json({
-        movies: movies.map((movie) => movie.toObject({ getters: true })),
-      });
+    let movies = [];
+    let message = "";
+    console.log(req.query);
+    if (req.query.search) {
+      const query = {
+        $regex: new RegExp(req.query.search),
+        // case insensitivity, include upper and lower case
+        $options: "i",
+      };
+      movies = await Movie.find({
+        // LIKE matching REgex pattern
+        // title: { $regex: /new/, $options: "i" },
+        title: query,
+      }).sort({ year: "descending" });
+    } else if (req.query.search === "") {
+      message = "Find your favorite movies";
     } else {
-      throw new HttpError(
-        "You are not authorized to update an existing movie",
-        403
-      );
+      const sortBy = req.user.isAdmin
+        ? {
+            createdAt: -1,
+          }
+        : { year: -1 };
+      movies = await Movie.find({}).sort(sortBy);
     }
+    res.json({
+      movies: movies.map((movie) => movie.toObject({ getters: true })),
+      message: message ? message : movies.length !== 0 ? "" : "No movie found",
+    });
   } catch (error) {
     next(error);
   }

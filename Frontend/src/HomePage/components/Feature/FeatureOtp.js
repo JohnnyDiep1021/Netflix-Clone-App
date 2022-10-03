@@ -46,7 +46,7 @@ const FeatureOption = (props) => {
   };
   return (
     <div className="featured">
-      {isLoading && <LoadingSpinner asOverlay />}
+      {isLoading && <LoadingSpinner asOverlay inherit />}
       {props.type && (
         <div className="category">
           <span>{props.type === "movies" ? "Movies" : "Series"}</span>

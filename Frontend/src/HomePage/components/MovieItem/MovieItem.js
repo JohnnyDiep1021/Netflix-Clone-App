@@ -72,7 +72,7 @@ const MovieItem = (props) => {
       onMouseLeave={hideOnLeaveHandler}
       // onMouseOver={hidePosterHandler}
     >
-      {isLoading && <LoadingSpinner asOverlay />}
+      {isLoading && <LoadingSpinner asOverlay inherit />}
       {movieItem && (
         <Fragment>
           {!isHovered && (

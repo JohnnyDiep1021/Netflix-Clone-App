@@ -18,7 +18,12 @@ const formReducer = (state, action) => {
         ...state,
         inputs: {
           ...state.inputs,
-          [action.inputId]: { value: action.value, isValid: action.isValid },
+          [action.inputId]: {
+            value: action.value,
+            ref: action.ref,
+            isValid: action.isValid,
+            isFocus: action.isFocus,
+          },
         },
         isValid: formIsValid,
       };
@@ -38,11 +43,13 @@ export const useForm = (initialInputs, initialFormValidity) => {
   });
 
   // same function will be re-used whenever the whole JSX component re-render
-  const inputHandler = useCallback((id, value, isValid) => {
+  const inputHandler = useCallback((id, value, inputRef, isValid, isFocus) => {
     dispatchFormAction({
       type: "INPUT_CHANGE",
       value: value,
+      ref: inputRef,
       isValid: isValid,
+      isFocus: isFocus,
       inputId: id,
     });
   }, []);
