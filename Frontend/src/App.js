@@ -22,14 +22,21 @@ function App() {
             <Navbar />
             <Home type="" />
           </Route>
-          <Route path="/movies">
+          <Route path="/category/:type" exact>
+            <Navbar />
+            <Home />
+          </Route>
+          {/* <Route path="/search/:match">
+            <Home type="" />
+          </Route> */}
+          {/* <Route path="/movies">
             <Navbar />
             <Home type="movies" />
           </Route>
           <Route path="/series">
             <Navbar />
             <Home type="series" />
-          </Route>
+          </Route> */}
           <Route path="/watchlist">
             <Navbar />
             <WatchList />

@@ -1,4 +1,5 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { movieAction } from "../../../shared/store/movie";
@@ -14,11 +15,12 @@ import LoadingSpinner from "../../../shared/components/UI/Loading/LoadingSpinner
 import "./FeatureOtp.scss";
 
 const FeatureOption = (props) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const history = useHistory();
   const token = useSelector((state) => state.auth.token);
   const [movieShowcase, setMovieShowcase] = useState();
   const [showDetail, setShowDetail] = useState(false);
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { isLoading, sendRequest } = useHttpClient();
   useEffect(() => {
     const fetchMovie = async () => {
       try {
@@ -36,7 +38,8 @@ const FeatureOption = (props) => {
     fetchMovie();
   }, [token, sendRequest]);
   const genreChangeHandler = (e) => {
-    dispatch(movieAction.setGenre(e.target.value));
+    // dispatch(movieAction.setGenre(e.target.value));
+    history.push(`/category/${props.type}?genre=${e.target.value}`);
   };
   const showDetailHandler = () => {
     setShowDetail(true);
@@ -50,11 +53,17 @@ const FeatureOption = (props) => {
       {props.type && (
         <div className="category">
           <span>{props.type === "movies" ? "Movies" : "Series"}</span>
-          <select name="genre" id="genre" onChange={genreChangeHandler}>
+          <select
+            name="genre"
+            id="genre"
+            onChange={genreChangeHandler}
+            // defaultValue={props.genre}
+          >
             <option value="adventure">Adventure</option>
             <option value="action">Action</option>
             <option value="comedy">Comedy</option>
             <option value="crime">Crime</option>
+            <option value="education">Education</option>
             <option value="fantasy">Fantasy</option>
             <option value="historical">Historical</option>
             <option value="horror">Horror</option>

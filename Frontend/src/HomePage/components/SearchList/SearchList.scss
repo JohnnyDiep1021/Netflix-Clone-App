@@ -8,6 +8,8 @@
   background-color: rgba(65, 65, 65, 0.8);
   // backdrop-filter: blur(3px);
   // -webkit-backdrop-filter: blur(3px);
+  border-bottom-left-radius: 0.4rem;
+  border-bottom-right-radius: 0.4rem;
   &.loading {
     height: 8rem;
   }

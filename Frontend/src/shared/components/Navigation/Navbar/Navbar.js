@@ -49,7 +49,7 @@ const Navbar = () => {
           >
             <span>Homepage</span>
           </Button>
-          <Button
+          {/* <Button
             element="navLink"
             to="/series"
             className="link"
@@ -64,13 +64,24 @@ const Navbar = () => {
             onClick={moviesClickHandler}
           >
             <span>Movies</span>
-          </Button>
+          </Button> */}
           <Button
             element="navLink"
-            to="/watchlist"
+            to={`/category/movies?genre=`}
             className="link"
             onClick={moviesClickHandler}
           >
+            <span>Movies</span>
+          </Button>
+          <Button
+            element="navLink"
+            to={`/category/series?genre=`}
+            className="link"
+            onClick={seriesClickHandler}
+          >
+            <span>Series</span>
+          </Button>
+          <Button element="navLink" to="/watchlist" className="link">
             <span>My Watch List</span>
           </Button>
           {/* <span>New and Popular</span>

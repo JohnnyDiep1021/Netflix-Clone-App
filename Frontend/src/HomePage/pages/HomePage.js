@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import queryString from "query-string";
 import { useSelector, useDispatch } from "react-redux";
-
 import { authAction } from "../../shared/store/auth";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 
@@ -11,9 +12,13 @@ import FeatureOption from "../components/Feature/FeatureOtp";
 import "./HomePage.scss";
 
 const Home = (props) => {
+  // return query string as literal string => parse to obj by using query-string
+  const { search } = useLocation();
+  const { type } = useParams();
+  const { genre } = queryString.parse(search);
   const dispatch = useDispatch();
-  const type = useSelector((state) => state.movie.type);
-  const genre = useSelector((state) => state.movie.genre);
+  // const type = useSelector((state) => state.movie.type);
+  // const genre = useSelector((state) => state.movie.genre);
   const token = useSelector((state) => state.auth.token);
 
   const { sendRequest } = useHttpClient();
@@ -48,7 +53,7 @@ const Home = (props) => {
   return (
     <Fragment>
       <div className="home">
-        <FeatureOption type={type} />
+        <FeatureOption type={type} genre={genre} />
         <div className="movie-list-container">
           {movieList.length === 0 ? (
             <div className="warning">
