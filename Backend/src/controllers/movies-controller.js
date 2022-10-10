@@ -104,7 +104,11 @@ const getAllMovies = async (req, res, next) => {
     }
     res.json({
       movies: movies.map((movie) => movie.toObject({ getters: true })),
-      message: message ? message : movies.length !== 0 ? "" : "No movie found",
+      message: message
+        ? message
+        : movies.length !== 0
+        ? ""
+        : "Oops, no movie found!",
     });
   } catch (error) {
     next(error);
@@ -119,7 +123,8 @@ const getMovieById = async (req, res, next) => {
 };
 const getRandomMovie = async (req, res, next) => {
   try {
-    const type = req.query.type;
+    const { type } = req.query;
+    // console.log(type);
     let movie;
     if (type === "series") {
       movie = await Movie.aggregate([
@@ -132,6 +137,7 @@ const getRandomMovie = async (req, res, next) => {
         { $sample: { size: 1 } },
       ]);
     }
+    // console.log(movie);
     res.status(200).json(movie);
   } catch (error) {
     next(error);

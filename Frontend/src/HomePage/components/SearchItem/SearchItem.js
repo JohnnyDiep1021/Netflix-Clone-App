@@ -6,7 +6,7 @@ import "./SearchItem.scss";
 
 const SearchItem = (props) => {
   let content;
-  console.log(props.movie);
+  // console.log(props.movie);
   switch (props.element) {
     case "sml":
       content = (

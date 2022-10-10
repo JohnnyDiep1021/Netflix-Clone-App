@@ -14,13 +14,12 @@ import "./HomePage.scss";
 const Home = (props) => {
   // return query string as literal string => parse to obj by using query-string
   const { search } = useLocation();
-  const { type } = useParams();
+  const { type = "" } = useParams();
   const { genre } = queryString.parse(search);
   const dispatch = useDispatch();
-  // const type = useSelector((state) => state.movie.type);
-  // const genre = useSelector((state) => state.movie.genre);
-  const token = useSelector((state) => state.auth.token);
 
+  const token = useSelector((state) => state.auth.token);
+  // console.log(`type: ${type}`, `genre: ${genre}`);
   const { sendRequest } = useHttpClient();
   const [movieList, setMovieList] = useState([]);
   useEffect(() => {

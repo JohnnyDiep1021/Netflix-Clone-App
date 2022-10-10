@@ -1,7 +1,7 @@
 .searchList-container {
+  list-style: none;
   width: 100%;
   height: 40rem;
-  list-style: none;
   position: absolute;
   top: 100%;
   overflow-y: scroll;
@@ -13,20 +13,14 @@
   &.loading {
     height: 8rem;
   }
-  & .searchList_content {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
-  }
 }
 .emptyList-container {
   width: 100%;
   height: 8rem;
   position: absolute;
   top: 100%;
-  background-color: rgba(65, 65, 65, 0.8);
   color: rgb(211, 211, 211);
+  background-color: rgba(65, 65, 65, 0.8);
   font-size: 2rem;
   display: flex;
   justify-content: center;

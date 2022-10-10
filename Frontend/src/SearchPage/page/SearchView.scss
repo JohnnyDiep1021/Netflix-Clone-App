@@ -1,0 +1,17 @@
+.searchResult-container {
+  background-color: var(--dark-color-700);
+  padding: 16rem 10rem 8rem;
+  & .searchResult-list {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+    list-style: none;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  & .searchResult-msg {
+    font-size: 2.8rem;
+    color: red;
+  }
+}

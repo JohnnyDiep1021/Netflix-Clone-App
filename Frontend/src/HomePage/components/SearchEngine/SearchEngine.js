@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { useForm } from "../../../shared/hooks/form-hooks";
@@ -12,6 +13,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import "./SearchEngine.scss";
 
 const SearchEngine = (props) => {
+  const history = useHistory();
   const token = useSelector((state) => state.auth.token);
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
   const [queryResult, setQueryResult] = useState({});
@@ -35,7 +37,7 @@ const SearchEngine = (props) => {
             null,
             { Authorization: `Bearer ${token}` }
           );
-          console.log(responseMovieData);
+          // console.log(responseMovieData);
           setQueryResult(responseMovieData);
         }
       } catch (error) {}
@@ -48,7 +50,10 @@ const SearchEngine = (props) => {
   const searchSubmitHandler = async (event) => {
     event.preventDefault();
     try {
-      console.log(`submit query`);
+      if (!inputValue) {
+        return;
+      }
+      history.push(`/search?q=${inputValue}`);
     } catch (error) {}
   };
   return (
@@ -66,7 +71,11 @@ const SearchEngine = (props) => {
         />
         {Object.keys(queryResult).length !== 0 &&
           formState.inputs.search.isFocus && (
-            <SearchList resultList={queryResult} isLoading={isLoading} />
+            <SearchList
+              resultList={queryResult}
+              isLoading={isLoading}
+              size="sml"
+            />
           )}
         {/* {queryResult && <SearchList resultList={queryResult} />} */}
       </div>

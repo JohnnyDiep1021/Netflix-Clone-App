@@ -1,49 +1,27 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, Fragment } from "react";
 
-import { useMovieBtn } from "../../../shared/hooks/movie-hooks";
-import { useHttpClient } from "../../../shared/hooks/http-hook";
+import { useMovieBtn } from "../../shared/hooks/movie-hooks";
 
-import MovieDetail from "../MovieDetail/MovieDetail";
-import Button from "../../../shared/components/UI/Button/Button";
-import LoadingSpinner from "../../../shared/components/UI/Loading/LoadingSpinner";
-import { MessageCornerModal } from "../../../shared/components/UI/Modal/MessageModal";
+import MovieDetail from "../../HomePage/components/MovieDetail/MovieDetail";
+import LoadingSpinner from "../../shared/components/UI/Loading/LoadingSpinner";
+import Button from "../../shared/components/UI/Button/Button";
+import { MessageCornerModal } from "../../shared/components/UI/Modal/MessageModal";
 
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import "./MovieItem.scss";
 
-const MovieItem = (props) => {
-  const token = useSelector((state) => state.auth.token);
-  // console.log(watchList, isAdded);
+import "./SearchViewItem.scss";
+const SearchViewItem = (props) => {
   const { watchListToggleHandler, addMovieState, message } = useMovieBtn(
     props.id
   );
-  const [isHovered, setIsHovered] = useState(false);
-  const { isLoading, sendRequest } = useHttpClient(props.loading || false);
+
   const [movieItem, setMovieItem] = useState(props.movie);
   const [showDetail, setShowDetail] = useState(false);
-  useEffect(() => {
-    if (!props.movie) {
-      const fetchMovieItem = async () => {
-        try {
-          const responseData = await sendRequest(
-            `${process.env.REACT_APP_BACKEND_URL}/movies/${props.id}`,
-            "GET",
-            null,
-            { Authorization: `Bearer ${token}` }
-          );
-          setMovieItem(responseData.movie);
-        } catch (error) {}
-      };
-      fetchMovieItem();
-    } else {
-      return;
-    }
-  }, [sendRequest, token, props.id, props.movie]);
+  const [isHovered, setIsHovered] = useState(false);
 
   const showOnHoverHandler = () => {
     setIsHovered(true);
@@ -57,25 +35,13 @@ const MovieItem = (props) => {
   const hideDetailHandler = () => {
     setShowDetail(false);
   };
-  // const triggerHandler = async (domEle) => {
-  //   try {
-  //     // console.log(domEle);
-  //     console.log(`video is playing`);
-  //     if (domEle.requestFullscreen) await domEle.requestFullscreen();
-  //     else if (domEle.webkitRequestFullscreen)
-  //       await domEle.webkitRequestFullscreen();
-  //     else if (domEle.msRequestFullScreen) await domEle.msRequestFullScreen();
-  //   } catch (error) {}
-  // };
 
   return (
     <li
-      key={props.id}
-      className={`movie-item ${props.className}`}
+      className="searchViewItem-container"
+      key={props.movie.id}
       onMouseLeave={hideOnLeaveHandler}
-      // onMouseOver={hidePosterHandler}
     >
-      {isLoading && <LoadingSpinner asOverlay inherit />}
       {movieItem && (
         <Fragment>
           {!isHovered && (
@@ -97,10 +63,7 @@ const MovieItem = (props) => {
             />
           )}
 
-          <div
-            className={`description ${props.className}`}
-            onMouseOver={showOnHoverHandler}
-          >
+          <div className="description" onMouseOver={showOnHoverHandler}>
             <div className="description__btn">
               <div className="left">
                 <Button
@@ -165,4 +128,5 @@ const MovieItem = (props) => {
     </li>
   );
 };
-export default MovieItem;
+
+export default SearchViewItem;

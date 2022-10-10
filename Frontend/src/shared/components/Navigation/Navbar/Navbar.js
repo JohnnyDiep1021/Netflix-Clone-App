@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { movieAction } from "../../../store/movie";
-import { useDispatch } from "react-redux";
 
 import SearchEngine from "../../../../HomePage/components/SearchEngine/SearchEngine";
 import Button from "../../UI/Button/Button";
@@ -9,67 +7,29 @@ import { Notification, ArrowDown } from "../../Icon/MovieIcons";
 import "./Navbar.scss";
 
 const Navbar = () => {
-  const dispatch = useDispatch();
   const [isScrolled, setIsScrolled] = useState(false);
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
-
-  const homeClickHandler = () => {
-    dispatch(movieAction.setType(""));
-    dispatch(movieAction.setGenre(""));
-  };
-  const seriesClickHandler = () => {
-    dispatch(movieAction.setType("series"));
-    dispatch(movieAction.setGenre(""));
-  };
-  const moviesClickHandler = () => {
-    dispatch(movieAction.setType("movies"));
-    dispatch(movieAction.setGenre(""));
-  };
-
   return (
     <div className={`${isScrolled ? "navbar scrolled" : "navbar"}`}>
       <div className="container">
         <div className="left">
-          <NavLink to="/" onClick={homeClickHandler} exact>
+          <NavLink to="/home">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Netflix_2015_logo.svg/2560px-Netflix_2015_logo.svg.png"
               alt=""
             />
           </NavLink>
 
-          <Button
-            element="navLink"
-            to="/"
-            exact
-            className="link"
-            onClick={homeClickHandler}
-          >
+          <Button element="navLink" to="/home" className="link">
             <span>Homepage</span>
           </Button>
-          {/* <Button
-            element="navLink"
-            to="/series"
-            className="link"
-            onClick={seriesClickHandler}
-          >
-            <span>Series</span>
-          </Button>
-          <Button
-            element="navLink"
-            to="/movies"
-            className="link"
-            onClick={moviesClickHandler}
-          >
-            <span>Movies</span>
-          </Button> */}
           <Button
             element="navLink"
             to={`/category/movies?genre=`}
             className="link"
-            onClick={moviesClickHandler}
           >
             <span>Movies</span>
           </Button>
@@ -77,7 +37,6 @@ const Navbar = () => {
             element="navLink"
             to={`/category/series?genre=`}
             className="link"
-            onClick={seriesClickHandler}
           >
             <span>Series</span>
           </Button>
@@ -100,7 +59,7 @@ const Navbar = () => {
             <ArrowDown className="icon" />
 
             <div className="options">
-              <span>Settings</span>
+              {/* <span>Settings</span> */}
               <span>Logout</span>
             </div>
           </div>

@@ -1,9 +1,15 @@
 .watchList-container {
   background-color: var(--dark-color-700);
+  padding: 16rem 10rem 8rem;
   & .watchList-list {
-    padding: 16rem 10rem 8rem;
     display: flex;
     flex-direction: column;
     width: 100%;
+  }
+  & .watchList-msg {
+    text-align: center;
+    font-size: 2.8rem;
+    color: #fff;
+    font-weight: 500;
   }
 }

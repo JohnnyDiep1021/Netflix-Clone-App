@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 import Navbar from "./shared/components/Navigation/Navbar/Navbar";
 import MovieView from "./HomePage/components/MovieView/MovieView";
+import SearchView from "./SearchPage/page/SearchView";
 import Home from "./HomePage/pages/HomePage";
 import Register from "./HomePage/pages/Registeration/Register";
 import Login from "./HomePage/pages/Login/Login";
@@ -18,25 +19,18 @@ function App() {
     routes = (
       <Fragment>
         <Switch>
-          <Route path="/" exact>
-            <Navbar />
-            <Home type="" />
-          </Route>
-          <Route path="/category/:type" exact>
+          <Route path="/home" exact>
             <Navbar />
             <Home />
           </Route>
-          {/* <Route path="/search/:match">
-            <Home type="" />
-          </Route> */}
-          {/* <Route path="/movies">
+          <Route path="/category/:type">
             <Navbar />
-            <Home type="movies" />
+            <Home />
           </Route>
-          <Route path="/series">
+          <Route path="/search">
             <Navbar />
-            <Home type="series" />
-          </Route> */}
+            <SearchView />
+          </Route>
           <Route path="/watchlist">
             <Navbar />
             <WatchList />
@@ -44,7 +38,7 @@ function App() {
           <Route path="/watch">
             <MovieView />
           </Route>
-          <Redirect to="/" />
+          <Redirect to="/home" />
         </Switch>
       </Fragment>
     );

@@ -46,8 +46,21 @@ const MovieSchema = new mongoose.Schema(
         required: true,
       },
     },
+    genre: {
+      type: String,
+      required: true,
+    },
+    duration: {
+      type: Number,
+      required: true,
+    },
     year: {
       type: Number,
+      required: true,
+    },
+    isSeries: {
+      type: Boolean,
+      default: false,
     },
     limit: {
       type: String,
@@ -63,18 +76,6 @@ const MovieSchema = new mongoose.Schema(
     },
     warning: {
       type: String,
-    },
-    genre: {
-      type: String,
-      required: true,
-    },
-    duration: {
-      type: Number,
-      required: true,
-    },
-    isSeries: {
-      type: Boolean,
-      default: false,
     },
   },
   {
