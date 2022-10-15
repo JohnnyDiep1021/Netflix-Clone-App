@@ -25,7 +25,7 @@ const signup = async (req, res, next) => {
     console.log(`Signing up successfully,`, user);
     res.status(201).json({
       user: user.toObject({ getters: true }),
-      token: token,
+      token,
     });
   } catch (error) {
     console.log(error);
@@ -56,6 +56,7 @@ const logout = async (req, res, next) => {
     await req.user.save();
     res.json({ message: `Logging out sucessfully!` });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };

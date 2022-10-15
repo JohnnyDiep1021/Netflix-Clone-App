@@ -10,7 +10,7 @@ const movieParams = async (req, res, next) => {
     console.log(req.params.movieId);
     const movie = await Movie.findById(req.params.movieId);
     if (!movie) {
-      throw new HttpError(`Found no movie with provided id!`, 401);
+      throw new HttpError(`Found no movie with provided id!`, 404);
     }
     req.movie = movie;
     next();

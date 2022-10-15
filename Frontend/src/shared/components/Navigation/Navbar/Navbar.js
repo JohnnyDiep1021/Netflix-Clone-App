@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import SearchEngine from "../../../../HomePage/components/SearchEngine/SearchEngine";
 import Button from "../../UI/Button/Button";
 import { Notification, ArrowDown } from "../../Icon/MovieIcons";
+
 import "./Navbar.scss";
 
 const Navbar = () => {
@@ -50,12 +51,12 @@ const Navbar = () => {
           <SearchEngine />
           {/* <Search className="icon" /> */}
           {/* <span>KID</span> */}
-          <Notification className="icon" />
+          {/* <Notification className="icon" /> */}
           <img
             src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
             alt="profile"
           />
-          <div className="profile">
+          <div className="menu">
             <ArrowDown className="icon" />
 
             <div className="options">
