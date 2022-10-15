@@ -18,18 +18,18 @@ const authSlice = createSlice({
       state.token = action.payload.token;
       state.isLoggedIn = !!action.payload.token;
 
-      console.log(typeof action.payload.expTime, action.payload.expTime);
+      // console.log(typeof action.payload.expTime, action.payload.expTime);
       const tokenExpDate = action.payload.expTime
         ? new Date(action.payload.expTime)
         : // : new Date(new Date().getTime() + 1000 * 60 * (60 * 48));
-          new Date(new Date().getTime() + 1000 * 50);
+          new Date(new Date().getTime() + 1000 * 55);
       state.tokenExpDate = tokenExpDate.getTime();
       localStorage.setItem(
         "userData",
         JSON.stringify({
           token: action.payload.token,
-          expTime: tokenExpDate,
-          // expTime: tokenExpDate.toISOString(),
+          // expTime: tokenExpDate,
+          expTime: tokenExpDate.toISOString(),
         })
       );
       console.log(tokenExpDate);

@@ -7,7 +7,7 @@ import "./WatchList.scss";
 
 const WatchList = () => {
   const watchList = useSelector((state) => state.auth.watchlist);
-  console.log(watchList);
+  // console.log(watchList);
   return (
     <div className="watchList-container">
       <ul className="watchList-list">
