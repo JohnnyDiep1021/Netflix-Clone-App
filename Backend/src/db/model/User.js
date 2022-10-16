@@ -22,6 +22,18 @@ const UserSchema = new mongoose.Schema(
         }
       },
     },
+    fname: {
+      type: String,
+      default: "",
+    },
+    lname: {
+      type: String,
+      default: "",
+    },
+    bio: {
+      type: String,
+      default: "",
+    },
     password: {
       type: String,
       required: true,

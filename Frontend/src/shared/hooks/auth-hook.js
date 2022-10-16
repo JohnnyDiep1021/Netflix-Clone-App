@@ -71,9 +71,7 @@ export const useAuth = () => {
           );
           console.log(responseData);
           dispatch(authAction.logout());
-        } catch (err) {
-          console.log(err);
-        }
+        } catch (err) {}
       }, remainingTime);
     } else {
       clearTimeout(loggoutTimer);

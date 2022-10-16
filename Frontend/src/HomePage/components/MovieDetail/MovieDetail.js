@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-import { ANIMATION_STYLE, ANIMATION_TIMEOUT } from "../../../shared/util/util";
 import { useMovieBtn } from "../../../shared/hooks/movie-hooks";
 
 import Button from "../../../shared/components/UI/Button/Button";
@@ -14,6 +13,7 @@ import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import CloseIcon from "@mui/icons-material/Close";
+import { ANIMATION_STYLE, ANIMATION_TIMEOUT } from "../../../shared/util/util";
 
 import "./MovieDetail.scss";
 

@@ -29,7 +29,6 @@ const authSlice = createSlice({
         "userData",
         JSON.stringify({
           token: action.payload.token,
-          // expTime: tokenExpDate,
           expTime: tokenExpDate.toISOString(),
         })
       );
@@ -43,6 +42,9 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       state.watchlist = [];
       localStorage.removeItem("userData");
+      console.log(
+        `token: ${state.token}; expDate: ${state.tokenExpDate}; isLoggedIn: ${state.isLoggedIn}; watchlist: ${state.watchlist}`
+      );
       console.log("Logged out!");
     },
   },
