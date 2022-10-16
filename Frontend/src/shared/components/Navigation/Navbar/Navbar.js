@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 
 import SearchEngine from "../../../../HomePage/components/SearchEngine/SearchEngine";
 import Button from "../../UI/Button/Button";
-import { Notification, ArrowDown } from "../../Icon/MovieIcons";
-
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import "./Navbar.scss";
 
 const Navbar = () => {
@@ -51,18 +51,29 @@ const Navbar = () => {
           <SearchEngine />
           {/* <Search className="icon" /> */}
           {/* <span>KID</span> */}
-          {/* <Notification className="icon" /> */}
-          <img
-            src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-            alt="profile"
-          />
+          {/* <Button className="btn-icon">
+            <NotificationsIcon />
+          </Button> */}
           <div className="menu">
-            <ArrowDown className="icon" />
-
-            <div className="options">
-              {/* <span>Settings</span> */}
-              <span>Logout</span>
+            {/* <Button className="btn-icon">
+              <ArrowDropDownIcon />
+            </Button> */}
+            <div>
+              <img
+                src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+                alt="profile"
+              />
             </div>
+
+            <ul className="options">
+              {/* <span>Settings</span> */}
+              <li>
+                {/* <Button className="link">
+                  <span>Logout</span>
+                </Button> */}
+                <span>Logout</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

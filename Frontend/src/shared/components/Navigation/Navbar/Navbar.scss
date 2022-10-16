@@ -28,7 +28,6 @@
         height: 3rem;
         margin-right: 3rem;
       }
-
       span {
         cursor: pointer;
       }
@@ -46,8 +45,17 @@
 
       & .menu {
         position: relative;
+        & .btn-icon {
+          width: 4rem;
+          height: 4rem;
+          border: none;
+          & svg {
+            font-size: 4rem;
+          }
+        }
         & .options {
           display: none;
+          list-style: none;
           background-color: var(--dark-color-700);
           border-radius: 0.5rem;
         }

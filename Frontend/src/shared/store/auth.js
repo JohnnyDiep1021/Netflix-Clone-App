@@ -21,8 +21,9 @@ const authSlice = createSlice({
       // console.log(typeof action.payload.expTime, action.payload.expTime);
       const tokenExpDate = action.payload.expTime
         ? new Date(action.payload.expTime)
-        : // : new Date(new Date().getTime() + 1000 * 60 * (60 * 48));
-          new Date(new Date().getTime() + 1000 * 55);
+        : // ms * s * m * h
+          // : new Date(new Date().getTime() + 1000 * 60 * (60 * 48));
+          new Date(new Date().getTime() + 1000 * 60 * 55);
       state.tokenExpDate = tokenExpDate.getTime();
       localStorage.setItem(
         "userData",

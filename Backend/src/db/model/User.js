@@ -59,12 +59,14 @@ UserSchema.methods.generateAuthToken = async function () {
     { _id: user._id.toString(), isAdmin: user.isAdmin },
     process.env.JWT_KEY,
     {
-      expiresIn: "60000",
+      // expiresIn: "60000",
+      expiresIn: "1h",
     }
   );
   user.tokens = user.tokens.concat({ token });
   await user.save();
-  return { token, expIn: +jwt.decode(token).exp * 1000 };
+  // return { token, expIn: +jwt.decode(token).exp * 1000 };
+  return { token };
 };
 UserSchema.methods.toJSON = function () {
   const user = this;
