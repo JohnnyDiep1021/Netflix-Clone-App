@@ -1,5 +1,6 @@
 export const NAME_MINLENGTH = 2;
-export const NAME_MAXLENGTH = 23;
+export const NAME_MAXLENGTH = 64;
+export const BIO_MAXLENGTH = 256;
 export const USERNAME_MINLENGTH = 6;
 export const USERNAME_MAXLENGTH = 36;
 export const EMAIL_MINLENGTH = 3;

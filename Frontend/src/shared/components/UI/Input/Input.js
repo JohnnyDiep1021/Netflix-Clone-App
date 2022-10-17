@@ -116,9 +116,15 @@ const Input = react.forwardRef((props, ref) => {
         <textarea
           ref={inputRef}
           id={props.id}
-          rows={props.rows || 3}
+          className={`${
+            inputState.isFocus || inputState.value ? "hasText" : ""
+          }`}
+          placeholder={props.placeholder}
+          rows={props.rows || 10}
+          cols={props.cols || 10}
           onChange={changeHandler}
           onBlur={touchHandler}
+          onFocus={focusHandler}
           value={inputState.value}
         >
           {props.children}

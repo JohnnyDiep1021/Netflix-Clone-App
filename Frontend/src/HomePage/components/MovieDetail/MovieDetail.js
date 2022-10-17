@@ -130,7 +130,9 @@ const MovieDetail = (props) => {
             </div>
             <div className="adj">
               <p>
-                <span>This MV is:</span>
+                <span>
+                  This {props.movie.isSeries ? "Series" : "Movie"} is:
+                </span>
                 {props.movie.label || "Romantic, Heartbroken"}
               </p>
             </div>

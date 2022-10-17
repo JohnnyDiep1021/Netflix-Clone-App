@@ -7,15 +7,15 @@ const UserSchema = new mongoose.Schema(
   {
     username: {
       type: String,
-      required: true,
-      unique: true,
       trim: true,
+      unique: true,
+      required: true,
     },
     email: {
       type: String,
+      trim: true,
       required: true,
       unique: true,
-      trim: true,
       validate(val) {
         if (!validator.isEmail(val)) {
           throw new Error(`Email is invalid. Try again!`);
@@ -24,20 +24,38 @@ const UserSchema = new mongoose.Schema(
     },
     fname: {
       type: String,
+      trim: true,
       default: "",
+      validator(val) {
+        if (val.length >= 64) {
+          throw new Error(`Only 64 characters for first name`);
+        }
+      },
     },
     lname: {
       type: String,
+      trim: true,
       default: "",
+      validator(val) {
+        if (val.length > 64) {
+          throw new Error(`Only 64 characters for last name`);
+        }
+      },
     },
     bio: {
       type: String,
+      trim: true,
       default: "",
+      validator(val) {
+        if (val.length > 256) {
+          throw new Error(`Only 256 characters for bio`);
+        }
+      },
     },
     password: {
       type: String,
-      required: true,
       trim: true,
+      required: true,
     },
     profilePic: {
       type: String,

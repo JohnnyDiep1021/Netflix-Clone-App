@@ -89,7 +89,9 @@ const WatchListItem = (props) => {
                 <div className="publish-info">
                   <span className="matching">93% Match</span>
                   <span className="year">2019</span>
-                  <span className="type">MV</span>
+                  <span className="type">
+                    {movie.isSeries ? "Series" : "Movie"}
+                  </span>
                   <span className="duration">{movie.duration} mins</span>
                 </div>
                 <div className="category-info">

@@ -4,11 +4,13 @@ const MovieSchema = new mongoose.Schema(
   {
     title: {
       type: String,
+      trim: true,
       unique: true,
       required: true,
     },
     desc: {
       type: String,
+      trim: true,
       required: true,
     },
     image: {
@@ -46,8 +48,14 @@ const MovieSchema = new mongoose.Schema(
         required: true,
       },
     },
+    type: {
+      type: String,
+      trim: true,
+      required: true,
+    },
     genre: {
       type: String,
+      trim: true,
       required: true,
     },
     duration: {
@@ -64,18 +72,23 @@ const MovieSchema = new mongoose.Schema(
     },
     limit: {
       type: String,
+      trim: true,
     },
     casting: {
       type: String,
+      trim: true,
     },
     matching: {
       type: Number,
+      trim: true,
     },
     label: {
       type: String,
+      trim: true,
     },
     warning: {
       type: String,
+      trim: true,
     },
   },
   {

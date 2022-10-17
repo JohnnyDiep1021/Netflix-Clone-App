@@ -47,9 +47,12 @@ userRouter.patch(
   "/:id",
   auth,
   [
-    check("username").isLength({ min: 6 }),
     check("email").isEmail(),
+    check("username").isLength({ min: 6 }),
     check("password").isStrongPassword(),
+    check("fname").isLength({ max: 64 }),
+    check("lname").isLength({ max: 64 }),
+    check("bio").isLength({ max: 256 }),
   ],
   usersController.updateUser
 );
