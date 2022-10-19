@@ -69,6 +69,7 @@ const Register = () => {
       dispatch(
         authAction.login({
           token: responseData.token.token,
+          userId: responseData.user.id,
         })
       );
     } catch (error) {}

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import { useForm } from "../../../shared/hooks/form-hooks";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
@@ -20,9 +21,14 @@ import {
   USERNAME_MINLENGTH,
 } from "../../../shared/util/util";
 
+import ImageUpload from "../../../shared/components/UI/Upload/ImageUpload";
+
 import "./UserProfile.scss";
 
 const UserProfile = (props) => {
+  const token = useSelector((state) => state.auth.token);
+  const { isLoading, sendRequest, error, clearError, message, clearMessage } =
+    useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
     {
       email: {
@@ -49,7 +55,43 @@ const UserProfile = (props) => {
     false
   );
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const fetchInitData = async () => {
+      const responseData = await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/users/me`,
+        "GET",
+        null,
+        { Authorization: `Bearer ${token}` }
+      );
+      console.log(responseData);
+      setFormData(
+        {
+          email: {
+            value: responseData.user.email,
+            isValid: true,
+          },
+          username: {
+            value: responseData.user.username,
+            isValid: true,
+          },
+          fname: {
+            value: responseData.user.fname,
+            isValid: true,
+          },
+          lname: {
+            value: responseData.user.lname,
+            isValid: true,
+          },
+          bio: {
+            value: responseData.user.bio,
+            isValid: true,
+          },
+        },
+        true
+      );
+    };
+    fetchInitData();
+  }, [sendRequest, token, setFormData]);
   return (
     <Modal
       className="modal-user-profile"
@@ -59,12 +101,22 @@ const UserProfile = (props) => {
       {/* <div className="left-box"> */}
       {/* </div> */}
       <div className="profile-container">
-        <div className="profile-img">
+        {/* <div className="profile-img">
           <img
             src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
             alt="profile"
           />
-        </div>
+        </div> */}
+        <ImageUpload
+          imageFile
+          id="image"
+          userName={formState.inputs.username.value}
+          label="image"
+          accept=".jpg,.png,.jpeg,.webp,.svg"
+          errorText="image is required!"
+          onInput={inputHandler}
+          center
+        />
         <form className="personal-info">
           <h2 className="heading">Personal Information</h2>
           <div className="info-1">
@@ -121,6 +173,8 @@ const UserProfile = (props) => {
             errorText="6-36 character(s)"
             errorStyle={{ color: "#ffa00a", fontSize: "12px" }}
             onInput={inputHandler}
+            initialValue={formState.inputs.username.value}
+            initialValid={formState.inputs.username.isValid}
           />
           <Input
             id="bio"
@@ -129,6 +183,8 @@ const UserProfile = (props) => {
             errorText="Only 256 character(s)"
             errorStyle={{ color: "#ffa00a", fontSize: "12px" }}
             onInput={inputHandler}
+            initialValue={formState.inputs.bio.value}
+            initialValid={formState.inputs.bio.isValid}
           />
         </form>
       </div>

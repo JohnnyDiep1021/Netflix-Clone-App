@@ -82,6 +82,16 @@
             height: 100%;
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover,
+            &:-webkit-autofill:focus,
+            &:-webkit-autofill:active {
+              // outline: 1px solid var(--light-border-color);
+              outline: none;
+              -webkit-box-shadow: 0 0 0px 100rem var(--light-text-color) inset !important;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: #000;
+            }
           }
         }
         & .invalid.input::after {

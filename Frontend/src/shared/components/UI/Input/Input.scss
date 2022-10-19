@@ -35,12 +35,22 @@
       padding: 1.6rem 2rem 0;
       line-height: 5rem;
       background: #333;
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus,
+      &:-webkit-autofill:active {
+        // outline: 1px solid var(--light-border-color);
+        outline: none;
+        -webkit-box-shadow: 0 0 0px 100rem #333 inset !important;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: rgba(255, 255, 255);
+      }
       &:focus {
         outline: none;
         background-color: #454545;
       }
       &:-webkit-autofill + label {
-        color: #000;
+        // color: #000;
       }
     }
     & textarea {

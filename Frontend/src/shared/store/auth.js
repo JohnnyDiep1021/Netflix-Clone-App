@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialAuthState = {
   token: null,
+  userId: null,
   tokenExpDate: null,
   isLoggedIn: false,
   watchlist: [],
@@ -16,8 +17,8 @@ const authSlice = createSlice({
     },
     login(state, action) {
       state.token = action.payload.token;
+      state.userId = action.payload.userId;
       state.isLoggedIn = !!action.payload.token;
-
       // console.log(typeof action.payload.expTime, action.payload.expTime);
       const tokenExpDate = action.payload.expTime
         ? new Date(action.payload.expTime)
@@ -33,17 +34,21 @@ const authSlice = createSlice({
         })
       );
       console.log(tokenExpDate);
+      console.log(
+        `token: ${state.token}; expDate: ${state.tokenExpDate}; userId: ${state.userId}; isLoggedIn: ${state.isLoggedIn}; watchlist: ${state.watchlist.length}`
+      );
       console.log(`Logged in!`);
     },
 
     logout(state) {
       state.token = null;
+      state.userId = null;
       state.tokenExpDate = null;
       state.isLoggedIn = false;
       state.watchlist = [];
       localStorage.removeItem("userData");
       console.log(
-        `token: ${state.token}; expDate: ${state.tokenExpDate}; isLoggedIn: ${state.isLoggedIn}; watchlist: ${state.watchlist}`
+        `token: ${state.token}; expDate: ${state.tokenExpDate}; userId: ${state.userId}; isLoggedIn: ${state.isLoggedIn}; watchlist: ${state.watchlist.length}`
       );
       console.log("Logged out!");
     },

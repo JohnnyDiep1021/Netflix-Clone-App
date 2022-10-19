@@ -29,7 +29,7 @@ const MovieList = (props) => {
     // translate +x value will push the carousel forward and create sliding backward effect
     if (direction === "left") {
       console.log(distance);
-      scrollAmount = parseInt(416 + distance);
+      scrollAmount = parseInt(208 + distance);
       // if (scrollAmount >= 0) {
       // setIsMoved(false);
       // }
@@ -40,7 +40,7 @@ const MovieList = (props) => {
 
     // translate -x value will push the carousel backward and create sliding forward effect
     if (direction === "right") {
-      scrollAmount = parseInt(-416 + distance);
+      scrollAmount = parseInt(-208 + distance);
       if (scrollAmount < -totalCarouselWidth) {
         scrollAmount = 0;
         setIsMoved(false);

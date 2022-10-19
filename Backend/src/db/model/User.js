@@ -57,9 +57,11 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
-    profilePic: {
-      type: String,
-      default: "",
+    profileImg: {
+      file: { type: String },
+      fileRef: {
+        type: String,
+      },
     },
     isAdmin: {
       type: Boolean,

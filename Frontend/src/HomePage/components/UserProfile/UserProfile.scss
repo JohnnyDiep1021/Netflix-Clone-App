@@ -12,6 +12,20 @@
       textarea {
         border: 1px solid rgba(82, 82, 82, 0.5);
         background-color: transparent;
+        color: rgba(255, 255, 255, 0.8);
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active {
+          // outline: 1px solid var(--light-border-color);
+          outline: none;
+          -webkit-box-shadow: 0 0 0px 100rem rgb(28, 28, 28) inset !important;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: rgba(255, 255, 255, 0.8);
+        }
+      }
+      textarea {
+        line-height: 2.5rem;
       }
     }
   }
@@ -28,10 +42,10 @@
       width: 10rem;
       height: 10rem;
       border-radius: 50%;
+      box-shadow: 0 0 1.5rem -0.5rem rgba(207, 207, 207, 0.75);
       position: absolute;
       left: 50%;
       z-index: 104;
-      box-shadow: 0 0 1.5rem -0.5rem rgba(207, 207, 207, 0.75);
       transform: translate(-50%, -90%);
       & img {
         width: 100%;
@@ -43,7 +57,7 @@
     & .personal-info {
       margin-top: 4rem;
       & .heading {
-        color: rgb(201, 201, 201);
+        color: rgb(255, 255, 255);
         margin-bottom: 1rem;
       }
       & .info-1 {
