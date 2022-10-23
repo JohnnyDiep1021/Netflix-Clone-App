@@ -31,6 +31,7 @@ const authSlice = createSlice({
         JSON.stringify({
           token: action.payload.token,
           expTime: tokenExpDate.toISOString(),
+          userId: action.payload.userId,
         })
       );
       console.log(tokenExpDate);

@@ -1,4 +1,4 @@
-import react, { useRef, useState } from "react";
+import react, { useRef, useState, useEffect, useCallback } from "react";
 import storage from "../../../../firebase";
 import {
   ref,
@@ -15,12 +15,61 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 
 import "./ImageUpload.scss";
 const ImageUpload = (props) => {
+  // console.log(props.filePath);
   const [error, setError] = useState("");
-  const [previewUrl, setPreviewUrl] = useState(props.src || null);
-  const [fileRef, setFileRef] = useState(props.filePath || null);
+  // const [previewUrl, setPreviewUrl] = useState(props.src || null);
+  // const [fileRef, setFileRef] = useState(props.filePath || null);
+  const [saveFile, setSaveFile] = useState(false);
+  const [oldFilePath, setOldFilePath] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [fileRef, setFileRef] = useState(null);
   const [isValid, setIsValid] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const filePickerRef = useRef();
+  const deleteUploadFileHandler = useCallback(
+    // handle deleted File
+    // case 1: no current and uploaded file => nothing to delete
+    // case 2.1: no current file, new file is uploaded and saved => nothing to delete
+    // case 2.2: no current file, new file is uploaded, but then cancelled => delete uploaded file
+    // case 3.1: with current file, new file is uploaded and saved => delete the current file
+    // case 3.2: with current file, new file is uploaded, but then cancelled => keep the current file and delete the uploaded file
+    (filePath) => {
+      if (!filePath) {
+        throw new Error(`File path is required to process deletion!`);
+      }
+
+      console.log(filePath);
+      const deletedFileRef = ref(storage, filePath);
+      deleteObject(deletedFileRef)
+        .then((responseData) => {
+          setOldFilePath(null);
+          setSaveFile(false);
+          console.log(`Deleted previous file ${filePath} successfully!`);
+        })
+        .catch((error) => {
+          // error.message = `An error occurred. Could not delete previous file!`;
+          // console.log(error);
+          throw error;
+        });
+    },
+    []
+  );
+
+  useEffect(() => {
+    setOldFilePath(props.filePath);
+    setSaveFile(props.isSaved);
+    if (saveFile && previewUrl && oldFilePath) {
+      deleteUploadFileHandler(oldFilePath);
+    }
+  }, [
+    previewUrl,
+    saveFile,
+    props.isSaved,
+    oldFilePath,
+    props.filePath,
+    deleteUploadFileHandler,
+    setOldFilePath,
+  ]);
 
   const pickedHandler = async (event) => {
     // console.log(event.target.files);
@@ -34,7 +83,9 @@ const ImageUpload = (props) => {
         setIsLoading(true);
         pickedFile = event.target.files[0];
         // console.log(pickedFile.name, pickedFile.type);
-        const fileLocation = `users/${props.userName}-${pickedFile.name}`;
+        const fileLocation = `users/${props.userId}/${new Date().getTime()}-${
+          pickedFile.name
+        }`;
         const storageRef = ref(storage, fileLocation);
         const uploadTask = uploadBytesResumable(storageRef, pickedFile);
         uploadTask.on(
@@ -62,20 +113,20 @@ const ImageUpload = (props) => {
             // Upload completed successfully, now we can get the download URL
             const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
             // Then delete the previous existed file in the Firebase storage
-            if (fileRef) {
-              // console.log(fileRef);
-              const deletedFileRef = ref(storage, fileRef);
-              deleteObject(deletedFileRef)
-                .then(() => {
-                  console.log(
-                    `Deleted previous file ${previewUrl} successfully!`
-                  );
-                })
-                .catch((error) => {
-                  error.message = `An error occurred. Could not delete previous file!`;
-                  throw error;
-                });
-            }
+            // if (fileRef) {
+            //   // console.log(fileRef);
+            //   const deletedFileRef = ref(storage, fileRef);
+            //   deleteObject(deletedFileRef)
+            //     .then(() => {
+            //       console.log(
+            //         `Deleted previous file ${previewUrl} successfully!`
+            //       );
+            //     })
+            //     .catch((error) => {
+            //       error.message = `An error occurred. Could not delete previous file!`;
+            //       throw error;
+            //     });
+            // }
             imageUrl = downloadURL;
             imageRef = fileLocation;
             fileIsValid = true;
@@ -83,15 +134,19 @@ const ImageUpload = (props) => {
             setFileRef(fileLocation);
             setIsValid(true);
             setIsLoading(false);
+            setOldFilePath(null);
+
             props.onInput(
               props.id,
               { file: imageUrl, fileRef: imageRef },
-              fileIsValid
+              null,
+              fileIsValid,
+              null
             );
           }
         );
       } else {
-        // get triggered when canceling the uploading of another file after a file has already been uploaded
+        // get triggered when canceling the uploading process of another file after a file has already been uploaded
         if (previewUrl && isValid) {
           return props.onInput(
             props.id,
@@ -134,31 +189,37 @@ const ImageUpload = (props) => {
           onChange={pickedHandler}
         />
         <div className={`image-upload ${props.center && "center"}`}>
-          <div
-            className={`file-upload__preview ${
-              !previewUrl ? "empty-preview" : "available-preview"
-            } `}
-          >
-            {isLoading && <LoadingSpinner asOverlay />}
-            {previewUrl && props.imageFile && (
-              <img src={previewUrl} alt={`${props.label} Preview`} />
+          <div className={`file-upload__preview `}>
+            {isLoading && (
+              <LoadingSpinner asOverlay style={{ borderRadius: "50%" }} />
             )}
-            {previewUrl && props.videoFile && (
-              <video src={previewUrl} alt="Video Preview" controls autoPlay />
+            {(props.src || previewUrl) && props.imageFile && (
+              <img
+                src={props.src || previewUrl}
+                alt={`${props.label} Preview`}
+              />
             )}
-            {!previewUrl && <p>Pick an {props.label}.</p>}
+            {(props.src || previewUrl) && props.videoFile && (
+              <video
+                src={props.src || previewUrl}
+                alt="Video Preview"
+                controls
+                autoPlay
+              />
+            )}
+            {/* {!previewUrl && <p>Pick an {props.label}.</p>} */}
           </div>
           {!isValid && !previewUrl && (
             <p className="error-message">{props.errorText}</p>
           )}
-          {/* <Button
+          <Button
             type="button"
             className="btn btn-upload"
             onClick={pickImageHandler}
             disabled={isLoading}
           >
             <AddAPhotoIcon />
-          </Button> */}
+          </Button>
         </div>
       </div>
     </react.Fragment>

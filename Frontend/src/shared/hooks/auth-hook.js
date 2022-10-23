@@ -25,36 +25,13 @@ export const useAuth = () => {
         authAction.login({
           token: storedData.token,
           expTime: storedData.expTime,
+          userId: storedData.userId,
         })
       );
     }
   }, [dispatch]);
 
   // auto logout;
-  // useEffect(() => {
-  //   if (storedData && storedData.token && storedData.expTime) {
-  //     const remainingTime =
-  //       new Date(storedData.expTime).getTime() - new Date().getTime();
-  //     loggoutTimer = setTimeout(async () => {
-  //       try {
-  //         const responseData = await sendRequest(
-  //           `${process.env.REACT_APP_BACKEND_URL}/users/logout`,
-  //           "POST",
-  //           null,
-  //           {
-  //             Authorization: `Bearer ${storedData.token}`,
-  //           }
-  //         );
-  //         console.log(responseData);
-  //         dispatch(authAction.logout());
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     }, remainingTime);
-  //   } else {
-  //     clearTimeout(loggoutTimer);
-  //   }
-  // }, [dispatch, sendRequest, storedData?.token]);
   useEffect(() => {
     if (token && tokenExpDate) {
       const remainingTime =

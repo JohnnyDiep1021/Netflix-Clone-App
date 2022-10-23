@@ -1,11 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import { useForm } from "../../../shared/hooks/form-hooks";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 
+import ImageUpload from "../../../shared/components/UI/Upload/ImageUpload";
 import Modal from "../../../shared/components/UI/Modal/Modal";
 import Input from "../../../shared/components/UI/Input/Input";
+import Button from "../../../shared/components/UI/Button/Button";
+import CloseIcon from "@mui/icons-material/Close";
 
 import {
   VALIDATOR_EMAIL,
@@ -21,103 +25,116 @@ import {
   USERNAME_MINLENGTH,
 } from "../../../shared/util/util";
 
-import ImageUpload from "../../../shared/components/UI/Upload/ImageUpload";
-
 import "./UserProfile.scss";
 
 const UserProfile = (props) => {
+  const history = useHistory();
   const token = useSelector((state) => state.auth.token);
+  const userId = useSelector((state) => state.auth.userId);
+  const [filePath, setFilePath] = useState(props.user.profileImg.fileRef);
   const { isLoading, sendRequest, error, clearError, message, clearMessage } =
     useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
     {
       email: {
-        value: "",
-        isValid: false,
+        value: props.user.email,
+        isValid: true,
       },
       username: {
-        value: "",
-        isValid: false,
+        value: props.user.username,
+        isValid: true,
       },
       fname: {
-        value: "",
-        isValid: false,
+        value: props.user.fname,
+        isValid: true,
       },
       lname: {
-        value: "",
-        isValid: false,
+        value: props.user.lname,
+        isValid: true,
       },
       bio: {
-        value: "",
-        isValid: false,
+        value: props.user.bio,
+        isValid: true,
+      },
+      profileImg: {
+        value: {
+          file: props.user.profileImg.file,
+          fileRef: props.user.profileImg.fileRef,
+        },
+        isValid: true,
       },
     },
-    false
+    true
   );
+  const [saveFile, setSaveFile] = useState(false);
 
   useEffect(() => {
-    const fetchInitData = async () => {
-      const responseData = await sendRequest(
-        `${process.env.REACT_APP_BACKEND_URL}/users/me`,
-        "GET",
-        null,
-        { Authorization: `Bearer ${token}` }
-      );
-      console.log(responseData);
-      setFormData(
+    setSaveFile(false);
+  }, [sendRequest, token, setFormData, saveFile]);
+
+  const submitProfileHandler = async (event) => {
+    event.preventDefault();
+    try {
+      // console.log(formState.inputs);
+      const updatedProfile = await sendRequest(
+        `${process.env.REACT_APP_BACKEND_URL}/users/${userId}`,
+        "PATCH",
+        JSON.stringify({
+          email: formState.inputs.email.value,
+          username: formState.inputs.username.value,
+          fname: formState.inputs.fname.value,
+          lname: formState.inputs.lname.value,
+          bio: formState.inputs.bio.value,
+          profileImg: {
+            file: formState.inputs.profileImg.value.file,
+            fileRef: formState.inputs.profileImg.value.fileRef,
+          },
+        }),
         {
-          email: {
-            value: responseData.user.email,
-            isValid: true,
-          },
-          username: {
-            value: responseData.user.username,
-            isValid: true,
-          },
-          fname: {
-            value: responseData.user.fname,
-            isValid: true,
-          },
-          lname: {
-            value: responseData.user.lname,
-            isValid: true,
-          },
-          bio: {
-            value: responseData.user.bio,
-            isValid: true,
-          },
-        },
-        true
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        }
       );
-    };
-    fetchInitData();
-  }, [sendRequest, token, setFormData]);
+      console.log(updatedProfile);
+      setSaveFile(true);
+      setTimeout(() => {
+        history.push("/");
+      }, 2500);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const cancelUpdateHandler = () => {
+    props.onClose();
+    setFilePath(formState.inputs.profileImg.value.fileRef);
+    setSaveFile(true);
+  };
   return (
     <Modal
       className="modal-user-profile"
       show={props.show}
-      onClose={props.onClose}
+      onClose={cancelUpdateHandler}
     >
-      {/* <div className="left-box"> */}
-      {/* </div> */}
       <div className="profile-container">
-        {/* <div className="profile-img">
-          <img
-            src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-            alt="profile"
-          />
-        </div> */}
         <ImageUpload
           imageFile
-          id="image"
+          id="profileImg"
+          userId={userId}
+          // src={
+          //   formState.inputs.profileImg.value.file ||
+          //   "https://ih0.redbubble.net/image.618427277.3222/flat,1000x1000,075,f.u2.jpg"
+          // }
+          src={formState.inputs.profileImg.value.file}
+          filePath={filePath}
           userName={formState.inputs.username.value}
-          label="image"
+          label="profile"
           accept=".jpg,.png,.jpeg,.webp,.svg"
           errorText="image is required!"
           onInput={inputHandler}
+          isSaved={saveFile}
           center
         />
-        <form className="personal-info">
+        <form className="personal-info" onSubmit={submitProfileHandler}>
           <h2 className="heading">Personal Information</h2>
           <div className="info-1">
             <Input
@@ -186,7 +203,22 @@ const UserProfile = (props) => {
             initialValue={formState.inputs.bio.value}
             initialValid={formState.inputs.bio.isValid}
           />
+          <div className="profile-btn-container">
+            <Button className="btn btn-cancel" onClick={cancelUpdateHandler}>
+              Cancel
+            </Button>
+            <Button
+              type="submit"
+              className="btn btn-save btn--red"
+              onClick={props.onClose}
+            >
+              Save
+            </Button>
+          </div>
         </form>
+        <Button className="btn-icon btn-close" onClick={cancelUpdateHandler}>
+          <CloseIcon />
+        </Button>
       </div>
     </Modal>
   );

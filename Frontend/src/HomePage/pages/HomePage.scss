@@ -5,7 +5,9 @@
     overflow: visible;
     margin-bottom: 24rem;
     & .warning {
-      color: #fff;
+      // color: #fff;
+      color: red;
+
       font-size: 2rem;
       display: flex;
       align-items: center;

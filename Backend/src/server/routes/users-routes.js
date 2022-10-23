@@ -49,10 +49,11 @@ userRouter.patch(
   [
     check("email").isEmail(),
     check("username").isLength({ min: 6 }),
-    check("password").isStrongPassword(),
+    // check("password").isStrongPassword(),
     check("fname").isLength({ max: 64 }),
     check("lname").isLength({ max: 64 }),
     check("bio").isLength({ max: 256 }),
+    // check("profileImg.file").isString(),
   ],
   usersController.updateUser
 );

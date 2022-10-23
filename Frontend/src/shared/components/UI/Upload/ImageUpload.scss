@@ -1,48 +1,46 @@
 .uploadFile-container {
   width: 10rem;
   height: 10rem;
-  display: inline-block;
-  // box-shadow: 0 0 1.5rem -0.5rem rgba(207, 207, 207, 0.75);
-  border: 1px solid rgb(255, 2, 2);
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-box-shadow: 0 0 1.5rem -0.5rem rgba(207, 207, 207, 0.75);
+  box-shadow: 0 0 1.5rem -0.5rem rgba(207, 207, 207, 0.75);
   position: absolute;
   left: 50%;
   z-index: 104;
   transform: translate(-50%, -80%);
-  .image-upload {
+  & .image-upload {
     width: 10rem;
     height: 10rem;
-    & .file-upload__preview {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      &.empty-preview {
-        border: 1px solid #ccc;
-        // padding: 2rem;
-      }
-      &.available-preview {
-        padding: 0;
-        margin-bottom: 1rem;
-        -webkit-box-shadow: 0.4rem 0.6rem 1rem 0.1rem rgba(0, 0, 0, 0.45);
-        box-shadow: 0.4rem 0.6rem 1rem 0.1rem rgba(0, 0, 0, 0.45);
-        border-radius: 1rem;
-        border: none;
-        & img,
-        & video {
-          border-radius: 1rem;
+    border-radius: 50%;
+    &:hover {
+      & .btn-upload {
+        opacity: 1;
+        visibility: visible;
+        & svg {
+          transform: scale(1);
         }
       }
+    }
+    & .file-upload__preview {
+      width: 100%;
+      height: 100%;
       position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
+      border-radius: 50%;
       // margin-bottom: 1rem;
-
       & img,
       & video {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        border-radius: 50%;
       }
     }
     &.center {
@@ -58,13 +56,22 @@
       margin-bottom: 1rem;
     }
     & .btn-upload {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
       width: 10rem;
       height: 10rem;
       background-color: transparent;
-      border: 1px solid #fff;
-      position: absolute;
+      border-radius: 50%;
+      background-color: rgba(99, 99, 99, 0.75);
+      -webkit-backdrop-filter: blur(2px);
+      backdrop-filter: blur(2px);
+      transition: all 0.4s ease;
+
       & svg {
-        font-size: 4rem;
+        font-size: 4.5rem;
+        transform: scale(0.7);
+        transition: all 0.3s ease;
       }
     }
   }

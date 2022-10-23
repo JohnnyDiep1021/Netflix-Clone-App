@@ -58,9 +58,10 @@ const UserSchema = new mongoose.Schema(
       required: true,
     },
     profileImg: {
-      file: { type: String },
+      file: { type: String, default: "" },
       fileRef: {
         type: String,
+        default: "",
       },
     },
     isAdmin: {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
@@ -9,7 +9,6 @@ import UserProfile from "../../../../HomePage/components/UserProfile/UserProfile
 import SearchEngine from "../../../../HomePage/components/SearchEngine/SearchEngine";
 import Button from "../../UI/Button/Button";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 import "./Navbar.scss";
 
@@ -17,9 +16,26 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const { sendRequest } = useHttpClient();
-
+  const [userProfile, setUserProfile] = useState();
   const [showProfile, setShowProfile] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    const fetchInitData = async () => {
+      try {
+        const responseData = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/users/me`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        console.log(responseData);
+        setUserProfile(responseData.user);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchInitData();
+  }, [token, sendRequest]);
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
@@ -75,8 +91,6 @@ const Navbar = () => {
           <Button element="navLink" to="/watchlist" className="link">
             <span>My Watch List</span>
           </Button>
-          {/* <span>New and Popular</span>
-          <span>My List</span> */}
         </div>
         <div className="right">
           <SearchEngine />
@@ -86,25 +100,25 @@ const Navbar = () => {
             <NotificationsIcon />
           </Button> */}
           <div className="menu-container">
-            {/* <Button className="btn-icon">
-              <ArrowDropDownIcon />
-            </Button> */}
             <div className="profile-img" onClick={showProfileHandler}>
-              <img
-                src="https://images.pexels.com/photos/6899260/pexels-photo-6899260.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                alt="profile"
-              />
+              {userProfile && (
+                <img src={userProfile.profileImg.file} alt="profile" />
+              )}
             </div>
             <ul className="opt-list">
-              {/* <span>Settings</span> */}
               <li className="opt-list_item">
                 <Button className="btn" onClick={logoutHandler}>
                   Logout
                 </Button>
-                {/* <span>Logout</span> */}
               </li>
             </ul>
-            <UserProfile show={showProfile} onClose={hideProfileHandler} />
+            {userProfile && (
+              <UserProfile
+                user={userProfile}
+                show={showProfile}
+                onClose={hideProfileHandler}
+              />
+            )}
           </div>
         </div>
       </div>
