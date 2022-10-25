@@ -101,6 +101,7 @@ const UserProfile = (props) => {
         }
       );
       console.log(updatedProfile);
+      // err: if upload image more than one time, an error will occurs
       setSaveFile(true);
       dispatch(uiAction.setProfileImg(formState.inputs.profileImg.value.file));
     } catch (err) {
