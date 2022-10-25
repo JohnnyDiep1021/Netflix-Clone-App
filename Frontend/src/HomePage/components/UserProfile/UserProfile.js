@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { uiAction } from "../../../shared/store/ui";
 
 import { useForm } from "../../../shared/hooks/form-hooks";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
@@ -29,8 +31,11 @@ import "./UserProfile.scss";
 
 const UserProfile = (props) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.auth.userId);
+  const profileImg = useSelector((state) => state.ui.profileImg);
+
   const [filePath, setFilePath] = useState(props.user.profileImg.fileRef);
   const { isLoading, sendRequest, error, clearError, message, clearMessage } =
     useHttpClient();
@@ -97,9 +102,7 @@ const UserProfile = (props) => {
       );
       console.log(updatedProfile);
       setSaveFile(true);
-      setTimeout(() => {
-        history.push("/");
-      }, 2500);
+      dispatch(uiAction.setProfileImg(formState.inputs.profileImg.value.file));
     } catch (err) {
       console.log(err);
     }
@@ -108,6 +111,7 @@ const UserProfile = (props) => {
     props.onClose();
     setFilePath(formState.inputs.profileImg.value.fileRef);
     setSaveFile(true);
+    dispatch(uiAction.setProfileImg(props.user.profileImg.file));
   };
   return (
     <Modal
@@ -124,7 +128,7 @@ const UserProfile = (props) => {
           //   formState.inputs.profileImg.value.file ||
           //   "https://ih0.redbubble.net/image.618427277.3222/flat,1000x1000,075,f.u2.jpg"
           // }
-          src={formState.inputs.profileImg.value.file}
+          src={profileImg}
           filePath={filePath}
           userName={formState.inputs.username.value}
           label="profile"

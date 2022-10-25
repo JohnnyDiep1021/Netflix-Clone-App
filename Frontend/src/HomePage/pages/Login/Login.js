@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { authAction } from "../../../shared/store/auth";
 import { useDispatch } from "react-redux";
+
+import { authAction } from "../../../shared/store/auth";
+import { uiAction } from "../../../shared/store/ui";
 
 import { useForm } from "../../../shared/hooks/form-hooks";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
@@ -60,6 +62,7 @@ const Login = () => {
           userId: responseData.user.id,
         })
       );
+      dispatch(uiAction.setProfileImg(responseData.user.profileImg.file));
     } catch (error) {}
   };
   return (

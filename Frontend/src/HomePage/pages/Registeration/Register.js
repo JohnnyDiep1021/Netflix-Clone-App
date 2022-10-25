@@ -1,7 +1,9 @@
 import React, { Fragment, useState } from "react";
 
-import { authAction } from "../../../shared/store/auth";
 import { useDispatch } from "react-redux";
+
+import { authAction } from "../../../shared/store/auth";
+import { uiAction } from "../../../shared/store/ui";
 
 import { useHttpClient } from "../../../shared/hooks/http-hook";
 import { useForm } from "../../../shared/hooks/form-hooks";
@@ -72,6 +74,7 @@ const Register = () => {
           userId: responseData.user.id,
         })
       );
+      dispatch(uiAction.setProfileImg(responseData.user.profileImg.file));
     } catch (error) {}
   };
   return (

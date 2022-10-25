@@ -15,6 +15,8 @@ import "./Navbar.scss";
 const Navbar = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+  const profileImg = useSelector((state) => state.ui.profileImg);
+
   const { sendRequest } = useHttpClient();
   const [userProfile, setUserProfile] = useState();
   const [showProfile, setShowProfile] = useState(false);
@@ -101,9 +103,7 @@ const Navbar = () => {
           </Button> */}
           <div className="menu-container">
             <div className="profile-img" onClick={showProfileHandler}>
-              {userProfile && (
-                <img src={userProfile.profileImg.file} alt="profile" />
-              )}
+              <img src={profileImg} alt="profile" />
             </div>
             <ul className="opt-list">
               <li className="opt-list_item">
