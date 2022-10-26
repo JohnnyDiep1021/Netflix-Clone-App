@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import { useHttpClient } from "../../../hooks/http-hook";
+import { uiAction } from "../../../store/ui";
 import { authAction } from "../../../store/auth";
 
 import UserProfile from "../../../../HomePage/components/UserProfile/UserProfile";
+
 import SearchEngine from "../../../../HomePage/components/SearchEngine/SearchEngine";
 import Button from "../../UI/Button/Button";
 import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -32,12 +34,16 @@ const Navbar = () => {
         );
         console.log(responseData);
         setUserProfile(responseData.user);
+        dispatch(uiAction.setProfileImg(responseData.user.profileImg.file));
+        dispatch(
+          uiAction.setProfileImgRef(responseData.user.profileImg.fileRef)
+        );
       } catch (err) {
         console.log(err);
       }
     };
     fetchInitData();
-  }, [token, sendRequest]);
+  }, [token, sendRequest, dispatch]);
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
@@ -103,7 +109,7 @@ const Navbar = () => {
           </Button> */}
           <div className="menu-container">
             <div className="profile-img" onClick={showProfileHandler}>
-              <img src={profileImg} alt="profile" />
+              {profileImg && <img src={profileImg} alt="profile" />}
             </div>
             <ul className="opt-list">
               <li className="opt-list_item">

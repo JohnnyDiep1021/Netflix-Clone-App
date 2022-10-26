@@ -35,10 +35,10 @@ const UserProfile = (props) => {
   const token = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.auth.userId);
   const profileImg = useSelector((state) => state.ui.profileImg);
+  const profileImgRef = useSelector((state) => state.ui.profileImgRef);
 
   const [filePath, setFilePath] = useState(props.user.profileImg.fileRef);
-  const { isLoading, sendRequest, error, clearError, message, clearMessage } =
-    useHttpClient();
+  const { sendRequest } = useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
     {
       email: {

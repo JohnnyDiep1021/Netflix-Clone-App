@@ -7,7 +7,7 @@ import {
   deleteObject,
 } from "firebase/storage";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { uiAction } from "../../../store/ui";
 
 import ErrorModal from "../Modal/ErrorModal";
@@ -19,11 +19,10 @@ import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import "./ImageUpload.scss";
 const ImageUpload = (props) => {
   const dispatch = useDispatch();
-  const profileImg = useSelector((state) => state.ui.profileImg);
 
-  const [error, setError] = useState("");
   // const [previewUrl, setPreviewUrl] = useState(props.src || null);
   // const [fileRef, setFileRef] = useState(props.filePath || null);
+  const [error, setError] = useState("");
   const [saveFile, setSaveFile] = useState(false);
   const [oldFilePath, setOldFilePath] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);

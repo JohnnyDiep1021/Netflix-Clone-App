@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialUiState = {
   profileImg: "",
+  profileImgRef: "",
 };
 
 const uiSlice = createSlice({
@@ -11,6 +12,9 @@ const uiSlice = createSlice({
   reducers: {
     setProfileImg(state, action) {
       state.profileImg = action.payload;
+    },
+    setProfileImgRef(state, action) {
+      state.profileImgRef = action.payload;
     },
   },
 });
