@@ -37,7 +37,7 @@ const UserProfile = (props) => {
   const profileImg = useSelector((state) => state.ui.profileImg);
   const profileImgRef = useSelector((state) => state.ui.profileImgRef);
 
-  const [filePath, setFilePath] = useState(props.user.profileImg.fileRef);
+  const [filePath, setFilePath] = useState();
   const { sendRequest } = useHttpClient();
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -74,7 +74,20 @@ const UserProfile = (props) => {
   const [saveFile, setSaveFile] = useState(false);
 
   useEffect(() => {
-    setSaveFile(false);
+    if (saveFile) {
+      const fetchUserData = async () => {
+        const responseData = await sendRequest(
+          `${process.env.REACT_APP_BACKEND_URL}/users/me`,
+          "GET",
+          null,
+          { Authorization: `Bearer ${token}` }
+        );
+        // console.log(responseData);
+        setFilePath(responseData.user.profileImg.fileRef);
+        setSaveFile(false);
+      };
+      fetchUserData();
+    }
   }, [sendRequest, token, setFormData, saveFile]);
 
   const submitProfileHandler = async (event) => {

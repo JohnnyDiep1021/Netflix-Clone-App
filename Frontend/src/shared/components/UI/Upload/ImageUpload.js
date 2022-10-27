@@ -46,14 +46,14 @@ const ImageUpload = (props) => {
       const deletedFileRef = ref(storage, filePath);
       deleteObject(deletedFileRef)
         .then((responseData) => {
-          setOldFilePath(null);
           setSaveFile(false);
+          setOldFilePath(null);
           console.log(`Deleted previous file ${filePath} successfully!`);
         })
         .catch((error) => {
           // error.message = `An error occurred. Could not delete previous file!`;
-          // console.log(error);
-          throw error;
+          console.log(error);
+          // throw error;
         });
     },
     []
