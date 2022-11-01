@@ -1,3 +1,5 @@
+@import "../../../sass/variables";
+
 .login {
   min-width: 100%;
   min-height: 100vh;
@@ -8,6 +10,7 @@
     ),
     url("https://assets.nflxext.com/ffe/siteui/vlv3/8ee18735-ada3-45be-b383-a94701054bb9/c9e54739-cb41-4445-b88e-2246b8c16cea/VN-en-20220613-popsignuptwoweeks-perspective_alpha_website_small.jpg");
   background-size: cover;
+  background-position: center;
   position: relative;
   & .top {
     & .wrapper {
@@ -15,6 +18,9 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      @media only screen and (max-width: $bp-small) {
+        padding: 2rem;
+      }
       & .logo {
         height: 4rem;
       }
@@ -33,6 +39,12 @@
     align-items: center;
     color: var(--light-text-color);
     background-color: rgba(0, 0, 0, 0.75);
+    @media only screen and (max-width: $bp-smallest) {
+      width: 30rem;
+      height: 55rem;
+      padding: 4.5rem 3rem 4rem;
+      margin-top: 3rem;
+    }
     & .login-form-main {
       width: 100%;
       flex-grow: 1;
@@ -95,6 +107,27 @@
     background-color: rgba(0, 0, 0, 0.75);
     & .footer {
       background-color: transparent;
+      @media only screen and (max-width: $bp-small) {
+        padding: 2rem 2rem 0;
+      }
+      @media only screen and (max-width: $bp-smallest) {
+        padding: 4rem 4rem 0;
+      }
+      & .footer-links {
+        @media only screen and (max-width: $bp-small) {
+          font-size: 1rem;
+        }
+        @media only screen and (max-width: $bp-smallest) {
+          flex-direction: column;
+          gap: 1.5rem;
+          font-size: 1.3rem;
+        }
+        & > div {
+          @media only screen and (max-width: $bp-smallest) {
+            border-top: 0.5px solid rgba(65, 65, 65, 0.5);
+          }
+        }
+      }
     }
   }
 }

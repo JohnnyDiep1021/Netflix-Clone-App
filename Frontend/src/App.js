@@ -2,8 +2,9 @@ import { Fragment } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { useAuth } from "./shared/hooks/auth-hook";
+import Navbar from "./shared/components/Navigation/Navbar";
+import MainNavigation from "./shared/components/Navigation/MainNavigation";
 
-import Navbar from "./shared/components/Navigation/Navbar/Navbar";
 import MovieView from "./HomePage/components/MovieView/MovieView";
 import SearchView from "./SearchPage/page/SearchView";
 import Home from "./HomePage/pages/HomePage";
@@ -22,19 +23,23 @@ function App() {
       <Fragment>
         <Switch>
           <Route path="/home" exact>
-            <Navbar />
+            {/* <Navbar /> */}
+            <MainNavigation />
             <Home />
           </Route>
           <Route path="/category/:type">
-            <Navbar />
+            {/* <Navbar /> */}
+            <MainNavigation />
             <Home />
           </Route>
           <Route path="/search">
-            <Navbar />
+            {/* <Navbar /> */}
+            <MainNavigation />
             <SearchView />
           </Route>
           <Route path="/watchlist">
-            <Navbar />
+            {/* <Navbar /> */}
+            <MainNavigation />
             <WatchList />
           </Route>
           <Route path="/watch">

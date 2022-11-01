@@ -1,0 +1,108 @@
+@import "../../../sass/variables";
+
+.main-navigation {
+  &__header-nav {
+    // display: none;
+    width: 100%;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    opacity: 0;
+    transition: all 0.5s;
+    @media (min-width: $bp-largest) {
+      display: block;
+      visibility: visible;
+      opacity: 1;
+      position: relative;
+      top: 0;
+      left: 0;
+    }
+  }
+  &__drawer-nav {
+    height: 100vh;
+  }
+  &__home-nav {
+    display: block;
+    img {
+      height: 3rem;
+      margin-right: 3rem;
+    }
+    @media (min-width: $bp-largest) {
+      display: none;
+    }
+  }
+  &__menu-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    background: transparent;
+    border: none;
+    color: rgb(255, 255, 255);
+    border-radius: 50%;
+    transition: all 0.3s;
+    &:hover {
+      color: #000;
+      background-color: invert($color: #000);
+    }
+    & svg {
+      font-size: 3.6rem;
+    }
+    /* margin-right: 2rem; */
+    cursor: pointer;
+    @media (min-width: $bp-largest) {
+      display: none;
+    }
+  }
+}
+
+// .main-navigation__header-nav {
+//   /* display: none; */
+//   position: fixed;
+//   top: 0;
+//   left: -100%;
+//   visibility: hidden;
+//   opacity: 0;
+//   transition: all 0.5s;
+// }
+// .main-navigation__drawer-nav {
+//   height: 100vh;
+// }
+// .main-navigation__menu-btn {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   width: 4rem;
+//   height: 4rem;
+//   background: transparent;
+//   border: none;
+//   & svg {
+//     font-size: 3.6rem;
+//   }
+//   /* margin-right: 2rem; */
+//   cursor: pointer;
+// }
+// @media (min-width: $bp-largest) {
+//   .main-navigation__menu-btn {
+//     display: none;
+//   }
+//   .main-navigation__home-nav {
+//     display: none;
+//   }
+//   .main-navigation__header-nav {
+//     display: block;
+//     visibility: visible;
+//     opacity: 1;
+//     position: relative;
+//     top: 0;
+//     left: 0;
+//   }
+// }
+
+@media (max-width: 348px) {
+  .main-navigation__header-heading {
+    font-size: 2rem;
+  }
+}

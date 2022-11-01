@@ -5,13 +5,12 @@ import queryString from "query-string";
 
 import MovieItem from "../../HomePage/components/MovieItem/MovieItem";
 import { useHttpClient } from "../../shared/hooks/http-hook";
-import SearchViewItem from "../components/SearchViewItem";
 
 import "./SearchView.scss";
 
 const SearchView = (props) => {
   const token = useSelector((state) => state.auth.token);
-  const { isLoading, sendRequest, error, clearError } = useHttpClient();
+  const { isLoading, sendRequest } = useHttpClient();
   const [queryResult, setQueryResult] = useState([]);
   const { search } = useLocation();
   const { q } = queryString.parse(search);
@@ -43,7 +42,7 @@ const SearchView = (props) => {
           ))}
         {queryResult.message && (
           <div className="searchResult-msg">
-            Oops, no movie found. Please try again with the movie's title!
+            Oops, no movie found. Please, search movies by the title!
           </div>
         )}
       </ul>

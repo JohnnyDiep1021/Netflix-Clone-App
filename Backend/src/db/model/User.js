@@ -135,6 +135,7 @@ UserSchema.statics.findByCredentials = async function ({
 UserSchema.statics.getProperty = async function () {
   return Object.keys(this.schema.obj);
 };
+// pre vs post middleware
 UserSchema.pre("save", async function (next) {
   const user = this;
 

@@ -1,4 +1,3 @@
-import { useHistory } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -30,7 +29,6 @@ import {
 import "./UserProfile.scss";
 
 const UserProfile = (props) => {
-  const history = useHistory();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const userId = useSelector((state) => state.auth.userId);

@@ -34,10 +34,9 @@ const authSlice = createSlice({
           userId: action.payload.userId,
         })
       );
-      console.log(tokenExpDate);
-      console.log(
-        `token: ${state.token}; expDate: ${state.tokenExpDate}; userId: ${state.userId}; isLoggedIn: ${state.isLoggedIn}; watchlist: ${state.watchlist.length}`
-      );
+      // console.log(
+      //   `token: ${state.token}; expDate: ${state.tokenExpDate}; userId: ${state.userId}; isLoggedIn: ${state.isLoggedIn}; watchlist: ${state.watchlist.length}`
+      // );
       console.log(`Logged in!`);
     },
 
@@ -48,9 +47,9 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       state.watchlist = [];
       localStorage.removeItem("userData");
-      console.log(
-        `token: ${state.token}; expDate: ${state.tokenExpDate}; userId: ${state.userId}; isLoggedIn: ${state.isLoggedIn}; watchlist: ${state.watchlist.length}`
-      );
+      // console.log(
+      //   `token: ${state.token}; expDate: ${state.tokenExpDate}; userId: ${state.userId}; isLoggedIn: ${state.isLoggedIn}; watchlist: ${state.watchlist.length}`
+      // );
       console.log("Logged out!");
     },
   },
