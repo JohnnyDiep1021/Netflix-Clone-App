@@ -1,3 +1,5 @@
+@import "../../../sass/variables";
+
 .searchList-container {
   list-style: none;
   width: 100%;
@@ -6,28 +8,36 @@
   top: 100%;
   overflow-y: scroll;
   background-color: rgba(65, 65, 65, 0.8);
-  padding: 1rem;
-  // backdrop-filter: blur(3px);
-  // -webkit-backdrop-filter: blur(3px);
+  padding: 0.5rem;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   border-bottom-left-radius: 0.4rem;
   border-bottom-right-radius: 0.4rem;
   &.loading {
     height: 8rem;
   }
+
+  @media only screen and (min-width: $bp-largest) {
+    padding: 1rem;
+  }
 }
 .emptyList-container {
   width: 100%;
-  height: 8rem;
+  height: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 100%;
   color: rgb(211, 211, 211);
   background-color: rgba(65, 65, 65, 0.8);
-  font-size: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(3px);
+  font-size: 1.2rem;
   -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  @media only screen and (min-width: $bp-largest) {
+    font-size: 2rem;
+    height: 8rem;
+  }
   & .emptyList_content {
     position: relative;
   }

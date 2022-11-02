@@ -36,14 +36,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 4rem;
-    height: 4rem;
+    width: 3.8rem;
+    height: 3.8rem;
     background: transparent;
     border: none;
     color: rgb(255, 255, 255);
     border-radius: 50%;
     transition: all 0.3s;
-    &:hover {
+
+    // &:hover,
+    &.menu-active {
       color: #000;
       background-color: invert($color: #000);
     }

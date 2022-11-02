@@ -1,6 +1,6 @@
 .side-drawer {
   font-size: 3.2rem;
-  width: 50%;
+  width: 70%;
   height: 100vh;
   /* background-color: #eee; */
   background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.85) 50%);
@@ -15,6 +15,7 @@
   visibility: hidden;
   transform: translateX(-100%);
   transition: all 0.4s linear;
+  overflow-y: scroll;
 }
 
 .side-drawer.active {

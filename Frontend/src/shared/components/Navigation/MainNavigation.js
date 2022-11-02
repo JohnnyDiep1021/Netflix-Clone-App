@@ -12,7 +12,7 @@ import "./MainNavigation.scss";
 const MainNavigation = (props) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const openDrawerHandler = (event) => {
-    setIsDrawerOpen(true);
+    isDrawerOpen ? setIsDrawerOpen(false) : setIsDrawerOpen(true);
   };
   const closeDrawerHandler = (event) => {
     setIsDrawerOpen(false);
@@ -40,7 +40,9 @@ const MainNavigation = (props) => {
           <Navbar />
         </nav>
         <Button
-          className="main-navigation__menu-btn"
+          className={`main-navigation__menu-btn ${
+            isDrawerOpen && "menu-active"
+          }`}
           onClick={openDrawerHandler}
         >
           <MenuIcon />

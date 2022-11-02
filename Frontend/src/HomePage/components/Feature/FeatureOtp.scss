@@ -1,8 +1,15 @@
-.featured {
-  height: 70vh;
-  position: relative;
+@import "../../../sass/variables";
 
-  margin-bottom: 2rem;
+.featured {
+  height: 30vh;
+  position: relative;
+  margin-bottom: 1.5rem;
+  @media only screen and (min-width: $bp-smallest) {
+    height: 65vh;
+  }
+  @media only screen and (min-width: $bp-largest) {
+    height: 75vh;
+  }
   & .category {
     position: absolute;
     top: 8rem;
@@ -34,31 +41,63 @@
       object-fit: cover;
     }
     & .info {
-      width: 35%;
+      width: 15rem;
       position: absolute;
       left: 5rem;
-      bottom: 10rem;
+      bottom: 2rem;
       color: white;
-      display: flex;
-      flex-direction: column;
-
+      display: none;
+      @media only screen and (min-width: $bp-smallest) {
+        width: 25rem;
+        display: flex;
+        flex-direction: column;
+      }
+      @media only screen and (min-width: $bp-moderate) {
+        width: 30rem;
+      }
+      @media only screen and (min-width: $bp-largest) {
+        width: 40rem;
+      }
       & img {
-        width: 35rem;
+        width: 100%;
         border-radius: 0.8rem;
         -webkit-box-shadow: 0 0 1.5rem 0.5rem rgba(255, 255, 255, 0.3);
         box-shadow: 0 0 1.5rem 0.5rem rgba(255, 255, 255, 0.3);
       }
 
       & .desc {
-        margin: 2rem 0;
+        margin: 2rem 0 1.5rem;
       }
 
       & .buttons {
         display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 15rem;
+        @media only screen and (min-width: $bp-smallest) {
+          width: 60%;
+        }
+        @media only screen and (min-width: $bp-moderate) {
+          flex-direction: row;
+          gap: 0;
+          width: auto;
+        }
         & .btn-func-icon {
+          justify-content: flex-start;
+          font-size: 1.4rem;
+          & svg {
+            @media only screen and (min-width: $bp-smallest) {
+              font-size: 1rem;
+            }
+          }
+          @media only screen and (min-width: $bp-moderate) {
+            justify-content: center;
+            font-size: 1.6rem;
+          }
           &.more {
             background-color: rgb(128, 128, 128, 0.7);
             color: white;
+            border-radius: 0.8rem;
             &:hover {
               background-color: rgb(128, 128, 128);
               font-weight: 600;

@@ -15,7 +15,7 @@ import "./SearchEngine.scss";
 const SearchEngine = (props) => {
   const history = useHistory();
   const token = useSelector((state) => state.auth.token);
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { isLoading, sendRequest } = useHttpClient();
   const [queryResult, setQueryResult] = useState({});
   const [formState, inputHandler] = useForm(
     {
