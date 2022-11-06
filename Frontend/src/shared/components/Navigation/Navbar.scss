@@ -185,7 +185,10 @@
           margin-bottom: 1.5rem;
           border-radius: 1rem;
           box-shadow: 0 0 1.5rem 0rem rgba(255, 255, 255, 0.5);
-
+          @media only screen and (min-width: $bp-small) {
+            width: 20rem;
+            height: 20rem;
+          }
           & img {
             border-radius: 1rem;
           }

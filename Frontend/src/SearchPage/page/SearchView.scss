@@ -1,17 +1,27 @@
+@import "../../sass/variables";
+
 .searchResult-container {
   background-color: var(--dark-color-700);
-  padding: 16rem 10rem 8rem;
+  padding: 14rem 2rem 8rem;
+  @media only screen and (min-width: $bp-small) {
+    padding: 14rem 10rem 8rem;
+  }
   & .searchResult-list {
     width: 100%;
     display: flex;
     justify-content: center;
+
     font-size: 2rem;
     list-style: none;
     flex-wrap: wrap;
     gap: 1.5rem;
   }
   & .searchResult-msg {
-    font-size: 2.8rem;
     color: red;
+    font-size: 2rem;
+    text-align: center;
+    @media only screen and (min-width: $bp-small) {
+      font-size: 2.8rem;
+    }
   }
 }

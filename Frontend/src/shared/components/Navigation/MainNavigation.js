@@ -22,7 +22,7 @@ const MainNavigation = (props) => {
     <react.Fragment>
       <SideDrawer active={isDrawerOpen}>
         <nav className="main-navigation__drawer-nav">
-          <Navbar />
+          <Navbar onCloseDrawer={closeDrawerHandler} />
         </nav>
         <Button className=" btn-icon btn-close" onClick={closeDrawerHandler}>
           <CloseIcon />

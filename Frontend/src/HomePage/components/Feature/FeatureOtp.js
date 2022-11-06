@@ -66,14 +66,11 @@ const FeatureOption = (props) => {
           <option value="crime">Crime</option>
           <option value="education">Education</option>
           <option value="fantasy">Fantasy</option>
-          <option value="historical">Historical</option>
           <option value="horror">Horror</option>
           <option value="romance">Romance</option>
           <option value="sci-fi">Sci-fi</option>
           <option value="thriller">Thriller</option>
-          <option value="animation">Animation</option>
           <option value="drama">Drama</option>
-          <option value="documentary">Documentary</option>
         </select>
       </div>
       {/* )} */}
@@ -87,7 +84,12 @@ const FeatureOption = (props) => {
           {/* <img src={movieShowcase.image.file} alt="" /> */}
           <div className="info">
             <img src={movieShowcase.imageTitle.file} alt="title" />
-            <span className="desc">{movieShowcase.desc}</span>
+            <span className="desc">
+              {movieShowcase.desc.length > 30
+                ? movieShowcase.desc.split(" ").splice(0, 30).join(" ") +
+                  "....."
+                : movieShowcase.desc}
+            </span>
             <div className="buttons">
               <Button
                 element="link"

@@ -1,10 +1,8 @@
+@import "../../../sass/variables";
+
 .movie-item {
-  width: 20rem;
-  height: 12rem;
-  &.large {
-    width: 22rem;
-    height: 14rem;
-  }
+  width: 14rem;
+  height: 8rem;
   display: inline-block;
   border-radius: 0.4rem;
   margin-right: 0.8rem;
@@ -12,7 +10,18 @@
   transition: all 0.4s ease-in-out;
   background-color: var(--dark-color-700);
   position: relative;
-
+  @media only screen and (min-width: $bp-smallest) {
+    width: 20rem;
+    height: 12rem;
+  }
+  &.large {
+    width: 20rem;
+    height: 12rem;
+    @media only screen and (min-width: $bp-smallest) {
+      width: 22rem;
+      height: 12rem;
+    }
+  }
   & .poster {
     width: 100%;
     height: 100%;
@@ -46,21 +55,42 @@
     display: none;
     // visibility: hidden;
     // opacity: 0;
-    width: 20rem;
-    &.large {
-      width: 22rem;
-    }
+    width: 14rem;
     position: absolute;
     z-index: 100;
     margin-top: -1rem;
     background-color: #272727;
     border-bottom-left-radius: 0.4rem;
     border-bottom-right-radius: 0.4rem;
+    @media only screen and (min-width: $bp-smallest) {
+      width: 20rem;
+    }
+    &.large {
+      width: 20rem;
+      @media only screen and (min-width: $bp-smallest) {
+        width: 22rem;
+      }
+    }
     & .description__btn {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem;
+      padding: 0.5rem;
+      & .btn-icon {
+        width: 1.8rem;
+        height: 1.8rem;
+        & svg {
+          font-size: 1.2rem;
+          @media only screen and (min-width: $bp-smallest) {
+            font-size: 1.6rem;
+          }
+        }
+        @media only screen and (min-width: $bp-smallest) {
+          padding: 1rem;
+          width: 2.6rem;
+          height: 2.6rem;
+        }
+      }
       & .left {
         display: flex;
         align-items: center;
@@ -68,13 +98,17 @@
       }
     }
     & .description__text {
-      font-size: 1.28rem;
-      font-weight: 600;
-      color: var(--light-text-color) fff;
-      padding: 1rem;
       display: flex;
       justify-content: center;
       flex-direction: column;
+      padding: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--light-text-color) fff;
+      @media only screen and (min-width: $bp-smallest) {
+        padding: 1rem;
+        font-size: 1.28rem;
+      }
       & span {
         display: inline-block;
       }
@@ -99,7 +133,13 @@
     }
   }
   &:hover {
-    transform: scaleX(1.4) scaleY(1.5);
+    transform: scaleX(1.2) scaleY(1.3);
+    // @media only screen and (min-width: $bp-smallest) {
+    //   transform: scaleX(1.2) scaleY(1.3);
+    // }
+    @media only screen and (min-width: $bp-small) {
+      transform: scaleX(1.4) scaleY(1.5);
+    }
     z-index: 2;
     -webkit-box-shadow: 0 0 1.5rem 0 rgba(255, 255, 255, 0.07);
     box-shadow: 0 0 1.5rem 0 rgba(255, 255, 255, 0.07);

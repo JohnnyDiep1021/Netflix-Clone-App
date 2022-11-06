@@ -3,7 +3,7 @@
 .list {
   width: 100%;
   margin-top: 1rem;
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
   // position: relative;
 
   & .listTitle {
@@ -11,24 +11,29 @@
     color: white;
     font-size: 2rem;
     font-weight: 500;
-    margin-left: 5rem;
+    margin-left: 3rem;
     margin-bottom: 1rem;
+    @media only screen and (min-width: $bp-smallest) {
+      margin-left: 5rem;
+    }
   }
   & .carousel {
     position: relative;
-
     & .carouselbox {
       display: flex;
-      margin-left: 5rem;
+      margin-left: 3rem;
       position: relative;
       width: max-content;
       transition: all 1s ease;
+      @media only screen and (min-width: $bp-smallest) {
+        margin-left: 5rem;
+      }
     }
     & .sliderArrow {
-      width: 5rem;
+      width: 3rem;
       height: 100%;
-      display: none;
-
+      // display: none;
+      display: block;
       background-color: rgb(22, 22, 22, 0.5);
       color: white;
       position: absolute;
@@ -37,8 +42,9 @@
       bottom: 0;
       margin: auto;
       cursor: pointer;
-      @media only screen and (min-width: $bp-medium) {
-        display: block;
+      @media only screen and (min-width: $bp-small) {
+        // display: block;
+        width: 5rem;
       }
       &.left {
         left: 0;

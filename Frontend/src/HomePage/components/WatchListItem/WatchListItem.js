@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { useMovieBtn } from "../../../shared/hooks/movie-hooks";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
@@ -22,9 +23,7 @@ const WatchListItem = (props) => {
   const [isHovered, setIsHovered] = useState(false);
   const [showDetail, setShowDetail] = useState(false);
 
-  const { watchListToggleHandler, addMovieState, message } = useMovieBtn(
-    props.movieId
-  );
+  const { watchListToggleHandler, addMovieState } = useMovieBtn(props.movieId);
 
   useEffect(() => {
     const fetchInitData = async () => {
@@ -63,20 +62,24 @@ const WatchListItem = (props) => {
           <Fragment>
             <div className="left">
               {(!isHovered || showDetail) && (
-                <img
-                  src={movie.image.file}
-                  alt="movie-poster"
-                  className="movie-poster"
-                />
+                <Link to={{ pathname: "/watch", movie }}>
+                  <img
+                    src={movie.image.file}
+                    alt="movie-poster"
+                    className="movie-poster"
+                  />
+                </Link>
               )}
               {isHovered && !showDetail && (
-                <video
-                  src={movie.trailer.file}
-                  autoPlay
-                  loop
-                  muted
-                  className={`movie-trailer ${!isHovered && "deactive"}`}
-                />
+                <Link to={{ pathname: "/watch", movie }}>
+                  <video
+                    src={movie.trailer.file}
+                    autoPlay
+                    loop
+                    muted
+                    className={`movie-trailer ${!isHovered && "deactive"}`}
+                  />
+                </Link>
               )}
             </div>
             <div
@@ -110,13 +113,9 @@ const WatchListItem = (props) => {
                 </div>
                 <div className="description-info">
                   <p>
-                    A beautiful love of a young couple. They fell in love with
-                    each other since their first dating. They had been through
-                    thick and thin. However, the boy gradually recognized that
-                    he did not fully understand his girlfriend's intentions,
-                    leading to unexpected conflicts in love. Eventually, his
-                    girlfriends was so regretful as he passed away in a car
-                    accident.
+                    {movie.desc.length > 40
+                      ? movie.desc.split(" ").splice(0, 40).join(" ") + "....."
+                      : movie.desc}
                   </p>
                 </div>
               </div>

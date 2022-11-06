@@ -1,8 +1,8 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { useSelector } from "react-redux";
-
 import { useMovieBtn } from "../../../shared/hooks/movie-hooks";
 import { useHttpClient } from "../../../shared/hooks/http-hook";
+import { Link } from "react-router-dom";
 
 import MovieDetail from "../MovieDetail/MovieDetail";
 import Button from "../../../shared/components/UI/Button/Button";
@@ -79,13 +79,21 @@ const MovieItem = (props) => {
       {movieItem && (
         <Fragment>
           {!isHovered && (
-            <img
-              src={movieItem.image.file}
-              // className={`poster ${isPosterHovered && "hide"}`}
-              className={`poster`}
-              alt="movie poster"
-              // onClick={showOnHoverHandler}
-            />
+            <Link
+              to={{
+                pathname: "/watch",
+                movie: movieItem,
+                // trigger: triggerHandler,
+              }}
+            >
+              <img
+                src={movieItem.image.file}
+                // className={`poster ${isPosterHovered && "hide"}`}
+                className={`poster`}
+                alt="movie poster"
+                // onClick={showOnHoverHandler}
+              />
+            </Link>
           )}
           {isHovered && !showDetail && (
             <video

@@ -14,7 +14,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 
 import "./Navbar.scss";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
   const profileImg = useSelector((state) => state.ui.profileImg);
@@ -103,7 +103,12 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li className="navbar-item">
-          <Button element="navLink" to="/home" className="link">
+          <Button
+            element="navLink"
+            to="/home"
+            className="link"
+            onClick={props.onCloseDrawer}
+          >
             <span>Homepage</span>
           </Button>
         </li>
@@ -112,6 +117,7 @@ const Navbar = () => {
             element="navLink"
             to={`/category/movies?genre=`}
             className="link"
+            onClick={props.onCloseDrawer}
           >
             <span>Movies</span>
           </Button>
@@ -121,12 +127,18 @@ const Navbar = () => {
             element="navLink"
             to={`/category/series?genre=`}
             className="link"
+            onClick={props.onCloseDrawer}
           >
             <span>Series</span>
           </Button>
         </li>
         <li className="navbar-item">
-          <Button element="navLink" to="/watchlist" className="link">
+          <Button
+            element="navLink"
+            to="/watchlist"
+            className="link"
+            onClick={props.onCloseDrawer}
+          >
             <span>My Watch List</span>
           </Button>
         </li>

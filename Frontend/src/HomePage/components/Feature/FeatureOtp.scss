@@ -13,20 +13,31 @@
   & .category {
     position: absolute;
     top: 8rem;
-    left: 5rem;
-    font-size: 3rem;
+    left: 3rem;
+    font-size: 2rem;
     font-weight: 500;
     color: white;
     display: flex;
     align-items: center;
     // transition: all 0.2s;
+
+    @media only screen and (min-width: $bp-small) {
+      left: 5rem;
+
+      font-size: 3rem;
+    }
     & select {
-      cursor: pointer;
-      background-color: var(--dark-color-700);
-      border: 0.1rem solid white;
-      color: white;
-      margin-left: 2rem;
+      width: 12rem;
+      margin-left: 1.5rem;
       padding: 0.5rem;
+      color: white;
+      background-color: var(--dark-color-700);
+      border-radius: 0.4rem;
+      border: 0.1rem solid white;
+      cursor: pointer;
+      & option {
+        font-size: 1.2rem;
+      }
     }
   }
   & .showcase-container {
@@ -44,7 +55,7 @@
       width: 15rem;
       position: absolute;
       left: 5rem;
-      bottom: 2rem;
+      bottom: 5rem;
       color: white;
       display: none;
       @media only screen and (min-width: $bp-smallest) {
@@ -66,7 +77,10 @@
       }
 
       & .desc {
+        line-height: 1.5rem;
+        color: rgb(236, 236, 236);
         margin: 2rem 0 1.5rem;
+        text-align: justify;
       }
 
       & .buttons {
@@ -79,7 +93,6 @@
         }
         @media only screen and (min-width: $bp-moderate) {
           flex-direction: row;
-          gap: 0;
           width: auto;
         }
         & .btn-func-icon {

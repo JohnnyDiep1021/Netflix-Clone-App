@@ -92,27 +92,35 @@ const MovieDetail = (props) => {
               </span>
               <span className="duration">{props.movie.duration} mins</span>
             </div>
+            <div className="category category-responsive">
+              <div className="cast">
+                <p>
+                  <span>Cast:</span>
+                  {props.movie.casting || "Anh Tu, Diem My"}
+                </p>
+              </div>
+              <div className="genre">
+                <p>
+                  <span>Genre:</span>
+                  {props.movie.genre}
+                </p>
+              </div>
+              <div className="adj">
+                <p>
+                  <span>
+                    This {props.movie.isSeries ? "Series" : "Movie"} is:
+                  </span>
+                  {props.movie.label || "Romantic, Heartbroken"}
+                </p>
+              </div>
+            </div>
             <div className="description-info">
               <p className="warning">
                 {props.movie.warning ||
                   `Some audio languages may be pending: we're prioritizing the
                 safety of voice actors`}
               </p>
-              <p>
-                {/* {props.movie.desc ||
-                  `A beautiful love of a young couple. They fell in love with each
-                other since their first dating. They had been through thick and
-                thin. However, the boy gradually recognized that he did not
-                fully understand his girlfriend's intentions, leading to
-                unexpected conflicts in love. Eventually, his girlfriends was so
-                regretful as he passed away in a car accident.`} */}
-                A beautiful love of a young couple. They fell in love with each
-                other since their first dating. They had been through thick and
-                thin. However, the boy gradually recognized that he did not
-                fully understand his girlfriend's intentions, leading to
-                unexpected conflicts in love. Eventually, his girlfriends was so
-                regretful as he passed away in a car accident.
-              </p>
+              <p>{props.movie.desc}</p>
             </div>
           </div>
           <div className="category">

@@ -152,73 +152,75 @@ const UserProfile = (props) => {
         />
         <form className="personal-info" onSubmit={submitProfileHandler}>
           <h2 className="heading">Personal Information</h2>
-          <div className="info-1">
+          <div className="info-container">
+            <div className="info-1">
+              <Input
+                id="fname"
+                element="input"
+                label="First name"
+                type="text"
+                validators={[VALIDATOR_MAXLENGTH(NAME_MAXLENGTH)]}
+                errorText="only 64 character(s)"
+                errorStyle={{ color: "#ffa00a", fontSize: "12px" }}
+                onInput={inputHandler}
+                initialValue={formState.inputs.fname.value}
+                initialValid={formState.inputs.fname.isValid}
+              />
+              <Input
+                id="lname"
+                element="input"
+                label="Last name"
+                type="text"
+                validators={[VALIDATOR_MAXLENGTH(NAME_MAXLENGTH)]}
+                errorText="only 64 character(s)"
+                errorStyle={{ color: "#ffa00a", fontSize: "12px" }}
+                onInput={inputHandler}
+                initialValue={formState.inputs.lname.value}
+                initialValid={formState.inputs.lname.isValid}
+              />
+            </div>
             <Input
-              id="fname"
+              id="email"
               element="input"
-              label="First name"
+              label="Email"
               type="text"
-              validators={[VALIDATOR_MAXLENGTH(NAME_MAXLENGTH)]}
-              errorText="only 64 character(s)"
+              validators={[
+                VALIDATOR_EMAIL(),
+                VALIDATOR_MINLENGTH(EMAIL_MINLENGTH),
+                VALIDATOR_MAXLENGTH(EMAIL_MAXLENGTH),
+              ]}
+              errorText="include '@' (3-60 characters)"
               errorStyle={{ color: "#ffa00a", fontSize: "12px" }}
               onInput={inputHandler}
-              initialValue={formState.inputs.fname.value}
-              initialValid={formState.inputs.fname.isValid}
+              initialValue={formState.inputs.email.value}
+              initialValid={formState.inputs.email.isValid}
             />
             <Input
-              id="lname"
+              id="username"
               element="input"
-              label="Last name"
+              label="Username"
               type="text"
-              validators={[VALIDATOR_MAXLENGTH(NAME_MAXLENGTH)]}
-              errorText="only 64 character(s)"
+              validators={[
+                VALIDATOR_MINLENGTH(USERNAME_MINLENGTH),
+                VALIDATOR_MAXLENGTH(USERNAME_MAXLENGTH),
+              ]}
+              errorText="6-36 character(s)"
               errorStyle={{ color: "#ffa00a", fontSize: "12px" }}
               onInput={inputHandler}
-              initialValue={formState.inputs.lname.value}
-              initialValid={formState.inputs.lname.isValid}
+              initialValue={formState.inputs.username.value}
+              initialValid={formState.inputs.username.isValid}
+            />
+            <Input
+              id="bio"
+              label="Biography"
+              validators={[VALIDATOR_MAXLENGTH(BIO_MAXLENGTH)]}
+              errorText="Only 256 character(s)"
+              errorStyle={{ color: "#ffa00a", fontSize: "12px" }}
+              onInput={inputHandler}
+              initialValue={formState.inputs.bio.value}
+              initialValid={formState.inputs.bio.isValid}
             />
           </div>
-          <Input
-            id="email"
-            element="input"
-            label="Email"
-            type="text"
-            validators={[
-              VALIDATOR_EMAIL(),
-              VALIDATOR_MINLENGTH(EMAIL_MINLENGTH),
-              VALIDATOR_MAXLENGTH(EMAIL_MAXLENGTH),
-            ]}
-            errorText="include '@' (3-60 characters)"
-            errorStyle={{ color: "#ffa00a", fontSize: "12px" }}
-            onInput={inputHandler}
-            initialValue={formState.inputs.email.value}
-            initialValid={formState.inputs.email.isValid}
-          />
-          <Input
-            id="username"
-            element="input"
-            label="Username"
-            type="text"
-            validators={[
-              VALIDATOR_MINLENGTH(USERNAME_MINLENGTH),
-              VALIDATOR_MAXLENGTH(USERNAME_MAXLENGTH),
-            ]}
-            errorText="6-36 character(s)"
-            errorStyle={{ color: "#ffa00a", fontSize: "12px" }}
-            onInput={inputHandler}
-            initialValue={formState.inputs.username.value}
-            initialValid={formState.inputs.username.isValid}
-          />
-          <Input
-            id="bio"
-            label="Biography"
-            validators={[VALIDATOR_MAXLENGTH(BIO_MAXLENGTH)]}
-            errorText="Only 256 character(s)"
-            errorStyle={{ color: "#ffa00a", fontSize: "12px" }}
-            onInput={inputHandler}
-            initialValue={formState.inputs.bio.value}
-            initialValid={formState.inputs.bio.isValid}
-          />
           <div className="profile-btn-container">
             <Button className="btn btn-cancel" onClick={cancelUpdateHandler}>
               Cancel

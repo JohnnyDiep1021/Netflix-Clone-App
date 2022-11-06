@@ -1,6 +1,14 @@
+@import "../../../sass/variables";
+
 .watchList-container {
   background-color: var(--dark-color-700);
-  padding: 16rem 10rem 8rem;
+  padding: 12rem 2rem 6rem;
+  @media only screen and (min-width: $bp-smallest) {
+    padding: 16rem 10rem 8rem;
+  }
+  @media only screen and (min-width: $bp-largest) {
+    padding: 16rem 20rem 8rem;
+  }
   & .watchList-list {
     display: flex;
     flex-direction: column;
@@ -8,8 +16,11 @@
   }
   & .watchList-msg {
     text-align: center;
-    font-size: 2.8rem;
+    font-size: 2rem;
     color: #fff;
     font-weight: 500;
+    @media only screen and (min-width: $bp-xsmall) {
+      font-size: 3rem;
+    }
   }
 }
