@@ -10,8 +10,8 @@ app.use(cors());
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
-const morgan = require("morgan");
-app.use(morgan("dev"));
+// const morgan = require("morgan");
+// app.use(morgan("dev"));
 
 const apiRouter = require("./src/server/api");
 app.use("/api", apiRouter);
