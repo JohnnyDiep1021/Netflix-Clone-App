@@ -30,8 +30,11 @@ userRouter.get("/me", auth, usersController.getUserById);
 // GET ALL USERS
 userRouter.get("/", auth, usersController.getAllUser);
 
-// GET USER STATS
-userRouter.get("/stats", auth, usersController.getUserStats);
+// GET MONTHLY USER STATS
+userRouter.get("/monthlyStats", auth, usersController.getMonthlyStats);
+
+// GET REGISTER STATS
+userRouter.get("/registerStats", auth, usersController.getRegisterStats);
 
 // GET MOVIE FROM WATCH LIST
 userRouter.get("/watchlist", auth, usersController.getWatchList);

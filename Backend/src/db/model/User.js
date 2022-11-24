@@ -68,6 +68,10 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    membership: {
+      type: String,
+      default: "standard",
+    },
     watchList: {
       type: Array,
       default: [],

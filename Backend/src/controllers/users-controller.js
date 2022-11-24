@@ -82,24 +82,32 @@ const getUserById = async (req, res, next) => {
 const getAllUser = async (req, res, next) => {
   try {
     if (req.user.isAdmin) {
-      const users = req.query.new
-        ? await User.find().sort({ _id: -1 }).limit(2)
-        : await User.find();
+      // const users = req.query.new
+      //   ? await User.find().sort({ _id: -1 }).limit(2)
+      //   : await User.find();
+      const currentPage = req.query.page || 1;
+      const perPage = 5;
+      let totalUsers;
+      totalUsers = await User.find().countDocuments();
+      const users = await User.find()
+        .skip((currentPage - 1) * perPage)
+        .limit(perPage);
       res.json({
         users: users.map((user) => user.toObject({ getters: true })),
+        totalUsers,
       });
     } else {
-      throw new HttpError("You are not allowed to see all users", 403);
+      throw new HttpError("You are not authorized to see all users data", 403);
     }
   } catch (error) {
     next(error);
   }
 };
 
-const getUserStats = async (req, res, next) => {
+const getMonthlyStats = async (req, res, next) => {
   try {
     if (req.user.isAdmin) {
-      const data = await User.aggregate([
+      const monthlyData = await User.aggregate([
         {
           $project: {
             month: { $month: "$createdAt" },
@@ -112,12 +120,44 @@ const getUserStats = async (req, res, next) => {
             total: { $sum: 1 },
           },
         },
+        {
+          $sort: { _id: 1 },
+        },
       ]);
+      // console.log(monthlyData);
       res.json({
-        userStats: data,
+        monthlyStats: monthlyData,
       });
     }
   } catch (error) {
+    console.log(error);
+    next(error);
+  }
+};
+
+const getRegisterStats = async (req, res, next) => {
+  try {
+    if (req.user.isAdmin) {
+      const membershipData = await User.aggregate([
+        {
+          $project: {
+            membership: 1,
+          },
+        },
+        {
+          $group: {
+            _id: "$membership",
+            total: { $sum: 1 },
+          },
+        },
+      ]);
+      // console.log(membershipData);
+      res.json({
+        membershipStats: membershipData,
+      });
+    }
+  } catch (error) {
+    console.log(error);
     next(error);
   }
 };
@@ -214,7 +254,8 @@ module.exports = {
   logoutAll,
   getUserById,
   getAllUser,
-  getUserStats,
+  getMonthlyStats,
+  getRegisterStats,
   updateUser,
   getWatchList,
   addWatchList,
