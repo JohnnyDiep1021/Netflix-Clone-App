@@ -10,8 +10,21 @@ app.use(cors());
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
-// const morgan = require("morgan");
-// app.use(morgan("dev"));
+const fs = require("fs");
+const path = require("path");
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, "access.log"),
+  { flags: "a" }
+);
+
+const morgan = require("morgan");
+app.use(morgan("dev", { stream: accessLogStream }));
+
+const helmet = require("helmet");
+app.use(helmet());
+
+const compression = require("compression");
+app.use(compression());
 
 const apiRouter = require("./src/server/api");
 app.use("/api", apiRouter);
