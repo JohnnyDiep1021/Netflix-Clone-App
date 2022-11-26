@@ -111,7 +111,7 @@ const UserProfile = (props) => {
           Authorization: `Bearer ${token}`,
         }
       );
-      console.log(updatedProfile);
+      // console.log(updatedProfile);
       // err: if upload image more than one time, an error will occurs
       setSaveFile(true);
       dispatch(uiAction.setProfileImg(formState.inputs.profileImg.value.file));

@@ -21,10 +21,11 @@ const MovieList = (props) => {
     setIsMoved(true);
 
     const totalCarouselWidth = carouselRef.current.clientWidth - 208;
-    console.log(totalCarouselWidth);
+    // console.log(totalCarouselWidth);
+
     // get bounding x (margin-left, ) of carousel
     let distance = carouselRef.current.getBoundingClientRect().x - 50;
-    console.log(distance);
+    // console.log(distance);
 
     // movieItem innerWidth = 200, margin-right = 8 => totalWidth = 208
     // translate +x value will push the carousel forward and create sliding backward effect
@@ -46,7 +47,7 @@ const MovieList = (props) => {
         setIsMoved(false);
       }
     }
-    console.log(scrollAmount);
+    // console.log(scrollAmount);
     carouselRef.current.style.transform = `translateX(${scrollAmount}px)`;
   };
 

@@ -32,6 +32,7 @@ app.use("/api", apiRouter);
 // error-handler midlleware
 app.use((err, req, res, next) => {
   const status = err.status || 500;
+  console.log(err);
   res.status(status).json({
     error: err.message || `An unknown error occurred. Please try again!`,
   });

@@ -82,20 +82,25 @@ const getUserById = async (req, res, next) => {
 const getAllUser = async (req, res, next) => {
   try {
     if (req.user.isAdmin) {
-      // const users = req.query.new
-      //   ? await User.find().sort({ _id: -1 }).limit(2)
-      //   : await User.find();
-      const currentPage = req.query.page || 1;
-      const perPage = 5;
-      let totalUsers;
-      totalUsers = await User.find().countDocuments();
-      const users = await User.find()
-        .skip((currentPage - 1) * perPage)
-        .limit(perPage);
-      res.json({
-        users: users.map((user) => user.toObject({ getters: true })),
-        totalUsers,
-      });
+      let users;
+      if (req.query.page !== undefined) {
+        const currentPage = req.query.page || 1;
+        const perPage = 5;
+        let totalUsers;
+        totalUsers = await User.find().countDocuments();
+        users = await User.find()
+          .skip((currentPage - 1) * perPage)
+          .limit(perPage);
+        res.json({
+          users: users.map((user) => user.toObject({ getters: true })),
+          totalUsers,
+        });
+      } else {
+        const users = await User.find();
+        res.json({
+          users: users.map((user) => user.toObject({ getters: true })),
+        });
+      }
     } else {
       throw new HttpError("You are not authorized to see all users data", 403);
     }
@@ -164,13 +169,19 @@ const getRegisterStats = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
   try {
+    console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty())
       throw new HttpError(
         `Invalid inputs passed! Please, check your data and try again.`,
         422
       );
-    if (req.user._id.toString() === req.params.id || req.user.isAdmin) {
+    let id;
+    if (req.body.id) {
+      id = req.body.id;
+      delete req.body.id;
+    }
+    if (req.user._id.toString() === req.params.id) {
       const updates = await updateValidation("User", req.body);
       if (updates.error) throw new HttpError(updates.error, 400);
       updates.forEach((update) => {
@@ -178,6 +189,15 @@ const updateUser = async (req, res, next) => {
       });
       await req.user.save();
       res.json({ updatedUser: req.user });
+    } else if (req.user.isAdmin) {
+      const updates = await updateValidation("User", req.body);
+      if (updates.error) throw new HttpError(updates.error, 400);
+      const user = await User.findById(id);
+      updates.forEach((update) => {
+        user[update] = req.body[update];
+      });
+      await user.save();
+      res.json({ updatedUser: user });
     } else {
       throw new HttpError("You can only update your account", 403);
     }
@@ -236,9 +256,18 @@ const removeWatchList = async (req, res, next) => {
 
 const deleteProfile = async (req, res, next) => {
   try {
-    if (req.user._id.toString() === req.params.id || req.user.isAdmin) {
+    if (req.user._id.toString() === req.params.id && !req.user.isAdmin) {
       await req.user.remove();
-      res.json({ message: "Account deleted sucessfully!" });
+      res.json({ message: "Account deleted sucessfully!", isDeleted: true });
+    } else if (req.user.isAdmin) {
+      const deletedUser = await User.deleteOne({ _id: req.params.id });
+      console.log(deletedUser);
+      if (deletedUser.deletedCount > 0) {
+        res.json({
+          message: "Account deleted sucessfully!",
+          isDeleted: !!deletedUser.deletedCount,
+        });
+      }
     } else {
       throw new HttpError("You can only delete your account", 403);
     }

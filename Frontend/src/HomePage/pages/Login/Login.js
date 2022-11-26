@@ -41,7 +41,6 @@ const Login = () => {
 
   const loginSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log(process.env.REACT_APP_BACKEND_URL);
     try {
       const responseData = await sendRequest(
         `${process.env.REACT_APP_BACKEND_URL}/users/auth/login`,

@@ -72,6 +72,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: "standard",
     },
+    payment: {
+      type: Boolean,
+      default: false,
+    },
     watchList: {
       type: Array,
       default: [],
