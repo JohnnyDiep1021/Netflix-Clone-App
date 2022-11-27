@@ -6,6 +6,7 @@ import { useHttpClient } from "../../hooks/http-hook";
 import { uiAction } from "../../store/ui";
 import { authAction } from "../../store/auth";
 
+// import StripeContainer from "../../../HomePage/components/Payment/StripeContainer";
 import UserProfile from "../../../HomePage/components/UserProfile/UserProfile";
 import SearchEngine from "../../../HomePage/components/SearchEngine/SearchEngine";
 

@@ -3,6 +3,7 @@
     "DB_USER": "johnny-netflix-app",
     "DB_PASSWORD": "Dbdev1234",
     "DB_NAME": "netflix-api",
-    "JWT_KEY": "vh5iz1VsJeciZ8TA"
+    "JWT_KEY": "vh5iz1VsJeciZ8TA",
+    "STRIPE_SECRET_TEST": "sk_test_51M1LmFAUlN9Z2Oc1B34yL1WpyVnqWJ0Hh9TXo82CuvoaGxlDYgp5zeQXANeuEgB5a3KcfgSBhix45mv9IuhdymIy00Kq0uisxC"
   }
 }

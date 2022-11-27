@@ -1,7 +1,10 @@
+const lodash = require("lodash");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST);
+
 const User = require("../db/model/User");
+
 const HttpError = require("../utils/http-error");
 const { updateValidation } = require("../utils/utils");
-const lodash = require("lodash");
 const { validationResult } = require("express-validator");
 
 const signup = async (req, res, next) => {
@@ -233,6 +236,39 @@ const addWatchList = async (req, res, next) => {
   }
 };
 
+const processPayment = async (req, res, next) => {
+  try {
+    let { product, token: stripeToken } = req.body;
+    // a key keep track the payment process and ensure customers won't be charged twice
+    const idempontencyKey = req.user._id.toString();
+    const newCustomer = await stripe.customers.create({
+      email: stripeToken.email,
+      source: stripeToken.id,
+    });
+    console.log(newCustomer);
+
+    const payment = await stripe.charges.create(
+      {
+        amount: product.price * 100,
+        currency: "usd",
+        customer: newCustomer.id,
+        receipt_email: stripeToken.email,
+        description: product.name,
+        // shipping: {
+        //   name: stripeToken.card.name,
+        //   address: {
+        //     country: stripeToken.card.address_country,
+        //   },
+        // },
+      },
+      { idempontencyKey }
+    );
+    res.status(200).json({ msg: `Paid successfully`, payment });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const removeWatchList = async (req, res, next) => {
   try {
     const isMovieExisted = req.user.watchList.some(
@@ -249,7 +285,6 @@ const removeWatchList = async (req, res, next) => {
     await req.user.save();
     res.json({ watchList: req.user.watchList });
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
@@ -286,6 +321,7 @@ module.exports = {
   getMonthlyStats,
   getRegisterStats,
   updateUser,
+  processPayment,
   getWatchList,
   addWatchList,
   removeWatchList,

@@ -61,6 +61,9 @@ userRouter.patch(
   usersController.updateUser
 );
 
+// PAYMENT
+userRouter.post("/payment", auth, usersController.processPayment);
+
 // DELETE
 userRouter.delete("/:id", auth, usersController.deleteProfile);
 module.exports = userRouter;
