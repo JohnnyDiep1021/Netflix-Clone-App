@@ -63,4 +63,4 @@ After signing up successfully, explore all the app features and enjoy watching m
   +  Additional feature for cross-site sharing account.
   +  Authentic payment.
 ## Closing notes
-For more realistic experience and vivid imagination, please spend time exploring and playing around with the [Netflix Clone App](https://netflix-lover-jd.web.app/).
+For more realistic experience and vivid imagination, please spend time exploring and playing around with the [Netflix Clone App](https://netflix-lover-jd.web.app/). Enjoy :blush:! 
