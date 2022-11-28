@@ -10,15 +10,15 @@ Inspired by the official movie web app - Netflix, [Netflix Clone App](https://ne
 ## Features
 This app is constructed with all basic Netflix's features:
 1. Register for a new Netflix account or sign in for an existing one by using email/ username and password (with detailed input prompts).
-2. Search engine
+2. Search engine.
 3. Self-customize user account information:
    + Upload profile image
    + Update personal data (name, bio, username)
-4. Switch between a different movie genre
+4. Switch between a different movie genre.
 5. Add movies to "My List".
-6. Register for a premium membership step-by-step through the simulated payment process
-7. Play movies
-8. Auto account login/ logout (expired in 1 day)
+6. Register for a premium membership step-by-step through the simulated payment process.
+7. Play movies.
+8. Auto account login/ logout (expired in 1 day).
 
 ## How to use?
 To new users, there are 2/two ways to get started before using the **Netflix Clone App**:
@@ -34,14 +34,14 @@ After signing up successfully, explore all the app features and enjoy watching m
   + **react-router-dom** is used to simulate multi-page applications.
   + **react-transition-group** for modal, popup animations.
   + **reduxjs/toolkit**, **react-redux** creates stores to manage data across the application.
-  + **react-stripe-checkout** for payment process
+  + **react-stripe-checkout** for payment process.
   + **sass** is used for styles and decorations.
   + **mui/material** for icons and tooltips.
   + **firebase** for file upload.
 - **The user interface** is inspired and replicated from the official Netflix site:
-  + Each movie showcase can be hovered and then poped up. The pop-up window will display movie trailer and a vast interactive button (play, add to "My List", like, dislike, and expand for more detailed movie description)
+  + Each movie showcase can be hovered and then poped up. The pop-up window will display movie trailer and a vast interactive button (play, add to "My List", like, dislike, and expand for more detailed movie description).
   + The movies list's design is built with many scrollable carrousels. 
-  + The movie items in the watch list are designed based on the video items framework saved in the playlist on Youtube .
+  + The movie items in the watch list are designed based on the video items framework saved in the playlist on Youtube.
 
 2) ### Backend:
 - Featured by RESTful APIs and implemented by MongoDB, ExpressJs, and NodeJs. Using:
@@ -52,7 +52,7 @@ After signing up successfully, explore all the app features and enjoy watching m
   + **helmet** for setting up header security.
   + **jsonwebtoken**, **bcrypt** for creating authToken and hashing user's password.
   + **validator** for validating input data into mongoose schema.
-  + **stripe** for handling payment payment
+  + **stripe** for handling payment payment.
 
 ## What needs to be improved?
 - Although **Netflix Clone App** is usable, accessible and useful, there are still some features that can be improved and enhanced:
