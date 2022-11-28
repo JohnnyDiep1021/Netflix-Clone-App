@@ -27,7 +27,7 @@ To new users, there are 2/two ways to get started before using the **Netflix Clo
 
 After signing up successfully, explore all the app features and enjoy watching movies.
   
-## Technologies
+## Technologies :computer:
 1) ### Frontend:
 - **Netflix Clone App** is a single-page application (SPA), constructed from ReactJS. Using:
   + **Custom hooks** manages form data input, sending requests, authentication, and movie interactivities.
