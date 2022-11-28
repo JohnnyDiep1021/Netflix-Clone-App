@@ -16,7 +16,7 @@ This app is constructed with all basic Netflix's features:
    + Update personal data (name, bio, username)
 4. Switch between a different movie genre
 5. Add movies to the "My List".
-6. Register for a premium membership step-by-step through the payment process
+6. Register for a premium membership step-by-step through the simulated payment process
 7. Play movies
 8. Auto account login/ logout (expired in 1 day)
 
@@ -29,10 +29,38 @@ After signing up successfully, explore all the app features and enjoy watching m
   
 ## Technologies
 1) ### Frontend:
-**Netflix Clone App** is a single-paged application (SPA). The frontend is constructed from ReactJS, using:
-    - **Custom hooks** to manage form data input, sending requests, authentication, and movie interactivities.
-    - **react-router-dom** used to simulate multi-page applications.
-    - 
-## What needs to be improved?
+- **Netflix Clone App** is a single-page application (SPA), constructed from ReactJS. Using:
+  + **Custom hooks** manages form data input, sending requests, authentication, and movie interactivities.
+  + **react-router-dom** is used to simulate multi-page applications.
+  + **react-transition-group** for modal, popup animations.
+  + **reduxjs/toolkit**, **react-redux** creates stores to manage data across the application.
+  + **react-stripe-checkout** for payment process
+  + **sass** is used for styles and decorations.
+  + **mui/material** for icons and tooltips.
+  + **firebase** for file upload.
+- **The user interface** is inspired and replicated from the official Netflix site:
+  + Each movie showcase can be hovered and then poped up. The pop-up window will display movie trailer and a vast interactive button (play, add to "My List", like, dislike, and expand for more detailed movie description)
+  + The movies list's design is built with many scrollable carrousels. 
+  + The movie items in the watch list are designed based on the video items framework saved in the playlist on Youtube .
 
-## License
+2) ### Backend:
+- Featured by RESTful APIs and implemented by MongoDB, ExpressJs, and NodeJs. Using:
+  + **mongodb**, **mongoose** for user data storage.
+  + **cors** for setting up cross-site resource sharing permissions.
+  + **express** for building web framework, **express-validator** for handling and validating input data sent from client-side.
+  + **body-parser** for parsing request data.
+  + **helmet** for setting up header security.
+  + **jsonwebtoken**, **bcrypt** for creating authToken and hashing user's password.
+  + **validator** for validating input data into mongoose schema.
+  + **stripe** for handling payment payment
+
+## What needs to be improved?
+- Although **Netflix Clone App** is usable, accessible and useful, there are still some features that can be improved and enhanced:
+  +  Speed up application loading process.
+  +  The movie carrousels can be optimized to be scrolled smoother and infinitely instead of leaving a blank space after scrolling to the end.
+  +  A more secure way to store user data (token, userId,...) used for auto-login/ logout instead of storing it in easily-mutable local storage.
+  +  More configurations and settings for the quality of movies.
+  +  Additional feature for cross-site sharing account.
+  +  Authentic payment.
+## Closing notes
+For more realistic experience and vivid imagination, please spend time exploring and playing around with the [Netflix Clone App](https://netflix-lover-jd.web.app/).
