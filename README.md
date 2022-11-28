@@ -15,7 +15,7 @@ This app is constructed with all basic Netflix's features:
    + Upload profile image
    + Update personal data (name, bio, username)
 4. Switch between a different movie genre
-5. Add movies to the "My List".
+5. Add movies to "My List".
 6. Register for a premium membership step-by-step through the simulated payment process
 7. Play movies
 8. Auto account login/ logout (expired in 1 day)
