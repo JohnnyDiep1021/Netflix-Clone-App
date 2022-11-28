@@ -59,18 +59,45 @@ const MovieDetail = (props) => {
               onClick={async () => {
                 await watchListToggleHandler(props.id);
               }}
+              toolTip={{
+                title: "Add to My List",
+                placement: "top",
+                fontSize: "16px",
+              }}
             >
               <FavoriteIcon />
             </Button>
-            <Button className="btn-icon">
+            <Button
+              className="btn-icon"
+              toolTip={{
+                title: "I like this",
+                placement: "top",
+                fontSize: "16px",
+              }}
+            >
               <ThumbUpOffAltIcon />
             </Button>
-            <Button className="btn-icon">
+            <Button
+              className="btn-icon"
+              toolTip={{
+                title: "Not for me",
+                placement: "top",
+                fontSize: "16px",
+              }}
+            >
               <ThumbDownOffAltIcon />
             </Button>
           </div>
           <div className="right">
-            <Button className="btn-icon" onClick={muteHandler}>
+            <Button
+              className="btn-icon"
+              onClick={muteHandler}
+              toolTip={{
+                title: !isMuted ? "Muted" : "Unmuted",
+                placement: "top",
+                fontSize: "16px",
+              }}
+            >
               {!isMuted ? <VolumeUpIcon /> : <VolumeOffIcon />}
             </Button>
           </div>

@@ -46,7 +46,7 @@ export const useAuth = () => {
               Authorization: `Bearer ${token}`,
             }
           );
-          console.log(responseData);
+          // console.log(responseData);
           dispatch(authAction.logout());
         } catch (err) {}
       }, remainingTime);

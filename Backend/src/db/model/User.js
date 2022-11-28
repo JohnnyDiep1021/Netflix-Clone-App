@@ -58,7 +58,11 @@ const UserSchema = new mongoose.Schema(
       required: true,
     },
     profileImg: {
-      file: { type: String, default: "" },
+      file: {
+        type: String,
+        default:
+          "https://i.pinimg.com/originals/b4/0f/9f/b40f9f8fc0fb88aabf2a8acbc39c0ac0.png",
+      },
       fileRef: {
         type: String,
         default: "",

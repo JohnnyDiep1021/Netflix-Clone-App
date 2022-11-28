@@ -150,6 +150,9 @@ const UserProfile = (props) => {
           isSaved={saveFile}
           center
         />
+        {props.user.payment && (
+          <Button className="btn btn-bubble label">Premium</Button>
+        )}
         <form className="personal-info" onSubmit={submitProfileHandler}>
           <h2 className="heading">Personal Information</h2>
           <div className="info-container">

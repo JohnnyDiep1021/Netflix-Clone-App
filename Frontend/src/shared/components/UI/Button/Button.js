@@ -1,7 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
 
-import "./Button.scss";
+import { Tooltip } from "@mui/material";
 
+import "./Button.scss";
 const Button = (props) => {
   if (props.href) {
     return (
@@ -18,6 +19,31 @@ const Button = (props) => {
   if (props.to) {
     switch (props.element) {
       case "link":
+        if (props.toolTip) {
+          return (
+            <div>
+              <Tooltip
+                title={
+                  <span style={{ fontSize: props.toolTip?.fontSize || "14px" }}>
+                    {props.toolTip?.title || ""}
+                  </span>
+                }
+                placement={props.toolTip?.placement || "top"}
+                arrow
+              >
+                <Link
+                  to={props.to}
+                  exact={props.exact}
+                  onClick={props.onClick}
+                  className={`${props.className}`}
+                  target={props.target}
+                >
+                  {props.children}
+                </Link>
+              </Tooltip>
+            </div>
+          );
+        }
         return (
           <div>
             <Link
@@ -61,13 +87,33 @@ const Button = (props) => {
         >
           {props.children}
         </button>
-        ;
       </div>
     );
   }
+  if (props.toolTip) {
+    return (
+      <Tooltip
+        title={
+          <span style={{ fontSize: props.toolTip?.fontSize || "14px" }}>
+            {props.toolTip?.title || ""}
+          </span>
+        }
+        placement={props.toolTip?.placement || "top"}
+        arrow
+      >
+        <button
+          className={props.className}
+          type={props.type || "button"}
+          onClick={props.onClick}
+          disabled={props.disabled}
+          alt={props.alt}
+        >
+          {props.children}
+        </button>
+      </Tooltip>
+    );
+  }
   return (
-    // <div>
-    // <title>title</title>
     <button
       className={props.className}
       type={props.type || "button"}
@@ -77,7 +123,6 @@ const Button = (props) => {
     >
       {props.children}
     </button>
-    // </div>
   );
 };
 

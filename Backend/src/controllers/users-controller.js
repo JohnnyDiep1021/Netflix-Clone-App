@@ -1,6 +1,6 @@
 const lodash = require("lodash");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST);
-
+const { v4: uuidv4 } = require("uuid");
 const User = require("../db/model/User");
 
 const HttpError = require("../utils/http-error");
@@ -238,15 +238,13 @@ const addWatchList = async (req, res, next) => {
 
 const processPayment = async (req, res, next) => {
   try {
-    let { product, token: stripeToken } = req.body;
+    let { product, stripeToken } = req.body;
     // a key keep track the payment process and ensure customers won't be charged twice
-    const idempontencyKey = req.user._id.toString();
+    const idempotencyKey = uuidv4();
     const newCustomer = await stripe.customers.create({
       email: stripeToken.email,
       source: stripeToken.id,
     });
-    console.log(newCustomer);
-
     const payment = await stripe.charges.create(
       {
         amount: product.price * 100,
@@ -261,10 +259,18 @@ const processPayment = async (req, res, next) => {
         //   },
         // },
       },
-      { idempontencyKey }
+      { idempotencyKey }
     );
-    res.status(200).json({ msg: `Paid successfully`, payment });
+    if (payment.paid && payment.status === "succeeded") {
+      req.user.payment = true;
+      req.user.membership = "premium";
+      await req.user.save();
+    }
+    res
+      .status(200)
+      .json({ msg: `Payment proceed successfully`, success: true, payment });
   } catch (error) {
+    res.status(200).json({ msg: `Payment proceed failed!`, success: false });
     next(error);
   }
 };

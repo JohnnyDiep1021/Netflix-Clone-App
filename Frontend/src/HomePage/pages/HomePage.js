@@ -5,8 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { authAction } from "../../shared/store/auth";
 import { useHttpClient } from "../../shared/hooks/http-hook";
 
-import Payment from "../components/Payment/Payment";
-
 import Footer from "../components/Footer/Footer";
 import MovieList from "../components/MovieList/MovieList";
 import FeatureOption from "../components/Feature/FeatureOtp";
@@ -68,7 +66,6 @@ const Home = (props) => {
           )}
         </div>
       </div>
-      <Payment />
       <Footer />
     </Fragment>
   );

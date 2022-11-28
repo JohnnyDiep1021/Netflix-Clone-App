@@ -9,6 +9,8 @@ import Button from "../../../shared/components/UI/Button/Button";
 import LoadingSpinner from "../../../shared/components/UI/Loading/LoadingSpinner";
 import { MessageCornerModal } from "../../../shared/components/UI/Modal/MessageModal";
 
+import ReactTooltip from "react-tooltip";
+
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
@@ -119,6 +121,10 @@ const MovieItem = (props) => {
                     movie: movieItem,
                     // trigger: triggerHandler,
                   }}
+                  toolTip={{
+                    title: "Play this!",
+                    placement: "top",
+                  }}
                   // onClick={() => {
                   //   triggerHandler();
                   // }}
@@ -130,18 +136,41 @@ const MovieItem = (props) => {
                   onClick={async () => {
                     await watchListToggleHandler(movieItem._id);
                   }}
+                  toolTip={{
+                    title: "Add to My List",
+                    placement: "top",
+                  }}
                 >
                   <FavoriteIcon />
                 </Button>
-                <Button className="btn-icon">
+                <Button
+                  className="btn-icon"
+                  toolTip={{
+                    title: "I like this",
+                    placement: "top",
+                  }}
+                >
                   <ThumbUpOffAltIcon />
                 </Button>
-                <Button className="btn-icon">
+                <Button
+                  className="btn-icon"
+                  toolTip={{
+                    title: "Not for me",
+                    placement: "top",
+                  }}
+                >
                   <ThumbDownOffAltIcon />
                 </Button>
               </div>
               <div className="right">
-                <Button className="btn-icon" onClick={showDetailHandler}>
+                <Button
+                  className="btn-icon"
+                  onClick={showDetailHandler}
+                  toolTip={{
+                    title: "Episodes & Info",
+                    placement: "top",
+                  }}
+                >
                   <ExpandMoreIcon />
                 </Button>
               </div>

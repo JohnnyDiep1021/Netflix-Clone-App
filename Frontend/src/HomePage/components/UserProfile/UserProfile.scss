@@ -113,5 +113,11 @@
         font-size: 2rem;
       }
     }
+    & .btn-bubble.label {
+      top: -10%;
+      left: 53%;
+      z-index: 104;
+      font-size: 0.8rem;
+    }
   }
 }

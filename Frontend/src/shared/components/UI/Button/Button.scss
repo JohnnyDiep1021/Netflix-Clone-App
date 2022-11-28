@@ -1,16 +1,18 @@
+@import "../../../../sass/variables";
+
 .btn {
   &,
   &:link,
   &:visited {
+    position: relative;
+    padding: 1.6rem;
+    font-weight: 700;
+    font-size: 1.6rem;
     text-transform: uppercase;
     text-decoration: none;
-    padding: 1.6rem;
-    font-size: 1.6rem;
-    font-weight: 700;
+    border: none;
     border-radius: 0.4rem;
     transition: all 0.2s;
-    position: relative;
-    border: none;
     cursor: pointer;
   }
   &:active,
@@ -77,6 +79,49 @@
   }
 }
 
+.btn-bubble {
+  &,
+  &:link,
+  &:visited {
+    font: inherit;
+    display: inline-block;
+    padding: 0.5rem;
+    margin-top: 1.5rem;
+    color: red;
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: capitalize;
+    text-decoration: none;
+    background: rgba(19, 13, 13, 0.5);
+    border-radius: 0.6rem;
+    border: 2px solid red;
+    cursor: pointer;
+    @media only screen and (min-width: $bp-xsmall) {
+      padding: 0.5rem 1rem;
+      font-size: 1.2rem;
+    }
+    @media only screen and (min-width: $bp-moderate) {
+      font-size: 1.6rem;
+    }
+  }
+  &:active,
+  &:focus,
+  &:hover {
+    background: rgba(85, 85, 85, 0.5);
+    transform: translateY(-0.25rem);
+  }
+  &.label {
+    position: absolute;
+    top: -10%;
+    left: 65%;
+    border: 1.5px solid red;
+    border-radius: 0.4rem;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    background-color: rgba(82, 0, 0, 0.75);
+  }
+}
+
 .btn-popup {
   font: inherit;
   padding: 0.5rem 1.5rem;
@@ -98,7 +143,7 @@
   }
 }
 
-.btn--sucess {
+.btn--success {
   background: rgb(240, 216, 4);
   border-color: rgb(240, 216, 4);
   &:hover,

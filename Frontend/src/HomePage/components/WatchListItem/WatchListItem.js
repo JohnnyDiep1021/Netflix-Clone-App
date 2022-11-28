@@ -136,16 +136,39 @@ const WatchListItem = (props) => {
                     onClick={async () => {
                       await watchListToggleHandler(props.movieId);
                     }}
+                    toolTip={{
+                      title: "Add to My List",
+                      placement: "top",
+                    }}
                   >
                     <FavoriteIcon />
                   </Button>
-                  <Button className="btn-icon">
+                  <Button
+                    className="btn-icon"
+                    toolTip={{
+                      title: "I like this",
+                      placement: "top",
+                    }}
+                  >
                     <ThumbUpOffAltIcon />
                   </Button>
-                  <Button className="btn-icon">
+                  <Button
+                    className="btn-icon"
+                    toolTip={{
+                      title: "Not for me",
+                      placement: "top",
+                    }}
+                  >
                     <ThumbDownOffAltIcon />
                   </Button>
-                  <Button className="btn-icon" onClick={showDetailHandler}>
+                  <Button
+                    className="btn-icon"
+                    onClick={showDetailHandler}
+                    toolTip={{
+                      title: "Episodes & Info",
+                      placement: "top",
+                    }}
+                  >
                     <ExpandMoreIcon />
                   </Button>
                 </div>

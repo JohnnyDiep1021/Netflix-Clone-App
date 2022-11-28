@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-
 import { useHttpClient } from "../../hooks/http-hook";
 import { uiAction } from "../../store/ui";
 import { authAction } from "../../store/auth";
 
 // import StripeContainer from "../../../HomePage/components/Payment/StripeContainer";
+import Payment from "../../../HomePage/components/Payment/Payment";
 import UserProfile from "../../../HomePage/components/UserProfile/UserProfile";
 import SearchEngine from "../../../HomePage/components/SearchEngine/SearchEngine";
 
@@ -76,14 +76,16 @@ const Navbar = (props) => {
         <div className="menu-container">
           <li className="profile-img" onClick={showProfileHandler}>
             {profileImg && <img src={profileImg} alt="profile" />}
+            {userProfile && userProfile.payment && (
+              <Button className="btn btn-bubble label">Premium</Button>
+            )}
           </li>
-          {/* <ul className="opt-list">
-            <li className="opt-list_item"> */}
-          <Button className="btn" onClick={logoutHandler}>
-            Logout
-          </Button>
-          {/* </li>
-          </ul> */}
+
+          {userProfile && !userProfile.payment && (
+            <li className="navbar-item">
+              <Payment />
+            </li>
+          )}
           {userProfile && (
             <UserProfile
               user={userProfile}
@@ -92,6 +94,7 @@ const Navbar = (props) => {
             />
           )}
         </div>
+
         <SearchEngine />
       </div>
       <div className="left">
@@ -143,7 +146,16 @@ const Navbar = (props) => {
             <span>My Watch List</span>
           </Button>
         </li>
+        {userProfile && !userProfile.payment && (
+          <li className="navbar-item payment">
+            <Payment />
+          </li>
+        )}
+        <Button className="btn" onClick={logoutHandler}>
+          Logout
+        </Button>
       </div>
+
       <div className="right">
         <SearchEngine />
         {/* <Button className="btn-icon">
@@ -152,6 +164,9 @@ const Navbar = (props) => {
         <div className="menu-container">
           <li className="profile-img" onClick={showProfileHandler}>
             {profileImg && <img src={profileImg} alt="profile" />}
+            {userProfile && userProfile.payment && (
+              <Button className="btn btn-bubble label">Premium</Button>
+            )}
           </li>
           <ul className="opt-list">
             <li className="opt-list_item">
