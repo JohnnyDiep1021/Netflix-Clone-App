@@ -6,7 +6,7 @@ import { uiAction } from "../../store/ui";
 import { authAction } from "../../store/auth";
 
 // import StripeContainer from "../../../HomePage/components/Payment/StripeContainer";
-// import Payment from "../../../HomePage/components/Payment/Payment";
+import Payment from "../../../HomePage/components/Payment/Payment";
 import UserProfile from "../../../HomePage/components/UserProfile/UserProfile";
 import SearchEngine from "../../../HomePage/components/SearchEngine/SearchEngine";
 
@@ -80,12 +80,11 @@ const Navbar = (props) => {
               <Button className="btn btn-bubble label">Premium</Button>
             )}
           </li>
-
-          {/* {userProfile && !userProfile.payment && (
+          {userProfile && !userProfile.payment && (
             <li className="navbar-item">
               <Payment />
             </li>
-          )} */}
+          )}
           {userProfile && (
             <UserProfile
               user={userProfile}
@@ -146,11 +145,11 @@ const Navbar = (props) => {
             <span>My Watch List</span>
           </Button>
         </li>
-        {/* {userProfile && !userProfile.payment && (
+        {userProfile && !userProfile.payment && (
           <li className="navbar-item payment">
             <Payment />
           </li>
-        )} */}
+        )}
         <Button className="btn" onClick={logoutHandler}>
           Logout
         </Button>
