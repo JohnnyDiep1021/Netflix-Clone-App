@@ -5,7 +5,7 @@
 <br>
 
 ## Why build this project?
-Inspired by the official movie web app - Netflix, [Netflix Clone App](https://netflix-lover-jd.web.app/) was built with a stunning UI and all the fundamental functionalities of a movie app. It was incorporated all the underlying traits of a responsive full-stack MERN application and only used as a personal project. This app is completely responsive and compatible with all digital devices from mobiles to computers. Compared to Netflix, *Netflix Clone App* is **FREE**, but can still guarantee the users will have the joyful experiences (UX) to explore all movie features of the true Netflix app.
+Inspired by the official movie web app - Netflix, [Netflix Clone App](https://netflix-lover-jd.web.app/) was built with a stunning UI and all the fundamental functionalities of a movie app. It incorporated all the underlying traits of a responsive full-stack MERN application and only used as a personal project. This app is completely responsive and compatible with all digital devices from mobiles to computers. Compared to Netflix, *Netflix Clone App* is **FREE**, but can still guarantee the users will have the joyful experiences (UX) to explore all movie features of the true Netflix app.
 
 ## Features
 This app is constructed with all basic Netflix's features:
