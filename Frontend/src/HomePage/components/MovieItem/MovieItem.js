@@ -11,6 +11,7 @@ import { MessageCornerModal } from "../../../shared/components/UI/Modal/MessageM
 
 import ReactTooltip from "react-tooltip";
 
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
@@ -69,7 +70,6 @@ const MovieItem = (props) => {
   //     else if (domEle.msRequestFullScreen) await domEle.msRequestFullScreen();
   //   } catch (error) {}
   // };
-
   return (
     <li
       key={props.id}
@@ -184,7 +184,14 @@ const MovieItem = (props) => {
                 </span>
               </div>
               <div className="description__bottom">
-                <span className="description__genre">{movieItem.genre}</span>
+                <ul className="description__list">
+                  {movieItem.genre.split(",").map((genre) => (
+                    <li className="description__item" key={Math.random()}>
+                      <FiberManualRecordIcon />
+                      <span className="description__genre">{genre.trim()}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>

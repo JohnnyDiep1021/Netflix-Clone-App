@@ -29,6 +29,8 @@ const updateValidation = async (modelType, instance) => {
 
     const updates = Object.keys(instance);
     const updateFields = await model.getProperty();
+    // console.log(updates);
+    // console.log(updateFields);
     const isValidUpdate = updates.every((update) =>
       updateFields.includes(update)
     );

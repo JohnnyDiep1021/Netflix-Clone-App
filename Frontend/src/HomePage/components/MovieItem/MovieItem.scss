@@ -126,8 +126,25 @@
       & .description__bottom {
         margin-bottom: 0.5rem;
 
-        & .description__genre {
-          width: 100%;
+        & .description__list {
+          display: flex;
+          list-style: none;
+          flex-wrap: wrap;
+          & .description__item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 0.4rem;
+            & svg {
+              fill: green;
+              font-size: 0.8rem;
+              margin-right: 0.2rem;
+            }
+            & .description__genre {
+              // width: 100%;
+              display: inline;
+            }
+          }
         }
       }
     }

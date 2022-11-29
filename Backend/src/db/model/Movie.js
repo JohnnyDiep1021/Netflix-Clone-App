@@ -76,18 +76,22 @@ const MovieSchema = new mongoose.Schema(
     casting: {
       type: String,
       trim: true,
+      default: "",
     },
     matching: {
       type: Number,
       trim: true,
+      default: 0,
     },
     label: {
       type: String,
       trim: true,
+      default: "",
     },
     warning: {
       type: String,
       trim: true,
+      default: "",
     },
   },
   {
