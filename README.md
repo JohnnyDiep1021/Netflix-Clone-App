@@ -5,7 +5,7 @@
 <br>
 
 ## Why build this project?
-Inspired by the official movie web app - Netflix, [Netflix Clone App](https://netflix-lover-jd.web.app/) was built with a stunning UI and all the fundamental functionalities of a movie app. It was incorporated all the underlying traits of a responsive full-stack MERN application and only used as a personal project. This app is completely responsive and compatible with all digital devices from mobiles to computers. Compared to Netflix, *Netflix Clone App* is **FREE**, but can still guarantee the users will have the joyful experiences (UX) to explore all movie features of the true Netflix app.
+Inspired by the official movie web app - Netflix, [Netflix Clone App](https://netflix-lover-jd.web.app/) was built with a stunning UI and all the fundamental functionalities of a movie app. It incorporated all the underlying traits of a responsive full-stack MERN application and only used as a personal project. This app is completely responsive and compatible with all digital devices from mobiles to computers. Compared to Netflix, *Netflix Clone App* is **FREE**, but can still guarantee the users will have the joyful experiences (UX) to explore all movie features of the true Netflix app.
 
 ## Features
 This app is constructed with all basic Netflix's features:
@@ -23,7 +23,7 @@ This app is constructed with all basic Netflix's features:
 ## How to use?
 To new users, there are 2/two ways to get started before using the **Netflix Clone App**:
   1. Use **default account** with username **"userTest"** - password **"Test@123"**
-  2. Register **new accounnt** with user-defined email/username and password
+  2. Register **new accounnt** with user-defined **email/username** and **password**
 
 After signing up successfully, explore all the app features and enjoy watching movies.
   
@@ -45,11 +45,12 @@ After signing up successfully, explore all the app features and enjoy watching m
 
 2) ### Backend:
 - Featured by RESTful APIs and implemented by MongoDB, ExpressJs, and NodeJs. Using:
-  + **mongodb**, **mongoose** for user data storage.
+  + **mongodb**, **mongoose** for data storage.
   + **cors** for setting up cross-site resource sharing permissions.
   + **express** for building web framework, **express-validator** for handling and validating input data sent from client-side.
   + **body-parser** for parsing request data.
   + **helmet** for setting up header security.
+  + **compression** to compress size.
   + **jsonwebtoken**, **bcrypt** for creating authToken and hashing user's password.
   + **validator** for validating input data into mongoose schema.
   + **stripe** for handling payment payment.
