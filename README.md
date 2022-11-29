@@ -23,7 +23,7 @@ This app is constructed with all basic Netflix's features:
 ## How to use?
 To new users, there are 2/two ways to get started before using the **Netflix Clone App**:
   1. Use **default account** with username **"userTest"** - password **"Test@123"**
-  2. Register **new accounnt** with user-defined email/username and password
+  2. Register **new accounnt** with user-defined **email/username** and **password**
 
 After signing up successfully, explore all the app features and enjoy watching movies.
   
