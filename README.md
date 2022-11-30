@@ -18,7 +18,7 @@ This app is constructed with all basic Netflix's features:
 5. Add movies to "My List".
 6. Register for a premium membership step-by-step through the simulated payment process.
 7. Play movies.
-8. Auto account login/ logout (expired in 1 day).
+8. Auto account login/ logout (expired in 1 hour).
 
 ## How to use?
 To new users, there are 2/two ways to get started before using the **Netflix Clone App**:
