@@ -30,7 +30,7 @@ After signing up successfully, explore all the app features and enjoy watching m
 
   
 ## Technologies :computer:
-1) ### Frontend:
+1) ### Frontend
 - **Netflix Clone App** is a single-page application (SPA), constructed from ReactJS. Using:
   + **Custom hooks** manages form data input, sending requests, authentication, and movie interactivities.
   + **react-router-dom** is used to simulate multi-page applications.
@@ -45,7 +45,7 @@ After signing up successfully, explore all the app features and enjoy watching m
   + The movies list's design is built with many scrollable carrousels. 
   + The movie items in the watch list are designed based on the video items framework saved in the playlist on Youtube.
 
-2) ### Backend:
+2) ### Backend
 - Featured by RESTful APIs and implemented by MongoDB, ExpressJs, and NodeJs. Using:
   + **mongodb**, **mongoose** for data storage.
   + **cors** for setting up cross-site resource sharing permissions.
