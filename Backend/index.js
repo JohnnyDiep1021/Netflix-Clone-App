@@ -10,15 +10,16 @@ app.use(cors());
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
-const fs = require("fs");
-const path = require("path");
-const accessLogStream = fs.createWriteStream(
-  path.join(__dirname, "access.log"),
-  { flags: "a" }
-);
+// const fs = require("fs");
+// const path = require("path");
+// const accessLogStream = fs.createWriteStream(
+//   path.join(__dirname, "access.log"),
+//   { flags: "a" }
+// );
 
 const morgan = require("morgan");
-app.use(morgan("dev", { stream: accessLogStream }));
+// app.use(morgan("dev", { stream: accessLogStream }));
+app.use(morgan("dev"));
 
 const helmet = require("helmet");
 app.use(helmet());
