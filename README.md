@@ -1,6 +1,6 @@
 <div align="center">
   <h1> <img src="https://github.com/JohnnyDiep1021/Netflix-Clone-App/blob/main/Frontend/img/netflix-logo48.png?raw=true" alt="Netflix logo"/> Netflix Clone App</h1>
-  <strong>A nearly perfect clone version of the most popular movie platform in web browser</strong><br>
+  <strong>A clone version of the most popular movie platform in web browser</strong><br>
 </div>
 <br>
 
@@ -18,17 +18,19 @@ This app is constructed with all basic Netflix's features:
 5. Add movies to "My List".
 6. Register for a premium membership step-by-step through the simulated payment process.
 7. Play movies.
-8. Auto account login/ logout (expired in 1 day).
+8. Auto account login/ logout (expired in 1 hour).
 
 ## How to use?
 To new users, there are 2/two ways to get started before using the **Netflix Clone App**:
   1. Use **default account** with username **"userTest"** - password **"Test@123"**
   2. Register **new accounnt** with user-defined **email/username** and **password**
-
 After signing up successfully, explore all the app features and enjoy watching movies.
+
+**IMPORTANT**: Sometimes, using Chrome browser to open Netflix-Clone-App may cause **Deceptive site ahead** since **Netflix-Clone-App** can be considered as ["site phishing"](https://www.techtarget.com/searchsecurity/definition/phishing). Please, just disregard it. I guarantee there is no malware or fraudulent action when accessing this site.
+
   
 ## Technologies :computer:
-1) ### Frontend:
+1) ### Frontend
 - **Netflix Clone App** is a single-page application (SPA), constructed from ReactJS. Using:
   + **Custom hooks** manages form data input, sending requests, authentication, and movie interactivities.
   + **react-router-dom** is used to simulate multi-page applications.
@@ -43,7 +45,7 @@ After signing up successfully, explore all the app features and enjoy watching m
   + The movies list's design is built with many scrollable carrousels. 
   + The movie items in the watch list are designed based on the video items framework saved in the playlist on Youtube.
 
-2) ### Backend:
+2) ### Backend
 - Featured by RESTful APIs and implemented by MongoDB, ExpressJs, and NodeJs. Using:
   + **mongodb**, **mongoose** for data storage.
   + **cors** for setting up cross-site resource sharing permissions.
