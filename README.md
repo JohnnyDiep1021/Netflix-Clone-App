@@ -26,7 +26,7 @@ To new users, there are 2/two ways to get started before using the **Netflix Clo
   2. Register **new accounnt** with user-defined **email/username** and **password**
 After signing up successfully, explore all the app features and enjoy watching movies.
 
-**IMPORTANT**: Sometimes, using Chrome browser to open Netflix-Clone-App may cause **Deceptive site ahead** since **Netflix-Clone-App** can be considered as ["site phishing"](https://www.techtarget.com/searchsecurity/definition/phishing). Please, just disregard it. I guarantee there is no malware or fraudulent action when accessing this site.
+**IMPORTANT**: Sometimes, using Chrome browser to open Netflix-Clone-App may cause **Deceptive site ahead** since **Netflix-Clone-App** can be considered as ["site phishing"](https://www.techtarget.com/searchsecurity/definition/phishing). Please, just disregard it. I guarantee there is no malware or any fraudulent actions/ transactions when accessing my site.
 
   
 ## Technologies :computer:
